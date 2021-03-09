@@ -26,6 +26,7 @@ PRINTER_CHOICES = [
     "Guava_TAZ4",
     "Juniper_TAZ5",
     "Oliveoil_TAZ6",
+    "Oliveoil_TAZ6Retro",
     "Quiver_TAZPro",
     "Redgum_TAZWorkhorse",
 
@@ -306,6 +307,36 @@ def make_config(PRINTER, TOOLHEAD):
         elif ENABLED("BLTOUCH"):
             USE_LESS_MEMORY                              = 2
 
+    if "Oliveoil_TAZ6Retro" in PRINTER:
+        IS_TAZ                                           = True
+        TAZ_BED                                          = True
+        USE_TWO_PIECE_BED                                = True
+        USE_Z_SCREW                                      = True
+        USE_AUTOLEVELING                                 = True
+        USE_NORMALLY_CLOSED_ENDSTOPS                     = True
+        USE_MIN_ENDSTOPS                                 = True
+        USE_MAX_ENDSTOPS                                 = True
+        USE_HOME_BUTTON                                  = True
+        USE_EINSY_RETRO                                  = True
+        MARLIN["CUSTOM_MACHINE_NAME"]                    = C_STRING("TAZ 6 Retro")
+        MARLIN["BACKLASH_COMPENSATION"]                  = True
+        MARLIN["SENSORLESS_HOMING"]                      = True
+        MARLIN["STEALTHCHOP_XY"]                         = False
+        MARLIN["STEALTHCHOP_Z"]                          = False 
+        MARLIN["STEALTHCHOP_E"]                          = True
+        MARLIN["HYBRID_THRESHOLD"]                       = False
+        MARLIN["BAUDRATE"]                               = 250000
+        MARLIN["PRINTCOUNTER"]                           = True
+        MARLIN["MACHINE_UUID"]                           = C_STRING("845f003c-aebd-4e53-a6b9-7d0984fde609")
+        MARLIN["SDSUPPORT"]                              = True
+        MARLIN["LIGHTWEIGHT_UI"]                         = True
+        MARLIN['REVERSE_ENCODER_DIRECTION']              = True 
+        # Specify pin for bed washers. If commented out,
+        # bed washers will use Z_MIN pin (i.e. bed washers
+        # and homing button wired together)
+        BED_WASHERS_PIN                                  = 'SERVO0_PIN'
+        USE_EXPERIMENTAL_FEATURES                        = True
+
     if "Hibiscus_Mini2" in PRINTER:
         IS_MINI                                          = True
         MINI_BED                                         = True
@@ -578,7 +609,10 @@ def make_config(PRINTER, TOOLHEAD):
         MARLIN["MOTHERBOARD"]                            = 'BOARD_EINSY_RETRO'
         MARLIN["CONTROLLER_FAN_PIN"]                     = 'FAN1_PIN' # Digital pin 6
         MARLIN["SERIAL_PORT"]                            = 0
-        MARLIN["SERVO0_PIN"]                             = 76
+        if 'Oliveoil_TAZ6Retro' in PRINTER:
+            MARLIN["SERVO0_PIN"]                         = 11           
+        else:
+            MARLIN["SERVO0_PIN"]                         = 76
         MARLIN["FIL_RUNOUT_PIN"]                         = 62
         if USE_REPRAP_LCD_DISPLAY:
             MARLIN["SERIAL_PORT_2"]                      = 2
@@ -1603,7 +1637,7 @@ def make_config(PRINTER, TOOLHEAD):
           "M117 Leveling done.\n"                        # Set LCD status
         )
 
-    elif USE_Z_SCREW:
+    elif USE_Z_SCREW and PRINTER not in ['Oliveoil_TAZ6Retro']:
         # The older Minis seem succeptible to noise in the probe lines.
         # This restores the sampling of endstops as it existed in previous
         # version of Marlin.
