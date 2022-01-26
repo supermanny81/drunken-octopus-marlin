@@ -109,7 +109,7 @@
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT_2 2 // <-- changed
+#define SERIAL_PORT_2 1 // <-- changed
 
 /**
  * This setting determines the communication speed of the printer.
@@ -127,15 +127,15 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_EINSY_RETRO // <-- changed
+  #define MOTHERBOARD BOARD_RAMBO // <-- changed
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "TAZ 6 Retro" // <-- changed
+#define CUSTOM_MACHINE_NAME "TAZ Workhorse Edition" // <-- changed
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
-#define MACHINE_UUID "845f003c-aebd-4e53-a6b9-7d0984fde609" // <-- changed
+#define MACHINE_UUID "5ee798fb-4062-4d35-8224-5e846ffb45a5" // <-- changed
 
 // @section extruder
 
@@ -665,8 +665,8 @@
 #define USE_XMIN_PLUG
 #define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG
-#define USE_XMAX_PLUG // <-- changed
-#define USE_YMAX_PLUG // <-- changed
+//#define USE_XMAX_PLUG
+//#define USE_YMAX_PLUG
 #define USE_ZMAX_PLUG // <-- changed
 
 // Enable pullup for all endstops to prevent a floating state
@@ -696,11 +696,11 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the endstop.
+#define X_MIN_ENDSTOP_INVERTING 0 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING 0 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the endstop.
-#define Y_MAX_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the endstop.
+#define X_MAX_ENDSTOP_INVERTING 0 // <-- changed:  Set to true to invert the logic of the endstop.
+#define Y_MAX_ENDSTOP_INVERTING 0 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING 0 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MIN_PROBE_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the probe.
 
@@ -722,15 +722,15 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2130 // <-- changed
-#define Y_DRIVER_TYPE  TMC2130 // <-- changed
-#define Z_DRIVER_TYPE  TMC2130 // <-- changed
+#define X_DRIVER_TYPE  A4988
+#define Y_DRIVER_TYPE  A4988
+#define Z_DRIVER_TYPE  A4988
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
-#define E0_DRIVER_TYPE TMC2130 // <-- changed
+#define E0_DRIVER_TYPE A4988
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -785,14 +785,14 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {100, 100, 1600, 420} // <-- changed
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {100, 100, 500, 420} // <-- changed
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          {300, 300, 3, 25} // <-- changed
+#define DEFAULT_MAX_FEEDRATE          {300, 300, 30, 25} // <-- changed
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -805,7 +805,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      {9000, 9000, 100, 9000} // <-- changed
+#define DEFAULT_MAX_ACCELERATION      {9000, 9000, 200, 9000} // <-- changed
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -885,7 +885,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN  // <-- changed
+#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -905,7 +905,7 @@
  *      - normally-closed switches to GND and D32.
  *      - normally-open switches to 5V and D32.
  */
-#define Z_MIN_PROBE_PIN SERVO0_PIN // <-- changed:  Pin 32 is the RAMPS default
+//#define Z_MIN_PROBE_PIN 32 // Pin 32 is the RAMPS default
 
 /**
  * Probe Type
@@ -1041,7 +1041,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET {0, 0, -1.2} // <-- changed
+#define NOZZLE_TO_PROBE_OFFSET {0, 0, -1.24} // <-- changed
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1051,7 +1051,7 @@
 #define XY_PROBE_FEEDRATE 6000 // <-- changed
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST 480 // <-- changed
+#define Z_PROBE_FEEDRATE_FAST 1200 // <-- changed
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW 60 // <-- changed
@@ -1176,7 +1176,7 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
+#define INVERT_X_DIR true // <-- changed
 #define INVERT_Y_DIR true
 #define INVERT_Z_DIR false
 
@@ -1195,7 +1195,7 @@
 // @section homing
 
 //#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
-//#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
+#define HOME_AFTER_DEACTIVATE // <-- changed:  Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
 
 /**
  * Set Z_IDLE_HEIGHT if the Z-Axis moves on its own when steppers are disabled.
@@ -1212,22 +1212,22 @@
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
 #define X_HOME_DIR -1
-#define Y_HOME_DIR 1 // <-- changed
-#define Z_HOME_DIR -1
+#define Y_HOME_DIR -1
+#define Z_HOME_DIR 1 // <-- changed
 
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 281.4 // <-- changed
-#define Y_BED_SIZE 281.4 // <-- changed
+#define X_BED_SIZE 280 // <-- changed
+#define Y_BED_SIZE 280 // <-- changed
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -20.1 // <-- changed
-#define Y_MIN_POS -20.1 // <-- changed
-#define Z_MIN_POS 0
-#define X_MAX_POS 301.5 // <-- changed
-#define Y_MAX_POS 304.5 // <-- changed
-#define Z_MAX_POS 270 // <-- changed
+#define X_MIN_POS -50 // <-- changed
+#define Y_MIN_POS -17 // <-- changed
+#define Z_MIN_POS -2 // <-- changed
+#define X_MAX_POS 295 // <-- changed
+#define Y_MAX_POS 308 // <-- changed
+#define Z_MAX_POS 299 // <-- changed
 
 /**
  * Software Endstops
@@ -1564,15 +1564,15 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-#define Z_SAFE_HOMING // <-- changed
+//#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT -19 // <-- changed:  X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT 258 // <-- changed:  Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M {3000, 3000, 180} // <-- changed
+#define HOMING_FEEDRATE_MM_M {3000, 3000, 1800} // <-- changed
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1709,7 +1709,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT {100, 294.5, 20} // <-- changed
+  #define NOZZLE_PARK_POINT {100, 298, 20} // <-- changed
   //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
@@ -1960,7 +1960,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-#define REVERSE_ENCODER_DIRECTION // <-- changed
+//#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -2703,10 +2703,10 @@
  */
 #define SOURCE_CODE_URL "https://github.com/marciot/drunken-octopus-marlin" // <-- changed
 //#define SHORT_BUILD_VERSION
-#define TOOLHEAD_NAME "Aerostruder" // <-- changed
-#define TOOLHEAD_TYPE "Aerostruder" // <-- changed
+#define TOOLHEAD_NAME "SL 0.25mm Micro" // <-- changed
+#define TOOLHEAD_TYPE "SmallLayer" // <-- changed
 #define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nT0\nG1 X-17 Y25 Z10 F4000\nM109 R170\nG1 Z1\nM114\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 Z15\nM400\nM106 S255\nG0 X-10.0 Y-9.0M109 R160\nM107" // <-- changed
-//#define AXIS_LEVELING_COMMANDS
+#define AXIS_LEVELING_COMMANDS "M117 Leveling X Axis\nG0 X150 F9999\nG28 Z0\nM117 Leveling done." // <-- changed
 //#define BED_LEVELING_COMMANDS
 //#define AO_EXP1_DEPRECATED_PINMAP
 //#define DISABLE_DUE_SD_MMC
@@ -2720,8 +2720,8 @@
 //#define TOUCH_UI_VERSION
 //#define TOUCH_UI_FILAMENT_RUNOUT_WORKAROUNDS
 #define CURA_LE_RUNOUT_HANDLING_WORKAROUND // <-- changed
-#define FIL_RUNOUT_PIN 62 // <-- changed
-#define SERVO0_PIN 11 // <-- changed
+//#define FIL_RUNOUT_PIN
+//#define SERVO0_PIN
 #define ACTION_ON_FILAMENT_RUNOUT "pause: filament_runout" // <-- changed
 //#define SWAP_EXTRUDER_FANS
 //#define SWAP_E0_AND_E1

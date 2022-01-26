@@ -102,14 +102,14 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT 0
+#define SERIAL_PORT -1 // <-- changed
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#define SERIAL_PORT_2 2 // <-- changed
+//#define SERIAL_PORT_2 -1
 
 /**
  * This setting determines the communication speed of the printer.
@@ -127,15 +127,15 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_EINSY_RETRO // <-- changed
+  #define MOTHERBOARD BOARD_ARCHIM2 // <-- changed
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "TAZ 6 Retro" // <-- changed
+#define CUSTOM_MACHINE_NAME "TAZ Pro" // <-- changed
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
-#define MACHINE_UUID "845f003c-aebd-4e53-a6b9-7d0984fde609" // <-- changed
+#define MACHINE_UUID "a952577d-8722-483a-999d-acdc9e772b7b" // <-- changed
 
 // @section extruder
 
@@ -485,8 +485,8 @@
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
-  #define PID_EDIT_MENU // <-- changed:  Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
-  #define PID_AUTOTUNE_MENU // <-- changed:  Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
+  //#define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of PROGMEM)
+  //#define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of PROGMEM)
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
@@ -663,9 +663,9 @@
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
 #define USE_XMIN_PLUG
-#define USE_YMIN_PLUG
+//#define USE_YMIN_PLUG  // <-- changed
 #define USE_ZMIN_PLUG
-#define USE_XMAX_PLUG // <-- changed
+//#define USE_XMAX_PLUG
 #define USE_YMAX_PLUG // <-- changed
 #define USE_ZMAX_PLUG // <-- changed
 
@@ -699,7 +699,7 @@
 #define X_MIN_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING 0 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MIN_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the endstop.
-#define X_MAX_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the endstop.
+#define X_MAX_ENDSTOP_INVERTING 0 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING 0 // <-- changed:  Set to true to invert the logic of the endstop.
 #define Z_MIN_PROBE_ENDSTOP_INVERTING 1 // <-- changed:  Set to true to invert the logic of the probe.
@@ -785,14 +785,14 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {100, 100, 1600, 420} // <-- changed
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {100, 100, 500, 420} // <-- changed
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          {300, 300, 3, 25} // <-- changed
+#define DEFAULT_MAX_FEEDRATE          {300, 300, 30, 25} // <-- changed
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -805,7 +805,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      {9000, 9000, 100, 9000} // <-- changed
+#define DEFAULT_MAX_ACCELERATION      {9000, 9000, 200, 9000} // <-- changed
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -885,7 +885,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN  // <-- changed
+#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -905,7 +905,7 @@
  *      - normally-closed switches to GND and D32.
  *      - normally-open switches to 5V and D32.
  */
-#define Z_MIN_PROBE_PIN SERVO0_PIN // <-- changed:  Pin 32 is the RAMPS default
+//#define Z_MIN_PROBE_PIN 32 // Pin 32 is the RAMPS default
 
 /**
  * Probe Type
@@ -1041,7 +1041,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET {0, 0, -1.2} // <-- changed
+#define NOZZLE_TO_PROBE_OFFSET {0, 0, -1.102} // <-- changed
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1051,7 +1051,7 @@
 #define XY_PROBE_FEEDRATE 6000 // <-- changed
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST 480 // <-- changed
+#define Z_PROBE_FEEDRATE_FAST 1200 // <-- changed
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW 60 // <-- changed
@@ -1195,7 +1195,7 @@
 // @section homing
 
 //#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
-//#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
+#define HOME_AFTER_DEACTIVATE // <-- changed:  Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
 
 /**
  * Set Z_IDLE_HEIGHT if the Z-Axis moves on its own when steppers are disabled.
@@ -1213,21 +1213,21 @@
 // :[-1,1]
 #define X_HOME_DIR -1
 #define Y_HOME_DIR 1 // <-- changed
-#define Z_HOME_DIR -1
+#define Z_HOME_DIR 1 // <-- changed
 
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 281.4 // <-- changed
-#define Y_BED_SIZE 281.4 // <-- changed
+#define X_BED_SIZE 280 // <-- changed
+#define Y_BED_SIZE 280 // <-- changed
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -20.1 // <-- changed
-#define Y_MIN_POS -20.1 // <-- changed
-#define Z_MIN_POS 0
-#define X_MAX_POS 301.5 // <-- changed
-#define Y_MAX_POS 304.5 // <-- changed
-#define Z_MAX_POS 270 // <-- changed
+#define X_MIN_POS -6 // <-- changed
+#define Y_MIN_POS -15 // <-- changed
+#define Z_MIN_POS -2 // <-- changed
+#define X_MAX_POS 320 // <-- changed
+#define Y_MAX_POS 313 // <-- changed
+#define Z_MAX_POS 299 // <-- changed
 
 /**
  * Software Endstops
@@ -1273,7 +1273,7 @@
  */
 #define FILAMENT_RUNOUT_SENSOR // <-- changed
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
-  #define FIL_RUNOUT_ENABLED_DEFAULT false // <-- changed:  Enable the sensor on startup. Override with M412 followed by M500.
+  #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
 
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
@@ -1318,7 +1318,7 @@
   // Commands to execute on filament runout.
   // With multiple runout sensors use the %c placeholder for the current tool in commands (e.g., "M600 T%c")
   // NOTE: After 'M412 H1' the host handles filament runout and this script does not apply.
-  #define FILAMENT_RUNOUT_SCRIPT "M600"
+  #define FILAMENT_RUNOUT_SCRIPT "M25" // <-- changed
 
   // After a runout is detected, continue printing this length of filament
   // before executing the runout script. Useful for a sensor at the end of
@@ -1329,7 +1329,7 @@
     // Enable this option to use an encoder disc that toggles the runout pin
     // as the filament moves. (Be sure to set FILAMENT_RUNOUT_DISTANCE_MM
     // large enough to avoid false positives.)
-    //#define FILAMENT_MOTION_SENSOR
+    #define FILAMENT_MOTION_SENSOR // <-- changed
   #endif
 #endif
 
@@ -1564,15 +1564,15 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-#define Z_SAFE_HOMING // <-- changed
+//#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT -19 // <-- changed:  X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT 258 // <-- changed:  Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // Y point for Z homing
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M {3000, 3000, 180} // <-- changed
+#define HOMING_FEEDRATE_MM_M {3000, 3000, 1800} // <-- changed
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1709,7 +1709,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT {100, 294.5, 20} // <-- changed
+  #define NOZZLE_PARK_POINT {100, 303, 20} // <-- changed
   //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
@@ -1765,8 +1765,8 @@
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT {-17, 95, 1} // <-- changed
-  #define NOZZLE_CLEAN_END_POINT   {-17, 25, 1} // <-- changed
+  #define NOZZLE_CLEAN_START_POINT {297, 95, 1} // <-- changed
+  #define NOZZLE_CLEAN_END_POINT   {297, 25, 1} // <-- changed
 
   // Circular pattern radius
   #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5
@@ -1789,7 +1789,7 @@
   //#define NOZZLE_CLEAN_HEATUP       // Heat up the nozzle instead of skipping wipe
 
   // Explicit wipe G-code script applies to a G12 with no arguments.
-  #define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nT0\nG1 X-17 Y25 Z10 F4000\nM109 R170\nG1 Z1\nM114\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 Z15\nM400\nM106 S255\nG0 X-10.0 Y-9.0M109 R160\nM107" // <-- changed
+  #define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nG1 X297 Y25 Z10 F4000\nM109 R170\nG1 Z1\nM114\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 Z15\nM400\nM106 S255\nG0 X-6 Y-9.0M109 R160\nM107" // <-- changed
 
 #endif
 
@@ -1937,13 +1937,13 @@
 // This option overrides the default number of encoder pulses needed to
 // produce one step. Should be increased for high-resolution encoders.
 //
-#define ENCODER_PULSES_PER_STEP 2 // <-- changed
+//#define ENCODER_PULSES_PER_STEP 4
 
 //
 // Use this option to override the number of step signals required to
 // move between next/prev menu items.
 //
-#define ENCODER_STEPS_PER_MENU_ITEM 1 // <-- changed
+//#define ENCODER_STEPS_PER_MENU_ITEM 1
 
 /**
  * Encoder Direction Options
@@ -1960,7 +1960,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-#define REVERSE_ENCODER_DIRECTION // <-- changed
+//#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1983,7 +1983,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-#define INDIVIDUAL_AXIS_HOMING_MENU // <-- changed
+//#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
@@ -2172,7 +2172,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER // <-- changed
+//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // ReprapWorld Graphical LCD
@@ -2372,7 +2372,7 @@
 // Touch UI for FTDI EVE (FT800/FT810) displays
 // See Configuration_adv.h for all configuration options.
 //
-//#define TOUCH_UI_FTDI_EVE
+#define TOUCH_UI_FTDI_EVE // <-- changed
 
 //
 // Touch-screen LCD for Anycubic printers
@@ -2567,12 +2567,12 @@
 //#define NUM_M106_FANS 1
 
 // Increase the FAN PWM frequency. Removes the PWM noise but increases heating in the FET/Arduino
-#define FAST_PWM_FAN // <-- changed
+//#define FAST_PWM_FAN
 
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-//#define FAN_SOFT_PWM
+#define FAN_SOFT_PWM // <-- changed
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
@@ -2703,32 +2703,32 @@
  */
 #define SOURCE_CODE_URL "https://github.com/marciot/drunken-octopus-marlin" // <-- changed
 //#define SHORT_BUILD_VERSION
-#define TOOLHEAD_NAME "Aerostruder" // <-- changed
-#define TOOLHEAD_TYPE "Aerostruder" // <-- changed
-#define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nT0\nG1 X-17 Y25 Z10 F4000\nM109 R170\nG1 Z1\nM114\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 Z15\nM400\nM106 S255\nG0 X-10.0 Y-9.0M109 R160\nM107" // <-- changed
-//#define AXIS_LEVELING_COMMANDS
+#define TOOLHEAD_NAME "SE 0.5mm AeroV2" // <-- changed
+#define TOOLHEAD_TYPE "SingleExtruderAeroV2" // <-- changed
+#define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nG1 X297 Y25 Z10 F4000\nM109 R170\nG1 Z1\nM114\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 X297 Y25\nG1 X297 Y95\nG1 Z15\nM400\nM106 S255\nG0 X-6 Y-9.0M109 R160\nM107" // <-- changed
+#define AXIS_LEVELING_COMMANDS "M117 Leveling X Axis\nG0 X150 F9999\nG28 Z0\nM117 Leveling done." // <-- changed
 //#define BED_LEVELING_COMMANDS
 //#define AO_EXP1_DEPRECATED_PINMAP
-//#define DISABLE_DUE_SD_MMC
-//#define ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE
+#define DISABLE_DUE_SD_MMC // <-- changed
+#define ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE 1000 // <-- changed
 #define END_G29_ON_BACK_LEFT_CORNER // <-- changed
 #define G26_IN_START_GCODE_WORKAROUND // <-- changed
-//#define USB_DEVICE_VENDOR_ID
-//#define USB_DEVICE_PRODUCT_ID
+#define USB_DEVICE_VENDOR_ID 0x27b1 // <-- changed
+#define USB_DEVICE_PRODUCT_ID 0x0001 // <-- changed
 //#define TOUCH_UI_NO_BOOTSCREEN
 //#define TOUCH_UI_ROYAL_THEME
 //#define TOUCH_UI_VERSION
-//#define TOUCH_UI_FILAMENT_RUNOUT_WORKAROUNDS
+#define TOUCH_UI_FILAMENT_RUNOUT_WORKAROUNDS // <-- changed
 #define CURA_LE_RUNOUT_HANDLING_WORKAROUND // <-- changed
-#define FIL_RUNOUT_PIN 62 // <-- changed
-#define SERVO0_PIN 11 // <-- changed
+//#define FIL_RUNOUT_PIN
+//#define SERVO0_PIN
 #define ACTION_ON_FILAMENT_RUNOUT "pause: filament_runout" // <-- changed
 //#define SWAP_EXTRUDER_FANS
 //#define SWAP_E0_AND_E1
 //#define Z_STOP_PIN
 //#define Z_MAX_PIN
 //#define NO_MOTION_BEFORE_HOMING_WORKAROUND
-//#define NO_TIME_AFTER_SD_PRINT
+#define NO_TIME_AFTER_SD_PRINT // <-- changed
 //#define EMI_MITIGATION
 #define Z_MIN_PROBE_REPEATABILITY_TEST // <-- changed
 //#define Z2_PRESENCE_CHECK

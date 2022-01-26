@@ -755,7 +755,7 @@
  *
  * :[2,3,4,5,6,7]
  */
-//#define ENDSTOP_NOISE_THRESHOLD 2
+#define ENDSTOP_NOISE_THRESHOLD 2 // <-- changed
 
 // Check for stuck or disconnected endstops during homing moves.
 //#define DETECT_BROKEN_ENDSTOP
@@ -1960,7 +1960,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-#define REVERSE_ENCODER_DIRECTION // <-- changed
+//#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -2721,7 +2721,7 @@
 //#define TOUCH_UI_FILAMENT_RUNOUT_WORKAROUNDS
 #define CURA_LE_RUNOUT_HANDLING_WORKAROUND // <-- changed
 #define FIL_RUNOUT_PIN 62 // <-- changed
-#define SERVO0_PIN 11 // <-- changed
+#define SERVO0_PIN 76 // <-- changed
 #define ACTION_ON_FILAMENT_RUNOUT "pause: filament_runout" // <-- changed
 //#define SWAP_EXTRUDER_FANS
 //#define SWAP_E0_AND_E1
