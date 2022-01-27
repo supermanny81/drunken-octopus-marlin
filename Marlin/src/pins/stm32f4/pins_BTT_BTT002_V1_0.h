@@ -21,20 +21,13 @@
  */
 #pragma once
 
-#include "env_validate.h"
-
-#if HAS_MULTI_HOTEND || E_STEPPERS > 1
+#if NOT_TARGET(STM32F4)
+  #error "Oops! Select an STM32F4 board in 'Tools > Board.'"
+#elif HOTENDS > 1 || E_STEPPERS > 1
   #error "BIGTREE BTT002 V1.0 only supports one hotend / E-stepper. Comment out this line to continue."
 #endif
 
 #define BOARD_INFO_NAME "BTT BTT002 V1.0"
-
-//#define MK3_FAN_PINS
-
-#define USES_DIAG_PINS
-
-// Ignore temp readings during development.
-//#define BOGUS_TEMPERATURE_GRACE_PERIOD    2000
 
 // Use one of these or SDCard-based Emulation will be used
 #if NO_EEPROM_SELECTED
@@ -47,6 +40,9 @@
   // 128 kB sector allocated for EEPROM emulation.
   #define FLASH_EEPROM_LEVELING
 #endif
+
+// Ignore temp readings during development.
+//#define BOGUS_TEMPERATURE_GRACE_PERIOD    2000
 
 //
 // Limit Switches
@@ -147,17 +143,20 @@
   //#define E3_HARDWARE_SERIAL Serial1
   //#define E4_HARDWARE_SERIAL Serial1
 
+  //
+  // Software serial  ##
+  //
   #define X_SERIAL_TX_PIN                   PE2
-  #define X_SERIAL_RX_PIN        X_SERIAL_TX_PIN
+  #define X_SERIAL_RX_PIN                   PE2
 
   #define Y_SERIAL_TX_PIN                   PE3
-  #define Y_SERIAL_RX_PIN        Y_SERIAL_TX_PIN
+  #define Y_SERIAL_RX_PIN                   PE3
 
   #define Z_SERIAL_TX_PIN                   PE4
-  #define Z_SERIAL_RX_PIN        Z_SERIAL_TX_PIN
+  #define Z_SERIAL_RX_PIN                   PE4
 
   #define E0_SERIAL_TX_PIN                  PD7
-  #define E0_SERIAL_RX_PIN      E0_SERIAL_TX_PIN
+  #define E0_SERIAL_RX_PIN                  PD7
 
   // Reduce baud rate to improve software serial reliability
   #define TMC_BAUD_RATE                    19200
@@ -168,7 +167,6 @@
 //
 #define TEMP_0_PIN                          PA2   // T0 <-> E0
 #define TEMP_1_PIN                          PA0   // T1 <-> E1
-#define TEMP_BOARD_PIN                      PC2   // Onboard thermistor, NTC100K
 #define TEMP_BED_PIN                        PA1   // T2 <-> Bed
 #define TEMP_PROBE_PIN                      PC3   // Shares J4 connector with PD1
 
@@ -177,43 +175,22 @@
 //
 #define HEATER_0_PIN                        PE6   // Heater0
 #define HEATER_BED_PIN                      PE5   // Hotbed
-
-#ifndef FAN_PIN
-  #ifdef MK3_FAN_PINS
-    #define FAN_PIN                         PB8   // Fan1
-  #else
-    #define FAN_PIN                         PB9   // Fan0
-  #endif
-#endif
-
-#ifndef FAN1_PIN
-  #ifdef MK3_FAN_PINS
-    #define FAN1_PIN                        PB9   // Fan0
-  #else
-    #define FAN1_PIN                        PB8   // Fan1
-  #endif
-#endif
-
-#ifndef E0_FAN_TACHO_PIN
-  #ifdef MK3_FAN_PINS
-    #define E0_FAN_TACHO_PIN                PE1   // Fan1
-  #else
-    #define E0_FAN_TACHO_PIN                PE0   // Fan0
-  #endif
-#endif
+#define FAN_PIN                             PB8   // Fan1
+#define FAN1_PIN                            PB9   // Fan0
 
 /**
- * ---------------------------------BTT002 V1.0---------------------------------
- *                ------                                    ------              |
- * (BEEPER) PE7  |10  9 | PB1  (BTN_ENC)     (MISO)    PA6 |10  9 | PA5 (SCK)   |
- * (LCD_EN) PE9  | 8  7 | PE8  (LCD_RS)      (BTN_EN1) PC5 | 8  7 | PA4 (SD_SS) |
- * (LCD_D4) PE10   6  5 | PE11 (LCD_D5)      (BTN_EN2) PB0   6  5 | PA7 (MOSI)  |
- * (LCD_D6) PE12 | 4  3 | PE13 (LCD_D7)      (SD_DET)  PC4 | 4  3 | RESET       |
- *           GND | 2  1 | 5V                           GND | 2  1 | PA3         |
- *                ------                                    ------              |
- *                 EXP1                                      EXP2               |
- * ------------------------------------------------------------------------------
+ * -----------------------------------BTT002 V1.0----------------------------------------
+ *               ------                                          ------                  |
+ *          PA3 | 1  2 | GND                                 5V | 1  2 | GND             |
+ *       NRESET | 3  4 | PC4 (SD_DET)             (LCD_D7) PE13 | 3  4 | PE12  (LCD_D6)  |
+ *   (MOSI) PA7 | 5  6 | PB0 (BTN_EN2)            (LCD_D5) PE11 | 5  6 | PE10  (LCD_D4)  |
+ *  (SD_SS) PA4 | 7  8 | PC5 (BTN_EN1)            (LCD_RS) PE8  | 7  8 | PE9   (LCD_EN)  |
+ *    (SCK) PA5 | 9 10 | PA6 (MISO)              (BTN_ENC) PB1  | 9 10 | PE7   (BEEPER)  |
+ *               ------                                          ------                  |
+ *                EXP2                                            EXP1                   |
+ * --------------------------------------------------------------------------------------
  */
+
 #define EXP1_03_PIN                         PE13
 #define EXP1_04_PIN                         PE12
 #define EXP1_05_PIN                         PE11
@@ -223,7 +200,6 @@
 #define EXP1_09_PIN                         PB1
 #define EXP1_10_PIN                         PE7
 
-#define EXP2_01_PIN                         PA3
 #define EXP2_03_PIN                         -1
 #define EXP2_04_PIN                         PC4
 #define EXP2_05_PIN                         PA7
@@ -234,10 +210,13 @@
 #define EXP2_10_PIN                         PA6
 
 // HAL SPI1 pins
-#define SD_SCK_PIN                   EXP2_09_PIN  // SPI1 SCLK
-#define SD_SS_PIN                    EXP2_07_PIN  // SPI1 SSEL
-#define SD_MISO_PIN                  EXP2_10_PIN  // SPI1 MISO
-#define SD_MOSI_PIN                  EXP2_05_PIN  // SPI1 MOSI
+#define CUSTOM_SPI_PINS
+#if ENABLED(CUSTOM_SPI_PINS)
+  #define SD_SCK_PIN                 EXP2_09_PIN  // SPI1 SCLK
+  #define SD_SS_PIN                  EXP2_07_PIN  // SPI1 SSEL
+  #define SD_MISO_PIN                EXP2_10_PIN  // SPI1 MISO
+  #define SD_MOSI_PIN                EXP2_05_PIN  // SPI1 MOSI
+#endif
 
 #define SDSS                         EXP2_07_PIN
 
@@ -317,10 +296,16 @@
   #endif
 
   // Alter timing for graphical display
-  #if IS_U8GLIB_ST7920
-    #define BOARD_ST7920_DELAY_1              96
-    #define BOARD_ST7920_DELAY_2              48
-    #define BOARD_ST7920_DELAY_3             600
+  #if HAS_MARLINUI_U8GLIB
+    #ifndef BOARD_ST7920_DELAY_1
+      #define BOARD_ST7920_DELAY_1 DELAY_NS(96)
+    #endif
+    #ifndef BOARD_ST7920_DELAY_2
+      #define BOARD_ST7920_DELAY_2 DELAY_NS(48)
+    #endif
+    #ifndef BOARD_ST7920_DELAY_3
+      #define BOARD_ST7920_DELAY_3 DELAY_NS(600)
+    #endif
   #endif
 
 #endif // HAS_WIRED_LCD

@@ -56,7 +56,7 @@
       static CircularQueue<tone_t, TONE_QUEUE_LENGTH> buffer;
 
       /**
-       * @brief Inverts the state of a digital PIN
+       * @brief Inverts the sate of a digital PIN
        * @details This will invert the current state of an digital IO pin.
        */
       FORCE_INLINE static void invert() { TOGGLE(BEEPER_PIN); }
@@ -77,7 +77,7 @@
        * @brief Resets the state of the class
        * @details Brings the class state to a known one.
        */
-      static void reset() {
+      static inline void reset() {
         off();
         state.endtime = 0;
       }
@@ -86,7 +86,7 @@
       /**
        * @brief Init Buzzer
        */
-      static void init() {
+      static inline void init() {
         SET_OUTPUT(BEEPER_PIN);
         reset();
       }
