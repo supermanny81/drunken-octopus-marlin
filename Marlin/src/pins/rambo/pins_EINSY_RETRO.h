@@ -25,7 +25,9 @@
  * Einsy-Retro pin assignments
  */
 
-#include "env_validate.h"
+#if NOT_TARGET(__AVR_ATmega2560__)
+  #error "Oops! Select 'Arduino Mega 2560 or Rambo' in 'Tools > Board.'"
+#endif
 
 #define BOARD_INFO_NAME "Einsy Retro"
 
@@ -55,12 +57,13 @@
 
   #define X_MIN_PIN                           12  // X-
   #define Y_MIN_PIN                           11  // Y-
+  #define Z_MIN_PIN                           10  // Z-
   #define X_MAX_PIN                           81  // X+
   #define Y_MAX_PIN                           57  // Y+
 
 #else
 
-  #if X_HOME_TO_MIN
+  #if X_HOME_DIR < 0
     #define X_MIN_PIN                 X_DIAG_PIN
     #define X_MAX_PIN                         81  // X+
   #else
@@ -68,7 +71,7 @@
     #define X_MAX_PIN                 X_DIAG_PIN
   #endif
 
-  #if Y_HOME_TO_MIN
+  #if Y_HOME_DIR < 0
     #define Y_MIN_PIN                 Y_DIAG_PIN
     #define Y_MAX_PIN                         57  // Y+
   #else
@@ -77,16 +80,15 @@
   #endif
 
   #if ENABLED(BLTOUCH)
-    #define Z_MIN_PIN                         11  // Y-
-    #define SERVO0_PIN                        10  // Z-
+    #define Z_MIN_PIN                         11  // Y-MIN
+    #define SERVO0_PIN                        10  // Z-MIN
+  #else
+    #define Z_MIN_PIN                         10
   #endif
 
 #endif
 
 #define Z_MAX_PIN                              7
-#ifndef Z_MIN_PIN                              7
-  #define Z_MIN_PIN                           10  // Z-
-#endif
 
 //
 // Z Probe (when not Z_MIN_PIN)
@@ -199,10 +201,3 @@
   #endif // IS_ULTIPANEL || TOUCH_UI_ULTIPANEL || TOUCH_UI_FTDI_EVE
 
 #endif // HAS_WIRED_LCD || TOUCH_UI_ULTIPANEL || TOUCH_UI_FTDI_EVE
-
-// Alter timing for graphical display
-#if IS_U8GLIB_ST7920
-  #define BOARD_ST7920_DELAY_1                 0
-  #define BOARD_ST7920_DELAY_2               250
-  #define BOARD_ST7920_DELAY_3                 0
-#endif

@@ -71,7 +71,7 @@
   #define E0_DIAG_PIN                         78  // PB23
   #define E1_DIAG_PIN                         25  // PD0
 
-  #if X_HOME_TO_MIN
+  #if X_HOME_DIR < 0
     #define X_MIN_PIN                 X_DIAG_PIN
     #define X_MAX_PIN                         32
   #else
@@ -79,7 +79,7 @@
     #define X_MAX_PIN                 X_DIAG_PIN
   #endif
 
-  #if Y_HOME_TO_MIN
+  #if Y_HOME_DIR < 0
     #define Y_MIN_PIN                 Y_DIAG_PIN
     #define Y_MAX_PIN                         15
   #else
@@ -210,11 +210,7 @@
 #define TEMP_0_PIN                            10  // D10 PB19 THERM AN1 *
 #define TEMP_1_PIN                             9  // D9 PB18 THERM AN2 *
 #endif
-#if defined(TEMP_SENSOR_CHAMBER)
-#define TEMP_CHAMBER_PIN                       8  // D8 PB17 THERM AN4 *
-#else
 #define TEMP_2_PIN                             8  // D8 PB17 THERM AN4 *
-#endif
 #define TEMP_BED_PIN                          11  // D11 PB20 THERM AN3 *
 
 //
@@ -235,9 +231,7 @@
   #define FAN1_PIN                             4  // D4 PC26 FET_PWM1 ("FAN1" header)
 #else
   #define FAN_PIN                              4  // D4 PC26 FET_PWM1 ("FAN1" header)
-  #ifndef FAN1_PIN
   #define FAN1_PIN                             8  // D8 PC22 FET_PWM5 ("HTR3" header)
-  #endif
 #endif
 
 #ifndef CONTROLLER_FAN_PIN
