@@ -3,7 +3,7 @@
 #define ADVANCED_OK
 #define ADVANCED_PAUSE_FEATURE
 #define ADVANCED_PAUSE_PURGE_FEEDRATE 1.0
-#define AUTO_BED_LEVELING_LINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 #define AXIS_LEVELING_COMMANDS "M117 Leveling X Axis\nG28\nG0 X150 F9999\nG0 Z5 F6000\nG91\nM211 S0\nM400\nM906 Z600\nG0 Z-15 F500\nG0 Z5 F500\nM400\nG90\nM906 Z960\nM211 S1\nG28 Z0\nM117 Leveling done."
 #define BABYSTEPPING
 #define BABYSTEP_ALWAYS_AVAILABLE
@@ -17,7 +17,6 @@
 #define BACKLASH_GCODE
 #define BACKLASH_SMOOTHING_MM 3
 #define BAUDRATE 250000
-//#define BLTOUCH
 #define BOOT_MARLIN_LOGO_SMALL
 #define BUFSIZE 5
 #define CALIBRATION_GCODE
@@ -75,6 +74,7 @@
 #define FILAMENT_CHANGE_FAST_LOAD_LENGTH 40
 #define FILAMENT_CHANGE_UNLOAD_FEEDRATE 5
 #define FILAMENT_CHANGE_UNLOAD_LENGTH 80
+#define FILAMENT_LOAD_UNLOAD_GCODES
 #define FILAMENT_RUNOUT_DISTANCE_MM 14
 #define FILAMENT_RUNOUT_SENSOR
 #define FILAMENT_UNLOAD_PURGE_DELAY 0
@@ -129,14 +129,15 @@
 #define MOTHERBOARD BOARD_EINSY_RETRO
 #define MULTIPLE_PROBING 2
 #define NOZZLE_AS_PROBE
-#define NOZZLE_CLEAN_END_POINT {115, 175, 1}
+#define NOZZLE_CLEAN_END_POINT {{115, 175, 1}}
 #define NOZZLE_CLEAN_FEATURE
 //#define NOZZLE_CLEAN_GOBACK
-#define NOZZLE_CLEAN_START_POINT {45, 175, 1}
+#define NOZZLE_CLEAN_START_POINT {{45, 175, 1}}
 #define NOZZLE_PARK_FEATURE
 #define NOZZLE_PARK_POINT {10, 182, 20}
 #define NOZZLE_TO_PROBE_OFFSET {0, 0, -1.1}
 #define NO_FAN_SLOWING_IN_PID_TUNING
+#define NO_MOTION_BEFORE_HOMING
 #define NO_VOLUMETRICS
 #define NO_WORKSPACE_OFFSETS
 #define NUM_RUNOUT_SENSORS 1
@@ -167,7 +168,7 @@
 #define SCROLL_LONG_FILENAMES
 #define SDSUPPORT
 #define SD_SPI_SPEED SPI_FULL_SPEED
-#define SENSORLESS_BACKOFF_MM {5, 5}
+#define SENSORLESS_BACKOFF_MM {5, 5, 0}
 #define SENSORLESS_HOMING
 #define SERIAL_PORT 0
 #define SERIAL_PORT_2 2
@@ -176,6 +177,7 @@
 #define SOFT_PWM_SCALE 4
 #define SOURCE_CODE_URL "https://github.com/marciot/drunken-octopus-marlin"
 #define STARTUP_COMMANDS "M17 Z"
+//#define START_PRINT_TIMER_ON_G26
 #define STATUS_EXPIRE_SECONDS 0
 #define STATUS_MESSAGE_SCROLLING
 //#define STEALTHCHOP_E
@@ -195,6 +197,7 @@
 #define THERMAL_PROTECTION_BED_PERIOD 15
 #define THERMAL_PROTECTION_HYSTERESIS 30
 #define THERMAL_PROTECTION_PERIOD 15
+//#define THERMAL_PROTECTION_VARIANCE_MONITOR
 #define TMC_ADV {stepperX.toff(1);stepperX.hstrt(4);stepperX.hend(0);stepperX.tbl(1);stepperY.toff(1);stepperY.hstrt(4);stepperY.hend(0);stepperY.tbl(1);stepperZ.toff(1);stepperZ.hstrt(0);stepperZ.hend(0);stepperZ.tbl(1);stepperE0.toff(1);stepperE0.hstrt(0);stepperE0.hend(0);stepperE0.tbl(1);stepperX.shaft(1);stepperX.semin(1);stepperX.semax(3);stepperY.shaft(1);stepperY.semin(1);stepperY.semax(3);stepperZ.shaft(1);stepperZ.semin(1);stepperZ.semax(3);stepperE0.shaft(1);stepperE0.semin(1);stepperE0.semax(3);}
 #define TMC_DEBUG
 #define TOOLHEAD_NAME "SE 0.5mm AeroV2"
