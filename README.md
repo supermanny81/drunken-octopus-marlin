@@ -1,57 +1,122 @@
 ﻿![alt text][logo]
 
-# *Drunken Octopus* Marlin: An Alternative (Unofficial) Firmware for Aleph Objects Printers and Derivatives
+# *Cocoa Press* Marlin: UNDER DEVELOPMENT
 
-*Drunken Octopus* is a fork of the firmware that was used on Aleph Objects printers (a.k.a. LulzBot) prior to the [layoff of 2019] and the subsequent take over and [relocation of the company].
+This firmware is currently under development on a contract from [Cocoa Press] and is alpha level software.
 
-By forking the firmware as it existed at that point in time, I hope provide to provide a resource to people who, like myself, still use Aleph Objects printers in some capacity. This fork also supports newer printers [that are derived from those original designs] as well as users who want to take their printers beyond their original configuration.
+Please do not attempt to use it on any printer (or do so at your own risk).
 
-## Who can benefit from *Drunken Octopus* Marlin?
+## How do I compile from source?
 
-This firmware is for users who want the very latest firmware and features for their existing printers and **are willing to take the risks associated with running development firmware**. It is also for people who are tech savvy and want to experiment with custom and unusual configurations.
+**Windows 10:** If you are using Windows 10, one of the easiest ways to build the firmware is using *Windows Subsystem for Linux (WSL)*. Simply follow [this guide] to set up WSL and get yourself an Ubuntu shell, then proceed with the steps for Linux.
 
-## How can I flash Drunken Octopus to my printer?
+**Linux:** Open a shell and execute the following commands one at a time:
 
-Use the [Drunken Octopus Firmware Tool], a quick, easy-to-use tool for finding and flashing firmware to your printer!
+```
+sudo apt-get update
+sudo apt-get install python git make rename
+sudo apt-get install gcc-avr avr-libc
+sudo apt-get install gcc-arm-none-eabi bossac-cli
+sudo ln -s "/mnt/c/Users/YOUR_WINDOWS_USER_DIR/Documents" Documents
+cd Documents
+git clone https://github.com/marcio-cp/cocoa-press-marlin.git marlin
+cd marlin
+./build-configs.sh
+./build-firmware.sh
+```
 
-## Where can I find information about upgrading my printer?
+Once this process is complete, the firmware files will be in the `build` directory of your Documents folder.
 
-If you have a pretty good idea of what you want to do, a good place to start is the [wiring guide] for *Drunken Octopus* Marlin.
+**Arduino IDE:** In order to use the Arduino IDE, you will need download and extract the zip file from the [GitHub repo].
 
-If you want more help and specifics, a community of enthusiasts has begun to form around *Drunken Octopus* Marlin. These volunteers are publishing guides, documentation and resources at [drunkenoctop.us].
+The, go into the unpacked folder and replace the "Configuration.h" and "Configuration_adv.h" files in the "Marlin" subdirectory with one of the example configuration files from "config/examples/CocoaPress".
 
-# How can you support my work?
+Open the "Marlin.ino" file from the "Marlin" subdirectory in the Arduino IDE.
 
-:heart: **If you would like to support my work on open-source projects, please consider contributions via my [Patreon page]**. :heart:
+Choose "Preferences" from the "File" menu and add "https://raw.githubusercontent.com/ultimachine/ArduinoAddons/master/package_ultimachine_index.json" to the "Additional Boards Manager URLs".
 
-While at AlephObjects, I was a [major contributor] to Marlin. Today, I [continue to contribute] in the following ways:
+In the "Boards Manager":
+    - If using Archim 2.0: Search for "Archim" and install "Archim by UltiMachine"
+    - For all others: Search for "RAMBo" and install "RepRap Arduino-compatible Mother Board (RAMBo) by UltiMachine"
 
-* Maintaining *Drunken Octopus* Marlin build and configuration scripts
-* Keeping *Drunken Octopus* Marlin up-to-date with upstream changes and fixing bugs as they occur
-* Maintaining the touch screen interface that is used in [many] [different] [printers]
-* Contributing to other open-source projects, related and unrelated to 3D printing
+Choose the board corresponding to your printer from the "Board" submenu menu of the "Tools" menu.
 
-All Patreon supporters will receive pre-compiled firmware for hundreds of different *Drunken Octopus* Marlin variants.
-Supporters may also receive additional member-only perks.
+To compile and upload the firmware to your printer, select "Upload" from the "Sketch" menu.
 
-# License
+# Wiring notes:
+
+On Einsy Retro:
+
+| Feature          | Pin                 |
+|------------------|---------------------|
+| NeoPixel         | Pin 9 on header P1  |
+| Extruder Control | N/A                 |
+| Cooling Control  | N/A                 |
+  
+On Archim 2.0:
+
+| Feature                | Port  | Arduino Pin | Archim Pin |
+|------------------------|-------|-------------|------------|
+| Nozzle Heater          | PC24  | 6           | HTR1       |
+| Body Heater            | PC23  | 7           | HTR2       |
+| Extra Heater           | PC22  | 8           | HTR3       |
+| Case Light Control     | PC21  | 9           | HTBD       |
+| Snapshot Control       | PB5   | 94          | J20 Pin 5  |
+| Cooling Control        | PB3   | 103         | J20 Pin 7  |
+| FIL_RUNOUT_PIN         | PB15  | 66          | J20 Pin 15 |
+| FIL_RUNOUT2_PIN        | PB16  | 67          | J20 Pin 16 |
+| Chocolate Level        | PB13  | 21          | J20 Pin 19 |
+| SERVO0_PIN (BLTouch)   | PB12  | 20          | J20 Pin 20 |
+
+# Using the chocolate fill sensor
+
+A linear potentiometer may be used to adjust the chocolate level graphics on the status screen. Do implement this feature, connect a linear potentiometer
+across pins 19, 23 and 24.
+
+| GND                    | J20 Pin 23 |
+| Chocolate Level        | J20 Pin 19 |
+| 3.3V                   | J20 Pin 24 |
+
+# Using the snapshot pin
+
+Connect camera output to J20 Pin 5 and trigger using the following commands:
+
+```
+M42 S255 P94 ;Trigger
+G4 P200      ;Wait for 200ms
+M42 S0 P94   ;Untrigger
+G4 P500      ;Wait for 500ms
+```
+
+Reference: https://blog.prusaprinters.org/how-to-make-3d-print-time-lapses-with-your-smartphone-camera_29790/
+
+# Sending Messages to the User to Set The Pressure Regulator from the GCODE:
+
+Use [M0], as follows:
+
+```
+M0 Set the pressure to 29.92 inches of mercury
+```
+
+# Using Unified Bed Leveling
+
+This build of Marlin enables [Unified Bed Leveling]. The bed leveling routine can be triggered by the user from the LCD menu. The mesh is then saved to the EEPROM for use in the next print. In the start GCODE for prints, the following commands should be used instead of `G29`:
+
+```
+G28 ; home all axes
+G29 L1 ; load leveling matrix slot 1
+G29 A ; ensure mesh is enabled
+```
+
+# License (from Marlin)
 
 Marlin is published under the [GPL license](/LICENSE) because we believe in open development. The GPL comes with both rights and obligations. Whether you use Marlin firmware as the driver for your open or closed-source product, you must keep Marlin open, and you must provide your compatible Marlin source code to end users upon request. The most straightforward way to comply with the Marlin license is to make a fork of Marlin on Github, perform your modifications, and direct users to your modified fork.
 
 While we can't prevent the use of this code in products (3D printers, CNC, etc.) that are closed source or crippled by a patent, we would prefer that you choose another firmware or, better yet, make your own.
 
-**Photo Credits:** Coat hanger photograph by Ari Sytner. Used with permission.
-
-[logo]: https://github.com/marciot/drunken-octopus-marlin/raw/master/images/drunken-octopus-small.jpg "Drunken Octopus Logo"
-[layoff of 2019]: https://www.fabbaloo.com/blog/2019/10/12/the-end-of-lulzbot "The End of LulzBot (?)"
-[relocation of the company]: https://3dprintingindustry.com/news/lulzbot-to-move-to-north-dakota-following-fame-3d-acquisition-166592/
-[that are derived from those original designs]: https://syndaver.com/product/axi-desktop-3d-printer/
-[drunkenoctop.us]: http://www.drunkenoctop.us
-[wiring guide]: https://www.drunkenoctop.us/drunken-octopus-marlin/pinouts/
-[Drunken Octopus Firmware Tool]: http://www.drunkenoctop.us/drunken-octopus-downloader/
-[Patreon page]: https://www.patreon.com/marciot "Marcio's Patreon Page"
-[major contributor]: https://github.com/marcio-ao
-[continue to contribute]: https://github.com/marciot
-[many]: https://syndaver.com/product/axi-desktop-3d-printer/
-[different]: https://www.cocoapress.com
-[printers]: https://www.youtube.com/watch?v=qiHzmXcFxJ0
+[logo]: https://github.com/marcio-cp/cocoa-press-marlin/raw/master/artwork/cp-logo-small.jpg "Cocoa Press Logo"
+[Cocoa Press]: https://www.cocoapress.com
+[this guide]: https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
+[GitHub repo]: https://github.com/marcio-cp/cocoa-press-marlin
+[M1]:http://marlinfw.org/docs/gcode/M000-M001.html
+[Unified Bed Leveling]:https://marlinfw.org/docs/features/unified_bed_leveling.html
