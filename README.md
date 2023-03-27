@@ -19,8 +19,9 @@ sudo apt-get install gcc-avr avr-libc
 sudo apt-get install gcc-arm-none-eabi bossac-cli
 sudo ln -s "/mnt/c/Users/YOUR_WINDOWS_USER_DIR/Documents" Documents
 cd Documents
-git clone https://github.com/marcio-cp/cocoa-press-marlin.git marlin
+git clone https://github.com/drunken-octopus/drunken-octopus-marlin.git marlin
 cd marlin
+git checkout cocoa-press-modifications
 ./build-configs.sh
 ./build-firmware.sh
 ```
