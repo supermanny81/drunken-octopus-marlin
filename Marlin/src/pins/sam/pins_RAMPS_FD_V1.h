@@ -110,7 +110,7 @@
 #define TEMP_BED_PIN                           0  // Analog Input
 
 // SPI for MAX Thermocouple
-#if DISABLED(SDSUPPORT)
+#if !HAS_MEDIA
   #define TEMP_0_CS_PIN                       53
 #else
   #define TEMP_0_CS_PIN                       49
@@ -260,7 +260,7 @@
 // M3/M4/M5 - Spindle/Laser Control
 //
 #if HOTENDS < 3 && HAS_CUTTER && !PIN_EXISTS(SPINDLE_LASER_ENA)
-  #define SPINDLE_LASER_ENA_PIN               45  // Use E2 ENA
   #define SPINDLE_LASER_PWM_PIN               12  // Hardware PWM
+  #define SPINDLE_LASER_ENA_PIN               45  // Use E2 ENA
   #define SPINDLE_DIR_PIN                     47  // Use E2 DIR
 #endif

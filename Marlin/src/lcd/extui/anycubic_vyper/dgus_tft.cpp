@@ -463,7 +463,7 @@ namespace Anycubic {
       pop_up_index = 15;  // show filament lack.
 
       if (READ(FIL_RUNOUT_PIN) == FIL_RUNOUT_STATE) {
-        PlayTune(FilamentOut, 1);
+        PlayTune(FilamentOut);
 
         feedrate_back = getFeedrate_percent();
 
@@ -505,7 +505,7 @@ namespace Anycubic {
         if (strcmp_P(msg, MARLIN_msg_heater_timeout) == 0) {
           pause_state = AC_paused_heater_timed_out;
           SendtoTFTLN(AC_msg_paused); // enable continue button
-          PlayTune(Heater_Timedout, 1);
+          PlayTune(HeaterTimeout);
         }
         // Reheat finished, send acknowledgement
         else if (strcmp_P(msg, MARLIN_msg_reheat_done) == 0) {
@@ -549,7 +549,7 @@ namespace Anycubic {
     bool msg_matched = false;
 
     #if HAS_LEVELING
-      static uint8_t probe_cnt = 0;
+      static grid_count_t probe_cnt = 0;
     #endif
 
     // The only way to get printer status is to parse messages
@@ -564,7 +564,7 @@ namespace Anycubic {
           // If probing completes ok save the mesh and park
           // Ignore the custom machine name
           if (strcmp_P(msg + strlen(MACHINE_NAME), MARLIN_msg_ready) == 0) {
-            if (probe_cnt == GRID_MAX_POINTS_X * GRID_MAX_POINTS_Y) {
+            if (probe_cnt == GRID_MAX_POINTS) {
               probe_cnt = 0;
               injectCommands(F("M500"));    // G27 park nozzle
               //ChangePageOfTFT(PAGE_PreLEVEL);
@@ -576,7 +576,7 @@ namespace Anycubic {
 
           // If probing fails don't save the mesh raise the probe above the bad point
           if (strcmp_P(msg, MARLIN_msg_probing_failed) == 0) {
-            PlayTune(BeepBeepBeeep, 1);
+            PlayTune(BeepBeepBeeep);
             injectCommands(F("G1 Z50 F500"));
             ChangePageOfTFT(PAGE_CHS_ABNORMAL_LEVELING_SENSOR);
             SendtoTFTLN(AC_msg_probing_complete);
@@ -1070,7 +1070,7 @@ namespace Anycubic {
                 #else
                   SendTxtToTFT(recovery.info.sd_filename, TXT_OUTAGE_RECOVERY_FILE);
                 #endif
-                PlayTune(SOS, 1);
+                PlayTune(SOS);
               }
             #else
               constexpr bool is_outage = false;
@@ -1081,7 +1081,7 @@ namespace Anycubic {
           }
           else if (control_value == 0x010000) {         // startup first gif
             // Startup tunes are defined in Tunes.h
-            PlayTune(Anycubic_PowerOn, 1);              // takes 3500 ms
+            PlayTune(Anycubic_PowerOn);                 // takes 3500 ms
           }
         }
 

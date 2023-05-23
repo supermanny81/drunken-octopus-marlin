@@ -178,7 +178,7 @@
 #endif
 
 // SPI for MAX Thermocouple
-//#if DISABLED(SDSUPPORT)
+//#if !HAS_MEDIA
 //  #define TEMP_0_CS_PIN    66   // Don't use 53 if using Display/SD card
 //#else
 //  #define TEMP_0_CS_PIN    66   // Don't use 49 (SD_DETECT_PIN)
@@ -228,12 +228,12 @@
 //
 #if HAS_CUTTER && !PIN_EXISTS(SPINDLE_LASER_ENA)
   #if !NUM_SERVOS                                 // Prefer the servo connector
-    #define SPINDLE_LASER_ENA_PIN              4  // Pullup or pulldown!
     #define SPINDLE_LASER_PWM_PIN              6  // Hardware PWM
+    #define SPINDLE_LASER_ENA_PIN              4  // Pullup or pulldown!
     #define SPINDLE_DIR_PIN                    5
   #elif HAS_FREE_AUX2_PINS                        // Try to use AUX 2
-    #define SPINDLE_LASER_ENA_PIN             40  // Pullup or pulldown!
     #define SPINDLE_LASER_PWM_PIN             44  // Hardware PWM
+    #define SPINDLE_LASER_ENA_PIN             40  // Pullup or pulldown!
     #define SPINDLE_DIR_PIN                   65
   #endif
 #endif
