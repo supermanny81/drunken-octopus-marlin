@@ -142,7 +142,7 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["USE_YMIN_PLUG"]                              = false
     MARLIN["USE_ZMIN_PLUG"]                              = true
 
-    MARLIN["USE_XMAX_PLUG"]                              = true
+    //MARLIN["USE_XMAX_PLUG"]                              = true
     MARLIN["USE_YMAX_PLUG"]                              = true
     MARLIN["USE_ZMAX_PLUG"]                              = false
 

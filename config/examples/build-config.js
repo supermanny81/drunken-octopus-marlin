@@ -3065,6 +3065,24 @@ function make_config(PRINTER, TOOLHEAD) {
 /*********************************** CLEAN UP **********************************/
 
     MARLIN["TOOLHEAD_TYPE"]                              = C_STRING(TOOLHEAD_TYPE)
+    
+    function checkEndstop(u,assertion) {
+        if(MARLIN.hasOwnProperty(u)) {
+            if(!assertion) {
+                console.log("WARNING:", u, "not supported on this version of Marlin");
+            }
+            delete MARLIN[u];
+        }
+    }
+    
+    // As of https://github.com/MarlinFirmware/Marlin/pull/25748, USE_*_PLUG is no longer used,
+    // but keep it around for now.
+    checkEndstop("USE_XMIN_PLUG", MARLIN["X_HOME_DIR"] == -1);
+    checkEndstop("USE_YMIN_PLUG", MARLIN["Y_HOME_DIR"] == -1);
+    checkEndstop("USE_ZMIN_PLUG", MARLIN["Z_HOME_DIR"] == -1);
+    checkEndstop("USE_XMAX_PLUG", MARLIN["X_HOME_DIR"] ==  1);
+    checkEndstop("USE_YMAX_PLUG", MARLIN["Y_HOME_DIR"] ==  1);
+    checkEndstop("USE_ZMAX_PLUG", MARLIN["Z_HOME_DIR"] ==  1);
 
     return MARLIN
 }
