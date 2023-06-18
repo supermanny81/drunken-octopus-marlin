@@ -80,8 +80,12 @@ void LevelingMenu::onRedraw(draw_mode_t what) {
     #if ENABLED(BLTOUCH)
        .text(BLTOUCH_TITLE_POS, GET_TEXT_F(MSG_BLTOUCH))
     #endif
-       .font(font_medium).colors(normal_btn) 
-       .enabled(ANY(Z_STEPPER_AUTO_ALIGN,MECHANICAL_GANTRY_CALIBRATION) || defined(AXIS_LEVELING_COMMANDS))
+       .font(font_medium).colors(normal_btn)
+       #ifdef AXIS_LEVELING_COMMANDS
+       .enabled(true)
+       #else
+       .enabled(ANY(Z_STEPPER_AUTO_ALIGN,MECHANICAL_GANTRY_CALIBRATION))
+       #endif
        .tag(2).button(LEVEL_AXIS_POS, GET_TEXT_F(MSG_LEVEL_X_AXIS))
        .enabled(ENABLED(HAS_BED_PROBE))
        .tag(3).button(PROBE_BED_POS, GET_TEXT_F(MSG_PROBE_BED))
