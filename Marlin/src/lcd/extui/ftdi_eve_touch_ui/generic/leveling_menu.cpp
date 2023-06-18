@@ -25,7 +25,7 @@
 
 #ifdef FTDI_LEVELING_MENU
 
-#if BOTH(HAS_BED_PROBE,BLTOUCH)
+#if ALL(HAS_BED_PROBE,BLTOUCH)
   #include "../../../../feature/bltouch.h"
 #endif
 
@@ -80,10 +80,9 @@ void LevelingMenu::onRedraw(draw_mode_t what) {
     #if ENABLED(BLTOUCH)
        .text(BLTOUCH_TITLE_POS, GET_TEXT_F(MSG_BLTOUCH))
     #endif
-       .font(font_medium).colors(normal_btn)
-    #if EITHER(Z_STEPPER_AUTO_ALIGN,MECHANICAL_GANTRY_CALIBRATION) || defined(AXIS_LEVELING_COMMANDS)
+       .font(font_medium).colors(normal_btn) 
+       .enabled(ANY(Z_STEPPER_AUTO_ALIGN,MECHANICAL_GANTRY_CALIBRATION) || defined(AXIS_LEVELING_COMMANDS))
        .tag(2).button(LEVEL_AXIS_POS, GET_TEXT_F(MSG_LEVEL_X_AXIS))
-    #endif
        .enabled(ENABLED(HAS_BED_PROBE))
        .tag(3).button(PROBE_BED_POS, GET_TEXT_F(MSG_PROBE_BED))
        .enabled(ENABLED(HAS_MESH))
@@ -115,7 +114,7 @@ bool LevelingMenu::onTouchEnd(uint8_t tag) {
         break;
     #elif defined(AXIS_LEVELING_COMMANDS)
       case 2: SpinnerDialogBox::enqueueAndWait(F(AXIS_LEVELING_COMMANDS)); break;
-    #elif EITHER(Z_STEPPER_AUTO_ALIGN,MECHANICAL_GANTRY_CALIBRATION)
+    #elif ANY(Z_STEPPER_AUTO_ALIGN,MECHANICAL_GANTRY_CALIBRATION)
       case 2:
         GOTO_SCREEN(StatusScreen);
         ExtUI::injectCommands_P(PSTR("G28 Z\nG34 A2 I20 T0.01"));

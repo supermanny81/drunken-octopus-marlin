@@ -69,8 +69,6 @@ namespace Language_en {
   LSTR MSG_LCD_SOFT_ENDSTOPS              = _UxGT("Soft Endstops");
   LSTR MSG_MAIN_MENU                      = _UxGT("Main Menu");
   LSTR MSG_ADVANCED_SETTINGS              = _UxGT("Advanced Settings");
-  LSTR MSG_TOOLBAR_SETUP                  = _UxGT("Toolbar Setup");
-  LSTR MSG_OPTION_DISABLED                = _UxGT("Option Disabled");
   LSTR MSG_CONFIGURATION                  = _UxGT("Configuration");
   LSTR MSG_RUN_AUTO_FILES                 = _UxGT("Run Auto Files");
   LSTR MSG_DISABLE_STEPPERS               = _UxGT("Disable Steppers");
@@ -750,9 +748,9 @@ namespace Language_en {
   LSTR MSG_MMU2_EJECT_FILAMENT            = _UxGT("MMU Eject");
   LSTR MSG_MMU2_EJECT_FILAMENT_N          = _UxGT("MMU Eject ~");
   LSTR MSG_MMU2_UNLOAD_FILAMENT           = _UxGT("MMU Unload");
-  LSTR MSG_MMU2_LOADING_FILAMENT          = _UxGT("Loading Fil. %i...");
-  LSTR MSG_MMU2_EJECTING_FILAMENT         = _UxGT("Ejecting Fil. ...");
-  LSTR MSG_MMU2_UNLOADING_FILAMENT        = _UxGT("Unloading Fil....");
+  LSTR MSG_MMU2_LOADING_FILAMENT          = _UxGT("Filament %i Load...");
+  LSTR MSG_MMU2_EJECTING_FILAMENT         = _UxGT("Filament Eject...");
+  LSTR MSG_MMU2_UNLOADING_FILAMENT        = _UxGT("Filament Unload...");
   LSTR MSG_MMU2_ALL                       = _UxGT("All");
   LSTR MSG_MMU2_FILAMENT_N                = _UxGT("Filament ~");
   LSTR MSG_MMU2_RESET                     = _UxGT("Reset MMU");
