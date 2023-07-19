@@ -23,6 +23,7 @@
 
 #include "../config.h"
 #include "../screens.h"
+#include "../../../../module/stepper.h"
 
 #ifdef COCOA_MAIN_MENU
 
@@ -63,6 +64,10 @@ void MainMenu::onRedraw(draw_mode_t what) {
        .tag( 6).button(SPEED_POS,             GET_TEXT_F(MSG_PRINT_SPEED))
        .tag( 7).button(FLOW_POS,              GET_TEXT_F(MSG_FLOW))
        .tag( 8).button(ADVANCED_SETTINGS_POS, GET_TEXT_F(MSG_ADVANCED_SETTINGS))
+               .enabled(stepper.axis_is_enabled(X_AXIS) ||
+                        stepper.axis_is_enabled(Y_AXIS) ||
+                        stepper.axis_is_enabled(Z_AXIS) ||
+                        stepper.axis_is_enabled(E0_AXIS))
        .tag( 9).button(DISABLE_STEPPERS_POS,  GET_TEXT_F(MSG_DISABLE_STEPPERS))
                .enabled(ENABLED(HAS_LEVELING))
        .tag(10).button(LEVELING_POS,          GET_TEXT_F(MSG_LEVELING))
@@ -95,6 +100,14 @@ bool MainMenu::onTouchEnd(uint8_t tag) {
       return false;
   }
   return true;
+}
+
+void MainMenu::onIdle() {
+  if (refresh_timer.elapsed(STATUS_UPDATE_INTERVAL)) {
+    if (!EventLoop::is_touch_held())
+      onRefresh();
+    refresh_timer.start();
+  }
 }
 
 #endif // COCOA_MAIN_MENU
