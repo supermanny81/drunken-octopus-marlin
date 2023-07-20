@@ -201,18 +201,6 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
     ui.bounds(POLY(h1_label), x, y, w, h);
     cmd.text(x, y, w, h, GET_TEXT_F(MSG_BODY));
 
-    #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
-      if (has_extra_heater()) {
-        ui.bounds(POLY(h2_label), x, y, w, h);
-        cmd.text(x, y, w, h, GET_TEXT_F(MSG_EXTERNAL));
-      }
-    #endif
-
-    #if ENABLED(COCOA_PRESS_CHAMBER_COOLER)
-      ui.bounds(POLY(h3_label), x, y, w, h);
-      cmd.text(x, y, w, h, GET_TEXT_F(MSG_CHAMBER));
-    #endif
-
     #if ENABLED(TOUCH_UI_USE_UTF8)
       load_utf8_bitmaps(cmd); // Restore font bitmap handles
     #endif
@@ -231,20 +219,6 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
     format_temp(str, getActualTemp_celsius(E1));
     ui.bounds(POLY(h1_temp), x, y, w, h);
     cmd.button(x, y, w, h, str);
-
-    #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
-      if (has_extra_heater()) {
-        format_temp(str, getActualTemp_celsius(E2));
-        ui.bounds(POLY(h2_temp), x, y, w, h);
-        cmd.text(x, y, w, h, str);
-      }
-    #endif
-
-    #if ENABLED(COCOA_PRESS_CHAMBER_COOLER)
-      format_temp(str, getActualTemp_celsius(CHAMBER));
-      ui.bounds(POLY(h3_temp), x, y, w, h);
-      cmd.text(x, y, w, h, str);
-    #endif
   }
 }
 

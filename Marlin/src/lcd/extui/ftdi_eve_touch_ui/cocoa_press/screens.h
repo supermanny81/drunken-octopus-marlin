@@ -108,7 +108,6 @@ enum {
 #include "../generic/bed_mesh_base.h"
 #include "../generic/bed_mesh_view_screen.h"
 #include "../generic/bed_mesh_edit_screen.h"
-#include "../generic/case_light_screen.h"
 #include "../generic/linear_advance_screen.h"
 #include "../generic/move_axis_screen.h"
 #include "../generic/flow_percent_screen.h"
