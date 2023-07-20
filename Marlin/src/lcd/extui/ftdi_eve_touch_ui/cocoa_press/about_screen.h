@@ -1,9 +1,10 @@
-/************************
- * cocoa_press_extras.h *
- ************************/
+/******************
+ * about_screen.h *
+ ******************/
 
 /****************************************************************************
- *   Written By Marcio Teixeira 2020                                        *
+ *   Written By Mark Pelletier  2017 - Aleph Objects, Inc.                  *
+ *   Written By Marcio Teixeira 2018 - Aleph Objects, Inc.                  *
  *                                                                          *
  *   This program is free software: you can redistribute it and/or modify   *
  *   it under the terms of the GNU General Public License as published by   *
@@ -16,26 +17,17 @@
  *   GNU General Public License for more details.                           *
  *                                                                          *
  *   To view a copy of the GNU General Public License, go to the following  *
- *   location: <http://www.gnu.org/licenses/>.                              *
+ *   location: <https://www.gnu.org/licenses/>.                             *
  ****************************************************************************/
 
 #pragma once
-#include <stdbool.h>
 
-/**************************** EXTRA HEATER CHECK ****************************/
+#define COCOA_ABOUT_SCREEN
+#define COCOA_ABOUT_SCREEN_CLASS AboutScreen
 
-#if ENABLED(COCOA_PRESS_EXTRA_HEATER)
-  void check_extra_heater();
-  bool has_extra_heater();
-#endif
-
-#if ENABLED(COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR)
-  float get_chocolate_fill_level();
-#endif
-
-#if ENABLED(COCOA_PRESS_CYCLE_COOLER)
-  bool cycle_cooler_enabled();
-  void cycle_cooler_state(bool state);
-  void cycle_cooler_init();
-  void cycle_cooler_idle();
-#endif
+class AboutScreen : public BaseScreen, public UncachedScreen {
+  public:
+    static void onEntry();
+    static void onRedraw(draw_mode_t);
+    static bool onTouchEnd(uint8_t tag);
+};

@@ -46,10 +46,6 @@ void TemperatureScreen::onRedraw(draw_mode_t what) {
     #if ENABLED(TOUCH_UI_COCOA_PRESS)
       w.adjuster(   2, GET_TEXT_F(MSG_NOZZLE), getTargetTemp_celsius(E0));
       w.adjuster(   4, GET_TEXT_F(MSG_BODY), getTargetTemp_celsius(E1));
-      #if ENABLED(COCOA_PRESS_EXTRA_HEATER)
-        if (has_extra_heater())
-          w.adjuster(6, GET_TEXT_F(MSG_EXTERNAL), getTargetTemp_celsius(E2));
-      #endif
     #elif HOTENDS == 1
       w.adjuster(   2, GET_TEXT_F(MSG_NOZZLE),   getTargetTemp_celsius(E0));
     #else
@@ -68,9 +64,6 @@ void TemperatureScreen::onRedraw(draw_mode_t what) {
   #endif
   #if HAS_HEATED_CHAMBER
     w.adjuster(    22, GET_TEXT_F(MSG_CHAMBER), getTargetTemp_celsius(CHAMBER));
-    #if ENABLED(COCOA_PRESS_CYCLE_COOLER)
-      w.toggle( 24, F("Cooler System Cycling"), cycle_cooler_enabled());
-    #endif
   #endif
   #if HAS_FAN
     w.color(fan_speed).units(GET_TEXT_F(MSG_UNITS_PERCENT));
@@ -86,9 +79,6 @@ bool TemperatureScreen::onTouchHeld(uint8_t tag) {
     case 21: UI_INCREMENT(TargetTemp_celsius, BED); break;
     case 22: UI_DECREMENT(TargetTemp_celsius, CHAMBER); break;
     case 23: UI_INCREMENT(TargetTemp_celsius, CHAMBER); break;
-    #if ENABLED(COCOA_PRESS_CYCLE_COOLER)
-    case 24: cycle_cooler_state(!cycle_cooler_enabled()); break;
-    #endif
     #ifndef NO_TOOLHEAD_HEATER_GCODE
       case  2: UI_DECREMENT(TargetTemp_celsius, E0); break;
       case  3: UI_INCREMENT(TargetTemp_celsius, E0); break;

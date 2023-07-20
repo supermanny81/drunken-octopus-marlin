@@ -35,23 +35,22 @@ const TOOLHEAD_CHOICES = [
  *  1. PRINTER MODEL CHARACTERISTICS
  *  2. GENERAL CONFIGURATION
  *  3. EXPERIMENTAL FEATURES
- *  4. CASE LIGHT SUPPORT
- *  5. MOTHERBOARD AND PIN CONFIGURATION
- *  6. ENDSTOP CONFIGURATION
- *  7. HOMING & AXIS DIRECTIONS
- *  8. PROBING OPTIONS
- *  9. COCOA PRESS TOOLHEADS
- * 10. TEMPERATURE SETTINGS
- * 11. COOLING FAN CONFIGURATION
- * 12. AXIS TRAVEL LIMITS
- * 13. AUTOLEVELING / BED PROBE
- * 14. FILAMENT CONFIGURATION
- * 15. MOTOR DRIVER TYPE
- * 16. TRINAMIC DRIVER CONFIGURATION
- * 17. TRINAMIC SENSORLESS HOMING
- * 18. MOTOR CURRENTS
- * 19. ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS
- * 20. LCD OPTIONS
+ *  4. MOTHERBOARD AND PIN CONFIGURATION
+ *  5. ENDSTOP CONFIGURATION
+ *  6. HOMING & AXIS DIRECTIONS
+ *  7. PROBING OPTIONS
+ *  8. COCOA PRESS TOOLHEADS
+ *  9. TEMPERATURE SETTINGS
+ * 10. COOLING FAN CONFIGURATION
+ * 11. AXIS TRAVEL LIMITS
+ * 12. AUTOLEVELING / BED PROBE
+ * 13. FILAMENT CONFIGURATION
+ * 14. MOTOR DRIVER TYPE
+ * 15. TRINAMIC DRIVER CONFIGURATION
+ * 16. TRINAMIC SENSORLESS HOMING
+ * 17. MOTOR CURRENTS
+ * 18. ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS
+ * 19. LCD OPTIONS
  */
 
 function C_STRING(str) {
@@ -84,6 +83,8 @@ function make_config(PRINTER, TOOLHEAD) {
         
     MARLIN["LIN_ADVANCE"]                                = true
     MARLIN["ADVANCE_K"]                                  = 0.0
+    MARLIN["BINARY_FILE_TRANSFER"]                       = true
+    MARLIN["EXPECTED_PRINTER_CHECK"]                     = true
 
     MARLIN["MARLIN_DEV_MODE"]                            = false
     MARLIN["USE_WATCHDOG"]                               = true
@@ -101,18 +102,10 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["STRING_CONFIG_H_AUTHOR"]                     = C_STRING("(Cocoa Press Marlin)")
     MARLIN["EEPROM_SETTINGS"]                            = true // EW - Enabled
     MARLIN["PRINTCOUNTER"]                               = true // EW - Enabled
-    MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press")
+    MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press MiniChef")
     MARLIN["USB_DEVICE_PRODUCT_NAME"]                    = C_STRING("Cocoa Press ")
     MARLIN["MACHINE_UUID"]                               = C_STRING("c51664e3-50b4-40fb-9bd0-63a8cd30df18")
-    MARLIN["FILAMENT_RUNOUT_SENSOR"]                     = true
-    MARLIN["COCOA_PRESS_CHAMBER_COOLER"]                 = false
-    MARLIN["COCOA_PRESS_CHOCOLATE_LEVEL_SENSOR"]         = false
-    MARLIN["COCOA_PRESS_FIRMWARE"]                       = true
     MARLIN["DEFAULT_NOMINAL_FILAMENT_DIA"]               = 22.66
-
-/***************************** CASE LIGHT SUPPORT *****************************/
-
-    MARLIN["CASE_LIGHT_ENABLE"]                          = true
 
 /********************* MOTHERBOARD AND PIN CONFIGURATION *********************/
 
@@ -137,14 +130,6 @@ function make_config(PRINTER, TOOLHEAD) {
 /*************************** ENDSTOP CONFIGURATION ***************************/
 
     MARLIN["Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN"]         = true
-
-    MARLIN["USE_XMIN_PLUG"]                              = false
-    MARLIN["USE_YMIN_PLUG"]                              = false
-    MARLIN["USE_ZMIN_PLUG"]                              = true
-
-    //MARLIN["USE_XMAX_PLUG"]                              = true
-    MARLIN["USE_YMAX_PLUG"]                              = true
-    MARLIN["USE_ZMAX_PLUG"]                              = false
 
     MARLIN["Y_MAX_ENDSTOP_HIT_STATE"]                    = 'HIGH'
 
@@ -176,7 +161,6 @@ function make_config(PRINTER, TOOLHEAD) {
 
     if(["CocoaPress_SingleExtruder"].includes(TOOLHEAD)) {
         MARLIN["EXTRUDERS"]                              = 1
-        MARLIN["HOTENDS"]                                = 3
         MARLIN["E0_CURRENT"]                             = 960 // mA
         MARLIN["COCOA_PRESS_EXTRUDER"]                   = true
     }
@@ -208,8 +192,8 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["HEATER_5_MAXTEMP"]                           = 500
     
 
-    MARLIN["HEATER_0_MINTEMP"]                           = -10
-    MARLIN["HEATER_1_MINTEMP"]                           = -10
+    MARLIN["HEATER_0_MINTEMP"]                           = 100
+    MARLIN["HEATER_1_MINTEMP"]                           = 100
     MARLIN["HEATER_2_MINTEMP"]                           = -10
     MARLIN["HEATER_3_MINTEMP"]                           = -10
     MARLIN["HEATER_4_MINTEMP"]                           = -10
@@ -218,37 +202,17 @@ function make_config(PRINTER, TOOLHEAD) {
 
     MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 // EW - changed from 4 to 1
 
-    // Cooled chamber options
-
-    if(ENABLED("COCOA_PRESS_CHAMBER_COOLER")) {
-        MARLIN["TEMP_SENSOR_CHAMBER"]                    = 100
-        MARLIN["CHAMBER_MAXTEMP"]                        = 500
-        MARLIN["CHAMBER_MINTEMP"]                        = -10
-
-        // Cooler cycling options
-
-        MARLIN["COCOA_PRESS_CYCLE_COOLER"]               = true
-        MARLIN["COOLER_ON_CYCLE_TIME"]                   = 4*60 // seconds
-        MARLIN["COOLER_OFF_CYCLE_TIME"]                  = 1*60 // seconds
-
-        MARLIN["HEATER_CHAMBER_INVERTING"]               = 'true' // Activate cooler when temperature is above threshold
-        MARLIN["THERMAL_PROTECTION_CHAMBER"]             = false
-    }
-
     // Preheat options for chocolate
 
     MARLIN["PREHEAT_1_LABEL"]                            = C_STRING("Cocoa")
     MARLIN["COCOA_PRESS_PREHEAT_SECONDS"]                = 15*60
-    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_INT_SCRIPT"]  = C_STRING("M104 S324 T0\nM104 S323 T1\nM141 S160")
-    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_INT_SCRIPT"]  = C_STRING("M104 S329 T0\nM104 S328 T1\nM141 S160")
-    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_INT_SCRIPT"] = C_STRING("M104 S328 T0\nM104 S326 T1\nM141 S200")
-    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_EXT_SCRIPT"]  = C_STRING("M104 S335 T2")
-    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_EXT_SCRIPT"]  = C_STRING("M104 S327 T2")
-    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_EXT_SCRIPT"] = C_STRING("M104 S290 T2")
+    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S331 T0\nM104 S330 T1\nM141 S160")
+    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S338 T0\nM104 S337 T1\nM141 S160")
+    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT"] = C_STRING("M104 S328 T0\nM104 S326 T1\nM141 S200")
 
-    MARLIN["COCOA_PRESS_EXTRA_HEATER"]                   = false
     MARLIN["SD_ABORT_NO_COOLDOWN"]                       = true
     MARLIN["EVENT_GCODE_SD_ABORT"]                       = C_STRING( "G0 X0 Y0")
+    MARLIN["SHOW_TEMP_ADC_VALUES"]                       = true
 
 /************************* COOLING FAN CONFIGURATION *************************/
 
@@ -286,13 +250,6 @@ function make_config(PRINTER, TOOLHEAD) {
 
     MARLIN["RETRACT_LENGTH"]                             = 0 // EW - changed retract to 0
 
-    if(ENABLED("FILAMENT_RUNOUT_SENSOR")) {
-        MARLIN["NUM_RUNOUT_SENSORS"]                     = 1
-        MARLIN["FILAMENT_RUNOUT_SCRIPT"]                 = C_STRING("M25\nM0 I'm hungry, feed me more chocolate.")
-        MARLIN["FILAMENT_RUNOUT_DISTANCE_MM"]            = 50
-        MARLIN["TOUCH_UI_FILAMENT_RUNOUT_WORKAROUNDS"]   = USE_TOUCH_UI
-    }
-
 /***************************** MOTOR DRIVER TYPE *****************************/
 
     DRIVER_TYPE                                          = 'TMC2130'
@@ -304,7 +261,7 @@ function make_config(PRINTER, TOOLHEAD) {
      * the E stepper not to advance when LIN_ADVANCE is enabled, so force
      * the stepper pulse to 1 to match the other drivers.
      */
-    MARLIN["MINIMUM_STEPPER_PULSE"]                  = 1
+    MARLIN["MINIMUM_STEPPER_PULSE"]                      = 1
 
     MARLIN["X_DRIVER_TYPE"]                              =  DRIVER_TYPE
     MARLIN["Y_DRIVER_TYPE"]                              =  DRIVER_TYPE

@@ -716,7 +716,9 @@
 #endif
 
 // Number of hotends...
-#if ANY(SINGLENOZZLE, MIXING_EXTRUDER)                // Only one for singlenozzle or mixing extruder
+#if defined(COCOA_PRESS_EXTRUDER)
+  #define HOTENDS 2                                   // Two heating zones on the CocoaPress printer
+#elif ANY(SINGLENOZZLE, MIXING_EXTRUDER)              // Only one for singlenozzle or mixing extruder
   #define HOTENDS 1
 #elif HAS_SWITCHING_EXTRUDER && !HAS_SWITCHING_NOZZLE // One for each pair of abstract "extruders"
   #define HOTENDS E_STEPPERS

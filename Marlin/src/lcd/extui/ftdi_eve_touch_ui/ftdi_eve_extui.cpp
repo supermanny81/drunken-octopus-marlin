@@ -66,7 +66,11 @@ namespace ExtUI {
   }
 
   void onMediaError() {
+    #if ENABLED(TOUCH_UI_COCOA_PRESS)
+    sound.play(media_removed, PLAY_ASYNCHRONOUS);
+    #else
     sound.play(sad_trombone, PLAY_ASYNCHRONOUS);
+    #endif
     AlertDialogBox::showError(F("Unable to read media."));
   }
 
