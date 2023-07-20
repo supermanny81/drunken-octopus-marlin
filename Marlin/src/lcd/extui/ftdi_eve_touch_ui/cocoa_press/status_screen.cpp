@@ -23,6 +23,7 @@
 
 #include "../config.h"
 #include "../screens.h"
+#include "../screen_data.h"
 
 #ifdef COCOA_STATUS_SCREEN
 
@@ -39,13 +40,13 @@ using namespace ExtUI;
 
 const uint8_t shadow_depth = 5;
 
+constexpr static StatusScreenData &mydata = screen_data.StatusScreen;
+
 // Format for background image
 
 constexpr uint8_t  format   = RGB332;
 constexpr uint16_t bitmap_w = 480;
 constexpr uint16_t bitmap_h = 272;
-
-float StatusScreen::increment;
 
 void StatusScreen::_format_time(char *outstr, uint32_t time) {
   const uint8_t hrs = time / 3600,
@@ -102,7 +103,7 @@ void StatusScreen::draw_bkgnd(draw_mode_t what) {
        .cmd(BITMAP_TRANSFORM_A(256))
        .cmd(BITMAP_TRANSFORM_E(256))
        .cmd(COLOR_RGB(bg_text_enabled));
-    }
+  }
 }
 
 void StatusScreen::send_buffer(CommandProcessor &cmd, const void *data, uint16_t len) {
@@ -248,62 +249,66 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
 }
 
 void StatusScreen::draw_buttons(draw_mode_t what) {
-  int16_t x, y, w, h;
+  if (what & FOREGROUND) {
+    int16_t x, y, w, h;
 
-  const bool can_print        = !isPrinting() && isMediaInserted() && isFileSelected();
-  const bool can_select       = !isPrinting() && isMediaInserted();
-  const bool sdOrHostPrinting = ExtUI::isPrinting();
-  const bool sdOrHostPaused   = ExtUI::isPrintingPaused();
+    const bool can_print        = !isPrinting() && isMediaInserted() && isFileSelected();
+    const bool can_select       = !isPrinting() && isMediaInserted();
+    const bool sdOrHostPrinting = ExtUI::isPrinting();
+    const bool sdOrHostPaused   = ExtUI::isPrintingPaused();
 
-  CommandProcessor cmd;
-  PolyUI ui(cmd, what);
+    CommandProcessor cmd;
+    PolyUI ui(cmd, what);
 
-  cmd.font(font_medium).colors(normal_btn);
+    cmd.font(font_medium).colors(normal_btn);
 
-  ui.bounds(POLY(load_chocolate_btn), x, y, w, h);
-  cmd.tag(1).button(x, y, w, h, GET_TEXT_F(MSG_LOAD_UNLOAD));
+    ui.bounds(POLY(load_chocolate_btn), x, y, w, h);
+    cmd.tag(1).button(x, y, w, h, GET_TEXT_F(MSG_LOAD_UNLOAD));
 
-  ui.bounds(POLY(extrude_btn), x, y, w, h);
-  cmd.tag(2).button(x, y, w, h, GET_TEXT_F(MSG_EXTRUDE));
+    ui.bounds(POLY(extrude_btn), x, y, w, h);
+    cmd.tag(2).button(x, y, w, h, GET_TEXT_F(MSG_EXTRUDE));
 
-  ui.bounds(POLY(preheat_chocolate_btn), x, y, w, h);
-  cmd.tag(3).button(x, y, w, h, GET_TEXT_F(MSG_PREHEAT_CHOCOLATE));
+    ui.bounds(POLY(preheat_chocolate_btn), x, y, w, h);
+    cmd.tag(3).button(x, y, w, h, GET_TEXT_F(MSG_PREHEAT_CHOCOLATE));
 
-  ui.bounds(POLY(menu_btn), x, y, w, h);
-  cmd.tag(4).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_MENU));
+    ui.bounds(POLY(menu_btn), x, y, w, h);
+    cmd.tag(4).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_MENU));
 
-  ui.bounds(POLY(media_btn), x, y, w, h);
-  cmd.tag(5).enabled(can_select).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_MEDIA));
+    ui.bounds(POLY(media_btn), x, y, w, h);
+    cmd.tag(5).enabled(can_select).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_MEDIA));
 
-  ui.bounds(POLY(print_btn), x, y, w, h);
-  cmd.tag(6).colors(action_btn).enabled(can_print).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_PRINT));
+    ui.bounds(POLY(print_btn), x, y, w, h);
+    cmd.tag(6).colors(action_btn).enabled(can_print).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_PRINT));
 
-  ui.bounds(POLY(pause_btn), x, y, w, h);
-  cmd.tag(sdOrHostPaused ? 8 : 7).enabled(sdOrHostPrinting).button(x, y, w, h, sdOrHostPaused ? GET_TEXT_F(MSG_BUTTON_RESUME) : GET_TEXT_F(MSG_BUTTON_PAUSE));
+    ui.bounds(POLY(pause_btn), x, y, w, h);
+    cmd.tag(sdOrHostPaused ? 8 : 7).enabled(sdOrHostPrinting).button(x, y, w, h, sdOrHostPaused ? GET_TEXT_F(MSG_BUTTON_RESUME) : GET_TEXT_F(MSG_BUTTON_PAUSE));
 
-  ui.bounds(POLY(stop_btn), x, y, w, h);
-  cmd.tag(9).enabled(sdOrHostPrinting).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_STOP));
+    ui.bounds(POLY(stop_btn), x, y, w, h);
+    cmd.tag(9).enabled(sdOrHostPrinting).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_STOP));
+  }
 }
 
+// When visible, the file name occupies the same space as the status
+// message and must be drawn opaque.
 void StatusScreen::draw_file(draw_mode_t what) {
-  int16_t x, y, w, h;
+  if (mydata.gotMessage) {
+      return;
+  }
+  if (what & FOREGROUND) {
+    int16_t x, y, w, h;
 
-  CommandProcessor cmd;
-  PolyUI ui(cmd, what);
+    CommandProcessor cmd;
+    PolyUI ui(cmd, what);
+    ui.bounds(POLY(file_name), x, y, w, h);
 
-  ui.bounds(POLY(file_name), x, y, w, h);
-
-  if (what & BACKGROUND) {
     cmd.tag(5)
-       .cmd(COLOR_RGB(bg_text_enabled))
+       .cmd (COLOR_RGB(bg_color))
+       .rectangle(x, y, w, h)
+       .cmd (COLOR_RGB(bg_text_enabled))
        .cmd (BITMAP_SOURCE(File_Icon_Info))
        .cmd (BITMAP_LAYOUT(File_Icon_Info))
        .cmd (BITMAP_SIZE  (File_Icon_Info))
        .icon(ICON_POS(x, y, w, h), File_Icon_Info, icon_scale);
-  }
-
-  if (what & FOREGROUND) {
-    cmd.cmd(COLOR_RGB(bg_text_enabled));
 
     if(!isMediaInserted())
       draw_text_with_ellipsis(cmd, TEXT_POS(x, y, w, h), F("No media present"), OPT_CENTERY, font_small);
@@ -312,6 +317,21 @@ void StatusScreen::draw_file(draw_mode_t what) {
       draw_text_with_ellipsis(cmd, TEXT_POS(x, y, w, h), list.filename(), OPT_CENTERY, font_small);
     } else
       draw_text_with_ellipsis(cmd, TEXT_POS(x, y, w, h), F("No file selected"), OPT_CENTERY, font_small);
+  }
+}
+
+// The message will be drawn on the background and may be obscured by
+// the filename.
+void StatusScreen::draw_message(draw_mode_t what, const char *message) {
+  if (what & BACKGROUND) {
+    int16_t x, y, w, h;
+
+    CommandProcessor cmd;
+    PolyUI ui(cmd, what);
+    ui.bounds(POLY(file_name), x, y, w, h);
+
+    cmd.cmd(COLOR_RGB(bg_text_enabled));
+    draw_text_box(cmd, TEXT_POS(x, y, w, h), message, OPT_CENTERY, font_small);
   }
 }
 
@@ -325,24 +345,14 @@ bool StatusScreen::isFileSelected() {
 }
 
 void StatusScreen::onRedraw(draw_mode_t what) {
-  if (what & BACKGROUND) {
-    CommandProcessor cmd;
-    cmd.cmd(CLEAR_COLOR_RGB(bg_color))
-       .cmd(CLEAR(true,true,true))
-       .tag(0);
+  if (what & FOREGROUND) {
+    draw_bkgnd(what);
+    draw_file(what);
+    draw_time(what);
+    draw_percent(what);
+    draw_temperature(what);
+    draw_buttons(what);
   }
-
-  draw_bkgnd(what);
-  draw_file(what);
-  draw_time(what);
-  draw_percent(what);
-  draw_temperature(what);
-  draw_buttons(what);
-}
-
-bool StatusScreen::onTouchStart(uint8_t) {
-  increment = 0;
-  return true;
 }
 
 bool StatusScreen::onTouchEnd(uint8_t tag) {
@@ -387,20 +397,55 @@ bool StatusScreen::onTouchEnd(uint8_t tag) {
 
 bool StatusScreen::onTouchHeld(uint8_t tag) {
   if (tag == 2 && !ExtUI::isMoving()) {
+    float increment;
     LoadChocolateScreen::setManualFeedrateAndIncrement(0.25, increment);
     UI_INCREMENT(AxisPosition_mm, E0);
-    current_screen.onRefresh();
   }
   return false;
 }
 
-void StatusScreen::setStatusMessage(FSTR_P) {
+void StatusScreen::setStatusMessage(FSTR_P message) {
+  char buff[strlen_P((const char * const)message)+1];
+  strcpy_P(buff, (const char * const) message);
+  setStatusMessage((const char *) buff);
 }
 
-void StatusScreen::setStatusMessage(const char * const) {
+void StatusScreen::setStatusMessage(const char * const message) {
+  if (CommandProcessor::is_processing()) {
+    #if ENABLED(TOUCH_UI_DEBUG)
+      SERIAL_ECHO_MSG("Cannot update status message, command processor busy");
+    #endif
+    return;
+  }
+
+  CommandProcessor cmd;
+  cmd.cmd(CMD_DLSTART)
+     .cmd(CLEAR_COLOR_RGB(bg_color))
+     .cmd(CLEAR(true,true,true));
+
+  const draw_mode_t what = BACKGROUND;
+  draw_bkgnd(what);
+  draw_message(what, message);
+  draw_time(what);
+  draw_percent(what);
+  draw_temperature(what);
+  draw_buttons(what);
+
+  storeBackground();
+
+  #if ENABLED(TOUCH_UI_DEBUG)
+    SERIAL_ECHO_MSG("New status message: ", message);
+  #endif
+
+  mydata.gotMessage = true;
+
+  if (AT_SCREEN(StatusScreen)) {
+    current_screen.onRefresh();
+  }
 }
 
 void StatusScreen::onEntry() {
+  mydata.gotMessage = false;
   load_background(cocoa_press_ui, sizeof(cocoa_press_ui));
 }
 

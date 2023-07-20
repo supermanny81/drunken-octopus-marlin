@@ -24,19 +24,19 @@
      inkscape:snap-nodes="false"
      inkscape:snap-global="true"
      inkscape:window-maximized="0"
-     inkscape:window-y="80"
-     inkscape:window-x="372"
+     inkscape:window-y="57"
+     inkscape:window-x="231"
      inkscape:window-height="983"
      inkscape:window-width="1492"
      units="px"
      showgrid="true"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer1"
      inkscape:document-units="px"
-     inkscape:cy="67.180005"
+     inkscape:cy="5.0482084"
      inkscape:cx="248.13886"
      inkscape:zoom="1.2875855"
      inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="1"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
@@ -99,13 +99,13 @@
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Cocoa Press Main PNG"
-     style="display:none">
+     style="display:inline">
     <g
        id="g25033"
        transform="matrix(0.89590444,0,0,0.89590444,37.380549,0.20477619)">
       <text
          xml:space="preserve"
-         style="font-size:24px;line-height:1.25;font-family:'Museo Sans Rounded';-inkscape-font-specification:'Museo Sans Rounded';letter-spacing:3.5px;fill:#3c2015;fill-opacity:1"
+         style="font-size:24px;line-height:1.25;font-family:'Museo Sans Rounded';-inkscape-font-specification:'Museo Sans Rounded Bold';letter-spacing:3.5px;fill:#3c2015;fill-opacity:1;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal"
          x="251.22433"
          y="44.712002"
          id="text2925"><tspan
@@ -127,7 +127,7 @@
            id="path13439" />
         <polygon
            class="st3"
-           points="309.56,276.75 360.13,243.67 409.41,230.68 516.08,235.52 581.26,257.87 648.69,213.75 640.94,334.37 593.62,379.78 565.73,373.95 477.2,337.98 370.86,359.41 321.91,398.66 314.13,394.12 298.23,358.79 "
+           points="409.41,230.68 516.08,235.52 581.26,257.87 648.69,213.75 640.94,334.37 593.62,379.78 565.73,373.95 477.2,337.98 370.86,359.41 321.91,398.66 314.13,394.12 298.23,358.79 309.56,276.75 360.13,243.67 "
            id="polygon13441" />
         <path
            class="st0"
@@ -150,6 +150,28 @@
            d="m 553.78,528.61 c 0,0 67.46,81.04 33.75,103.1 l 53.82,-20.77 7.75,-120.62 z"
            id="path13451" />
       </g>
+    </g>
+    <g
+       id="g101032"
+       transform="matrix(0.55495193,0,0,0.55495193,0.6092817,249.40159)"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi Bold Italic'"
+         x="57.588673"
+         y="-79.21804"
+         id="text8263"><tspan
+           sodipodi:role="line"
+           id="tspan8261"
+           x="57.588673"
+           y="-79.21804"
+           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Century Schoolbook';-inkscape-font-specification:'Century Schoolbook Bold Italic'">i</tspan></text>
+      <circle
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path29587"
+         cx="66.530518"
+         cy="-93.469482"
+         r="20.969481" />
     </g>
   </g>
   <g
@@ -269,7 +291,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="Cocoa Press Z Offset BTN">
+     inkscape:label="Cocoa Press Z Offset BTN"
+     style="display:none">
     <path
        id="z_wizard_heading"
        d="M 150,20 H 330 V 50 H 150 Z"
