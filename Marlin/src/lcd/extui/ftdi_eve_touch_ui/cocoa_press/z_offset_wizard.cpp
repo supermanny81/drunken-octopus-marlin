@@ -97,6 +97,7 @@ float ZOffsetWizard::getIncrement() {
     case 241: return   0.01;
     case 242: return   0.1;
     case 243: return   1.0;
+    default:  return   0.0;
   }
 }
 
