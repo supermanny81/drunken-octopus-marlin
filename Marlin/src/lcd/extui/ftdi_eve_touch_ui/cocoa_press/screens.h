@@ -107,7 +107,6 @@ enum {
 #include "../generic/display_tuning_screen.h"
 #include "../generic/statistics_screen.h"
 #include "../generic/stepper_current_screen.h"
-#include "../generic/z_offset_screen.h"
 #include "../generic/bed_mesh_base.h"
 #include "../generic/bed_mesh_view_screen.h"
 #include "../generic/bed_mesh_edit_screen.h"
@@ -132,3 +131,5 @@ enum {
 #include "move_e_screen.h"
 #include "files_screen.h"
 #include "confirm_start_print_dialog_box.h"
+#include "z_offset_screen.h"
+#include "z_offset_wizard.h"
