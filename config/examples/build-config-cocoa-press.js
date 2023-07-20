@@ -173,11 +173,11 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["PREVENT_COLD_EXTRUSION"]                     = false // EW - Turning off so we can use solenoid even when chocolate is cold
     MARLIN["EXTRUDE_MINTEMP"]                            = 10 // EW - changed from 175 to 10
 
-    // 100 is the custom CocoaPress thermistor profile
-    MARLIN["TEMP_SENSOR_0"]                              = 100
+    // 998 is the custom CocoaPress thermistor profile
+    MARLIN["TEMP_SENSOR_0"]                              = 998
     if(MARLIN["HOTENDS"] > 1) {
-      MARLIN["TEMP_SENSOR_1"]                            = 100
-      MARLIN["TEMP_SENSOR_2"]                            = 100
+      MARLIN["TEMP_SENSOR_1"]                            = 998
+      MARLIN["TEMP_SENSOR_2"]                            = 998
     }
 
     MARLIN["TOUCH_UI_LCD_TEMP_SCALING"]                  = 10 // Scale all UI temperatures by 10
