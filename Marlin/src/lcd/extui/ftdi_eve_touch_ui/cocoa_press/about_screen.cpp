@@ -76,7 +76,7 @@ void AboutScreen::onRedraw(draw_mode_t) {
     #endif
     , OPT_CENTER, font_xlarge
   );
-  #if BOTH(TOUCH_UI_DEVELOPER_MENU, FTDI_DEVELOPER_MENU)
+  #if ALL(TOUCH_UI_DEVELOPER_MENU, FTDI_DEVELOPER_MENU)
     cmd.tag(3);
   #endif
   draw_text_box(cmd, FW_VERS_POS,
@@ -105,7 +105,7 @@ bool AboutScreen::onTouchEnd(uint8_t tag) {
     #if ENABLED(PRINTCOUNTER)
       case 2: GOTO_SCREEN(StatisticsScreen); break;
     #endif
-    #if BOTH(TOUCH_UI_DEVELOPER_MENU, FTDI_DEVELOPER_MENU)
+    #if ALL(TOUCH_UI_DEVELOPER_MENU, FTDI_DEVELOPER_MENU)
       case 3: GOTO_SCREEN(DeveloperMenu); break;
     #endif
     default: return false;
