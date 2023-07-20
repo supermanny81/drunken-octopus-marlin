@@ -83,6 +83,8 @@ function make_config(PRINTER, TOOLHEAD) {
         
     MARLIN["LIN_ADVANCE"]                                = true
     MARLIN["ADVANCE_K"]                                  = 0.0
+    MARLIN["BINARY_FILE_TRANSFER"]                       = true
+    MARLIN["EXPECTED_PRINTER_CHECK"]                     = true
 
     MARLIN["MARLIN_DEV_MODE"]                            = false
     MARLIN["USE_WATCHDOG"]                               = true
@@ -100,7 +102,7 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["STRING_CONFIG_H_AUTHOR"]                     = C_STRING("(Cocoa Press Marlin)")
     MARLIN["EEPROM_SETTINGS"]                            = true // EW - Enabled
     MARLIN["PRINTCOUNTER"]                               = true // EW - Enabled
-    MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press")
+    MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press MiniChef")
     MARLIN["USB_DEVICE_PRODUCT_NAME"]                    = C_STRING("Cocoa Press ")
     MARLIN["MACHINE_UUID"]                               = C_STRING("c51664e3-50b4-40fb-9bd0-63a8cd30df18")
     MARLIN["DEFAULT_NOMINAL_FILAMENT_DIA"]               = 22.66
@@ -199,8 +201,8 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["HEATER_5_MAXTEMP"]                           = 500
     
 
-    MARLIN["HEATER_0_MINTEMP"]                           = -10
-    MARLIN["HEATER_1_MINTEMP"]                           = -10
+    MARLIN["HEATER_0_MINTEMP"]                           = 100
+    MARLIN["HEATER_1_MINTEMP"]                           = 100
     MARLIN["HEATER_2_MINTEMP"]                           = -10
     MARLIN["HEATER_3_MINTEMP"]                           = -10
     MARLIN["HEATER_4_MINTEMP"]                           = -10
@@ -219,6 +221,7 @@ function make_config(PRINTER, TOOLHEAD) {
 
     MARLIN["SD_ABORT_NO_COOLDOWN"]                       = true
     MARLIN["EVENT_GCODE_SD_ABORT"]                       = C_STRING( "G0 X0 Y0")
+    MARLIN["SHOW_TEMP_ADC_VALUES"]                       = true
 
 /************************* COOLING FAN CONFIGURATION *************************/
 
