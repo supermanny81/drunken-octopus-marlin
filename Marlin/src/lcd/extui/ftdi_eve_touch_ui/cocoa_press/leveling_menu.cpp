@@ -32,7 +32,7 @@ using namespace Theme;
 #define GRID_COLS 3
 #define GRID_ROWS 6
 #define BED_MESH_TITLE_POS BTN_POS(1,1), BTN_SIZE(3,1)
-#define WARNING_POS        BTN_POS(1,3), BTN_SIZE(3,1)
+#define WARNING_POS        BTN_POS(1,2), BTN_SIZE(3,2)
 #define PROBE_BED_POS      BTN_POS(1,4), BTN_SIZE(1,1)
 #define SHOW_MESH_POS      BTN_POS(2,4), BTN_SIZE(1,1)
 #define EDIT_MESH_POS      BTN_POS(3,4), BTN_SIZE(1,1)

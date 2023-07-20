@@ -118,7 +118,7 @@ void ZOffsetWizard::runWizard() {
   strcat(cmd, str);
   injectCommands(cmd);
   // Show instructions for user.
-  AlertDialogBox::show(F("On the next screen, adjust the Z Offset so that a sheet of paper can pass between the nozzle and bed with slight resistance.\n\nOnce the printer stops moving, press Okay to begin."));
+  AlertDialogBox::show(F("\nOn the next screen, adjust the Z Offset so that a sheet of paper can pass between the nozzle and bed with slight resistance.\n\nOnce the printer stops moving, press Okay to begin.\n"));
   // Set the destination screen after the dialog box.
   current_screen.forget();
   PUSH_SCREEN(ZOffsetWizard);
