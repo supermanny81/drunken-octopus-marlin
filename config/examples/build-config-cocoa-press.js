@@ -175,10 +175,7 @@ function make_config(PRINTER, TOOLHEAD) {
 
     // 998 is the custom CocoaPress thermistor profile
     MARLIN["TEMP_SENSOR_0"]                              = 998
-    if(MARLIN["HOTENDS"] > 1) {
-      MARLIN["TEMP_SENSOR_1"]                            = 998
-      MARLIN["TEMP_SENSOR_2"]                            = 998
-    }
+    MARLIN["TEMP_SENSOR_1"]                              = 998
 
     MARLIN["TOUCH_UI_LCD_TEMP_SCALING"]                  = 10 // Scale all UI temperatures by 10
     MARLIN["TOUCH_UI_LCD_TEMP_PRECISION"]                = 1  // Use one decimal point for temperatures
