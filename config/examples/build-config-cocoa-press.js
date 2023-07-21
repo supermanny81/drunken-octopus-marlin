@@ -355,6 +355,9 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["PAUSE_REHEAT_FAST_RESUME"]                   = true
     MARLIN["NO_TIME_AFTER_SD_PRINT"]                     = true
     MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 0
+    // Prevent truncation of filenames
+    MARLIN["SCROLL_LONG_FILENAMES"]                      = true
+    
 
     // Virtual joystick functionality
     MARLIN["JOYSTICK"]                                   = true
