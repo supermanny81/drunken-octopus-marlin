@@ -1,17 +1,17 @@
 /* Portions (c) 2019, Cocoa Press.
  * Portions (c) 2019 Aleph Objects, Inc.
  * Portions (c) 2019 Marcio Teixeira
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * To view a copy of the GNU General Public License, go to the following
  * location: <http://www.gnu.org/licenses/>.
  */
@@ -80,7 +80,7 @@ function make_config(PRINTER, TOOLHEAD) {
 
     MARLIN["SDSUPPORT"]                                  = true
     MARLIN["USB_FLASH_DRIVE_SUPPORT"]                    = PRINTER.includes("USB")
-        
+
     MARLIN["LIN_ADVANCE"]                                = true
     MARLIN["ADVANCE_K"]                                  = 0.0
     MARLIN["BINARY_FILE_TRANSFER"]                       = true
@@ -108,8 +108,6 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["DEFAULT_NOMINAL_FILAMENT_DIA"]               = 22.66
 
 /********************* MOTHERBOARD AND PIN CONFIGURATION *********************/
-
-    MARLIN["CONTROLLER_FAN_PIN"]                         = 'FAN1_PIN' // Digital pin 6
 
     MARLIN["MOTHERBOARD"]                                = 'BOARD_ARCHIM2'
     MARLIN["SERIAL_PORT"]                                = -1
@@ -187,7 +185,7 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["HEATER_3_MAXTEMP"]                           = 500
     MARLIN["HEATER_4_MAXTEMP"]                           = 500
     MARLIN["HEATER_5_MAXTEMP"]                           = 500
-    
+
 
     MARLIN["HEATER_0_MINTEMP"]                           = 100
     MARLIN["HEATER_1_MINTEMP"]                           = 100
@@ -195,7 +193,6 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["HEATER_3_MINTEMP"]                           = -10
     MARLIN["HEATER_4_MINTEMP"]                           = -10
     MARLIN["HEATER_5_MINTEMP"]                           = -10
-    
 
     MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 // EW - changed from 4 to 1
 
@@ -213,7 +210,16 @@ function make_config(PRINTER, TOOLHEAD) {
 
 /************************* COOLING FAN CONFIGURATION *************************/
 
+    // Enabling FAN_SOFT_PWM because otherwise it seems like PWM control isn't
+    // working on the controller fan.
+    MARLIN["FAN_SOFT_PWM"]                               = true
     MARLIN["USE_CONTROLLER_FAN"]                         = true
+    MARLIN["CONTROLLER_FAN_EDITABLE"]                    = true
+    MARLIN["CONTROLLER_FAN_PIN"]                         = 5  // D5 PC25 FET_PWM2
+    MARLIN["CONTROLLERFAN_SPEED_IDLE"]                   = 48
+    MARLIN["CONTROLLERFAN_SPEED_MIN"]                    = 0
+    MARLIN["CONTROLLER_FAN_IGNORE_Z"]                    = true
+    MARLIN["DISABLE_IDLE_Z"]                             = false
 
 /****************************** AXIS TRAVEL LIMITS ******************************/
 
@@ -224,12 +230,13 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["X_BED_SIZE"]                                 = 140
     MARLIN["Y_BED_SIZE"]                                 = 150
 
+    MARLIN["NO_MOTION_BEFORE_HOMING"]                    = true
+
 /************************** AUTOLEVELING / BED PROBE *************************/
 
     if(USE_AUTOLEVELING) {
         MARLIN["FIX_MOUNTED_PROBE"]                      = true
-        MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 15
-        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 43.3, -1.25]
+        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 37.20, -1.25]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = true // EW - enabled
         MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 // EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
         MARLIN["AUTO_BED_LEVELING_UBL"]                  = true
@@ -237,9 +244,9 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["GRID_MAX_POINTS_X"]                      = 5
         MARLIN["GRID_MAX_POINTS_Y"]                      = 5
         MARLIN["PROBING_MARGIN"]                         = 0
-        MARLIN["MESH_INSET"]                             = 0
         MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29 P1\nG29 P3\nG29 S1")
         MARLIN["G26_MESH_VALIDATION"]                    = false
+        MARLIN["UBL_HILBERT_CURVE"]                      = true
     }
 
 
@@ -253,7 +260,7 @@ function make_config(PRINTER, TOOLHEAD) {
 
     /* Workaround for E stepper not working on Archim 2.0
      *   https://github.com/MarlinFirmware/Marlin/issues/13040
-     * 
+     *
      * For the Archim, setting this to the default (0) for TRINAMICS causes
      * the E stepper not to advance when LIN_ADVANCE is enabled, so force
      * the stepper pulse to 1 to match the other drivers.
@@ -327,13 +334,11 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["TOUCH_UI_FTDI_EVE"]                          = true
     MARLIN["TOUCH_UI_COCOA_THEME"]                       = true
     MARLIN["TOUCH_UI_COCOA_PRESS"]                       = true
-    //MARLIN["TOUCH_UI_SYNDAVER_LEVEL"]                    = true
     MARLIN["LCD_LULZBOT_CLCD_UI"]                        = true
     MARLIN["TOUCH_UI_800x480"]                           = true
     MARLIN["TOUCH_UI_USE_UTF8"]                          = true
     MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = true
     MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = true
-    MARLIN["SCROLL_LONG_FILENAMES"]                      = true
     MARLIN["TOUCH_UI_DEBUG"]                             = false
     MARLIN["TOUCH_UI_DEVELOPER_MENU"]                    = false
 
@@ -342,7 +347,6 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["TOUCH_UI_UTF8_COPYRIGHT"]                    = true
     MARLIN["TOUCH_UI_UTF8_SUPERSCRIPTS"]                 = true
     MARLIN["SET_PROGRESS_MANUALLY"]                      = true
-    MARLIN["SCROLL_LONG_FILENAMES"]                      = true
     MARLIN["PAUSE_REHEAT_FAST_RESUME"]                   = true
     MARLIN["NO_TIME_AFTER_SD_PRINT"]                     = true
     MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 0
