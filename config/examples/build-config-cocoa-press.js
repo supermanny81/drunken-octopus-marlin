@@ -167,7 +167,11 @@ function make_config(PRINTER, TOOLHEAD) {
 
     MARLIN["PIDTEMP"]                                    = true // EW - skipping this section for now
 
-    MARLIN["THERMAL_PROTECTION_HOTENDS"]                 = false // EW - TEMP DISABLED
+    MARLIN["THERMAL_PROTECTION_HOTENDS"]                 = true
+    MARLIN["THERMAL_PROTECTION_BED"]                     = false
+    MARLIN["THERMAL_PROTECTION_CHAMBER"]                 = false
+    MARLIN["THERMAL_PROTECTION_COOLER"]                  = false
+    MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 // EW - changed from 4 to 1
     MARLIN["PREVENT_COLD_EXTRUSION"]                     = false // EW - Turning off so we can use solenoid even when chocolate is cold
     MARLIN["EXTRUDE_MINTEMP"]                            = 10 // EW - changed from 175 to 10
 
@@ -194,8 +198,6 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["HEATER_3_MINTEMP"]                           = -10
     MARLIN["HEATER_4_MINTEMP"]                           = -10
     MARLIN["HEATER_5_MINTEMP"]                           = -10
-
-    MARLIN["THERMAL_PROTECTION_HYSTERESIS"]              = 1 // EW - changed from 4 to 1
 
     // Preheat options for chocolate
 
