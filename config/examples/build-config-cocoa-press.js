@@ -91,10 +91,11 @@ function make_config(PRINTER, TOOLHEAD) {
     if( ENABLED("USB_FLASH_DRIVE_SUPPORT") ) {
         MARLIN["USB_FLASH_DRIVE_SUPPORT"]                = true
         MARLIN["USE_UHS3_USB"]                           = false
-        MARLIN["AO_EXP2_PINMAP"]                         = true
+        MARLIN["AO_EXP2_PINMAP"]                         = true // Daisy-chain LCD/USB
         MARLIN["USB_INTR_PIN"]                           = 'SD_DETECT_PIN'
     } else {
-        MARLIN["AO_EXP1_PINMAP"]                         = true
+        //MARLIN["AO_EXP1_PINMAP"]                       = true // Non-daisy chained
+        MARLIN["AO_EXP2_PINMAP"]                         = true // Daisy-chain LCD/SD
     }
 
 /*********************** PRINTER MODEL CHARACTERISTICS ***********************/
