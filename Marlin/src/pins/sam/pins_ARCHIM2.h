@@ -131,33 +131,33 @@
 #endif
 
 #if defined(SWAP_E0_AND_E1)
-#define E1_STEP_PIN                          107  // PB10 E1-STEP -AddOns *
-#define E1_DIR_PIN                            96  // PC10 E1-DIR -AddOns *
-#define E1_ENABLE_PIN                        105  // PB22 E1-EN -AddOns *
-#ifndef E1_CS_PIN
-  #define E1_CS_PIN                          104  // PC20 E1_nCS -AddOns *
-#endif
-
-#define E0_STEP_PIN                           22  // PB26 E2_STEP *
-#define E0_DIR_PIN                            97  // PB24 E2_DIR -AddOns *
-#define E0_ENABLE_PIN                         18  // PA11 E2-EN
-#ifndef E0_CS_PIN
-#define E0_CS_PIN                             19  // PA10 E2_nCS
-#endif
+  #define E1_STEP_PIN                          107  // PB10 E1-STEP -AddOns *
+  #define E1_DIR_PIN                            96  // PC10 E1-DIR -AddOns *
+  #define E1_ENABLE_PIN                        105  // PB22 E1-EN -AddOns *
+  #ifndef E1_CS_PIN
+    #define E1_CS_PIN                          104  // PC20 E1_nCS -AddOns *
+  #endif
+  
+  #define E0_STEP_PIN                           22  // PB26 E2_STEP *
+  #define E0_DIR_PIN                            97  // PB24 E2_DIR -AddOns *
+  #define E0_ENABLE_PIN                         18  // PA11 E2-EN
+  #ifndef E0_CS_PIN
+    #define E0_CS_PIN                           19  // PA10 E2_nCS
+  #endif
 #else // SWAP_E0_AND_E1
-#define E0_STEP_PIN                          107  // PB10 E1-STEP -AddOns *
-#define E0_DIR_PIN                            96  // PC10 E1-DIR -AddOns *
-#define E0_ENABLE_PIN                        105  // PB22 E1-EN -AddOns *
-#ifndef E0_CS_PIN
-  #define E0_CS_PIN                          104  // PC20 E1_nCS -AddOns *
-#endif
-
-#define E1_STEP_PIN                           22  // PB26 E2_STEP *
-#define E1_DIR_PIN                            97  // PB24 E2_DIR -AddOns *
-#define E1_ENABLE_PIN                         18  // PA11 E2-EN
-#ifndef E1_CS_PIN
-#define E1_CS_PIN                             19  // PA10 E2_nCS
-#endif
+  #define E0_STEP_PIN                          107  // PB10 E1-STEP -AddOns *
+  #define E0_DIR_PIN                            96  // PC10 E1-DIR -AddOns *
+  #define E0_ENABLE_PIN                        105  // PB22 E1-EN -AddOns *
+  #ifndef E0_CS_PIN
+    #define E0_CS_PIN                          104  // PC20 E1_nCS -AddOns *
+  #endif
+  
+  #define E1_STEP_PIN                           22  // PB26 E2_STEP *
+  #define E1_DIR_PIN                            97  // PB24 E2_DIR -AddOns *
+  #define E1_ENABLE_PIN                         18  // PA11 E2-EN
+  #ifndef E1_CS_PIN
+    #define E1_CS_PIN                           19  // PA10 E2_nCS
+  #endif
 #endif
 
 #if NUM_Z_STEPPER_DRIVERS == 2
@@ -202,16 +202,16 @@
 // Temperature Sensors
 //
 #if defined(SWAP_E0_AND_E1)
-#define TEMP_1_PIN                            10  // D10 PB19 THERM AN1 *
-#define TEMP_0_PIN                             9  // D9 PB18 THERM AN2 *
+  #define TEMP_1_PIN                            10  // D10 PB19 THERM AN1 *
+  #define TEMP_0_PIN                             9  // D9 PB18 THERM AN2 *
 #else // SWAP_E0_AND_E1
-#define TEMP_0_PIN                            10  // D10 PB19 THERM AN1 *
-#define TEMP_1_PIN                             9  // D9 PB18 THERM AN2 *
+  #define TEMP_0_PIN                            10  // D10 PB19 THERM AN1 *
+  #define TEMP_1_PIN                             9  // D9 PB18 THERM AN2 *
 #endif
 #if defined(TEMP_SENSOR_CHAMBER)
-#define TEMP_CHAMBER_PIN                       8  // D8 PB17 THERM AN4 *
+  #define TEMP_CHAMBER_PIN                       8  // D8 PB17 THERM AN4 *
 #else
-#define TEMP_2_PIN                             8  // D8 PB17 THERM AN4 *
+  #define TEMP_2_PIN                             8  // D8 PB17 THERM AN4 *
 #endif
 #define TEMP_BED_PIN                          11  // D11 PB20 THERM AN3 *
 
@@ -228,16 +228,6 @@
 #define HEATER_2_PIN                           8  // D8 PC22 FET_PWM5 ("HTR3" header)
 #define HEATER_BED_PIN                         9  // D9 PC21 BED_PWM  ("HTBD" header)
 
-#if defined(SWAP_EXTRUDER_FANS)
-  #define FAN0_PIN                              8  // D8 PC22 FET_PWM5 ("HTR3" header)
-  #define FAN1_PIN                             4  // D4 PC26 FET_PWM1 ("FAN1" header)
-#else
-  #define FAN0_PIN                              4  // D4 PC26 FET_PWM1 ("FAN1" header)
-  #ifndef FAN1_PIN
-  #define FAN1_PIN                             8  // D8 PC22 FET_PWM5 ("HTR3" header)
-  #endif
-#endif
-
 #ifndef CONTROLLER_FAN_PIN
   #define CONTROLLER_FAN_PIN                   5  // D5 PC25 FET_PWM2 ("FAN2" header)
 #endif
@@ -252,8 +242,16 @@
   #define ELECTROMAGNETIC_BRAKE_PIN            8  // D8 PC22 FET_PWM5 ("HTR3" header)
 #endif
 
+#if defined(SWAP_EXTRUDER_FANS)
+  #define FAN0_PIN                             8  // D8 PC22 FET_PWM5 ("HTR3" header)
+  #define FAN1_PIN                             4  // D4 PC26 FET_PWM1 ("FAN1" header)
+#endif
+
 #ifndef FAN0_PIN
   #define FAN0_PIN                             4  // D4 PC26 FET_PWM1
+#endif
+#ifndef FAN1_PIN
+  #define FAN1_PIN                             8  // D8 PC22 FET_PWM5 ("HTR3" header)
 #endif
 
 //
