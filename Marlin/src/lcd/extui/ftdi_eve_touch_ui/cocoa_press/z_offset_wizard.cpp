@@ -84,6 +84,7 @@ void ZOffsetWizard::onRedraw(draw_mode_t what) {
   ui.bounds(POLY(z_wizard_done_btn), x, y, w, h);
   cmd.tag(1).colors(action_btn).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_DONE));
 
+  cmd.tag(0);
   ui.color(bg_text_enabled);
   ui.fill(POLY(z_wizard_diagram));
 

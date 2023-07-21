@@ -59,7 +59,8 @@ void LevelingMenu::onRedraw(draw_mode_t what) {
        .tag(4).button(EDIT_MESH_POS, GET_TEXT_F(MSG_EDIT_MESH))
        .colors(action_btn)
        .tag(1).button(BACK_POS, GET_TEXT_F(MSG_BUTTON_DONE))
-       .cmd(COLOR_RGB(bg_text_enabled));
+       .cmd(COLOR_RGB(bg_text_enabled))
+       .tag(0);
     draw_text_box(cmd, WARNING_POS, F("Remove chocolate cartridge before probing.  This reduces the possibility of damaging a part."), OPT_CENTER, font_medium);
   }
 }

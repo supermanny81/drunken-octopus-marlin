@@ -94,6 +94,7 @@ void StatusScreen::draw_bkgnd(draw_mode_t what) {
     CommandProcessor cmd;
     cmd.cmd(COLOR_RGB(color))
        .cmd(BITMAP_SOURCE(BACKGROUND_OFFSET))
+       .tag(0)
        .bitmap_layout(format, linestride, bitmap_h)
        .bitmap_size(BILINEAR, BORDER, BORDER, bitmap_w*scale_w, bitmap_h*scale_h)
        .cmd(BITMAP_TRANSFORM_A(uint32_t(float(256)/scale_w)))
@@ -193,7 +194,7 @@ void StatusScreen::draw_temperature(draw_mode_t what) {
 
   if (what & BACKGROUND) {
     cmd.cmd(COLOR_RGB(bg_text_enabled));
-    cmd.font(font_medium).tag(10);
+    cmd.font(font_medium).tag(0);
 
     ui.bounds(POLY(h0_label), x, y, w, h);
     cmd.text(x, y, w, h, GET_TEXT_F(MSG_NOZZLE));
