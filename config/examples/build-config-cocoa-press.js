@@ -174,6 +174,7 @@ function make_config(PRINTER, TOOLHEAD) {
     // 998 is the custom CocoaPress thermistor profile
     MARLIN["TEMP_SENSOR_0"]                              = 998
     MARLIN["TEMP_SENSOR_1"]                              = 998
+    MARLIN["TEMP_SENSOR_BED"]                            = 0
 
     MARLIN["TOUCH_UI_LCD_TEMP_SCALING"]                  = 10 // Scale all UI temperatures by 10
     MARLIN["TOUCH_UI_LCD_TEMP_PRECISION"]                = 1  // Use one decimal point for temperatures
@@ -244,6 +245,7 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["GRID_MAX_POINTS_X"]                      = 5
         MARLIN["GRID_MAX_POINTS_Y"]                      = 5
         MARLIN["PROBING_MARGIN"]                         = 0
+        MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 5
         MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29 P1\nG29 P3\nG29 S1")
         MARLIN["G26_MESH_VALIDATION"]                    = false
         MARLIN["UBL_HILBERT_CURVE"]                      = true
