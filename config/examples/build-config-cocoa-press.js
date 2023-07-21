@@ -172,8 +172,8 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["EXTRUDE_MINTEMP"]                            = 10 // EW - changed from 175 to 10
 
     // 998 is the custom CocoaPress thermistor profile
-    MARLIN["TEMP_SENSOR_0"]                              = 998
-    MARLIN["TEMP_SENSOR_1"]                              = 998
+    MARLIN["TEMP_SENSOR_0"]                              = 101
+    MARLIN["TEMP_SENSOR_1"]                              = 101
     MARLIN["TEMP_SENSOR_BED"]                            = 0
 
     MARLIN["TOUCH_UI_LCD_TEMP_SCALING"]                  = 10 // Scale all UI temperatures by 10
