@@ -45,8 +45,8 @@ constexpr static StatusScreenData &mydata = screen_data.StatusScreen;
 // Format for background image
 
 constexpr uint8_t  format   = RGB332;
-constexpr uint16_t bitmap_w = 480;
-constexpr uint16_t bitmap_h = 272;
+constexpr uint16_t bitmap_w = 800;
+constexpr uint16_t bitmap_h = 480;
 
 void StatusScreen::_format_time(char *outstr, uint32_t time) {
   const uint8_t hrs = time / 3600,
@@ -96,7 +96,7 @@ void StatusScreen::draw_bkgnd(draw_mode_t what) {
        .cmd(BITMAP_SOURCE(BACKGROUND_OFFSET))
        .tag(0)
        .bitmap_layout(format, linestride, bitmap_h)
-       .bitmap_size(BILINEAR, BORDER, BORDER, bitmap_w*scale_w, bitmap_h*scale_h)
+       .bitmap_size(NEAREST, BORDER, BORDER, bitmap_w*scale_w, bitmap_h*scale_h)
        .cmd(BITMAP_TRANSFORM_A(uint32_t(float(256)/scale_w)))
        .cmd(BITMAP_TRANSFORM_E(uint32_t(float(256)/scale_h)))
        .cmd(BEGIN(BITMAPS))
