@@ -155,7 +155,12 @@ function make_config(PRINTER, TOOLHEAD) {
 /**************************** NOZZLE PARK FEATURE ****************************/
 
     MARLIN["NOZZLE_PARK_FEATURE"]                        = true
-    MARLIN["NOZZLE_PARK_POINT"]                          = [0, 0, 20]
+    MARLIN["NOZZLE_PARK_POINT"]                          = [0, 150, 20]
+
+    // Parking the head does not seem to quite work, so leaving off for now
+    //MARLIN["ADVANCED_PAUSE_FEATURE"]                     = true
+    //MARLIN["PARK_HEAD_ON_PAUSE"]                         = true
+    //MARLIN["PAUSE_PARK_RETRACT_LENGTH"]                  = 0
 
 /*************************** COCOA PRESS TOOLHEADS ***************************/
 
