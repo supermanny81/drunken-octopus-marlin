@@ -94,8 +94,8 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["AO_EXP2_PINMAP"]                         = true // Daisy-chain LCD/USB
         MARLIN["USB_INTR_PIN"]                           = 'SD_DETECT_PIN'
     } else {
-        //MARLIN["AO_EXP1_PINMAP"]                       = true // Non-daisy chained
-        MARLIN["AO_EXP2_PINMAP"]                         = true // Daisy-chain LCD/SD
+        MARLIN["AO_EXP1_PINMAP"]                         = true // Non-daisy chained
+        //MARLIN["AO_EXP2_PINMAP"]                       = true // Daisy-chain LCD/SD; Not reliable
     }
 
 /*********************** PRINTER MODEL CHARACTERISTICS ***********************/
