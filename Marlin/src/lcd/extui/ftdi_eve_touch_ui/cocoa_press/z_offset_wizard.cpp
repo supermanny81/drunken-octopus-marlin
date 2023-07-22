@@ -38,7 +38,7 @@ using namespace Theme;
 constexpr static ZOffsetWizardData &mydata = screen_data.ZOffsetWizard;
 
 void ZOffsetWizard::onEntry() {
-  mydata.increment = 241;
+  mydata.increment = 242;
   mydata.softEndstopState = getSoftEndstopState();
   BaseNumericAdjustmentScreen::onEntry();
   setSoftEndstopState(false);
