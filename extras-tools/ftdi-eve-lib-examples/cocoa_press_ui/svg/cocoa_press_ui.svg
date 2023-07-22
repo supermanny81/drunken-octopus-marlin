@@ -24,17 +24,17 @@
      inkscape:snap-nodes="false"
      inkscape:snap-global="true"
      inkscape:window-maximized="0"
-     inkscape:window-y="57"
-     inkscape:window-x="231"
+     inkscape:window-y="36"
+     inkscape:window-x="241"
      inkscape:window-height="983"
      inkscape:window-width="1492"
      units="px"
      showgrid="true"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
-     inkscape:cy="5.0482084"
-     inkscape:cx="248.13886"
-     inkscape:zoom="1.2875855"
+     inkscape:cy="44.027778"
+     inkscape:cx="309.02778"
+     inkscape:zoom="3.6"
      inkscape:pageshadow="2"
      inkscape:pageopacity="1"
      borderopacity="1.0"
@@ -105,7 +105,7 @@
        transform="matrix(0.89590444,0,0,0.89590444,37.380549,0.20477619)">
       <text
          xml:space="preserve"
-         style="font-size:24px;line-height:1.25;font-family:'Museo Sans Rounded';-inkscape-font-specification:'Museo Sans Rounded Bold';letter-spacing:3.5px;fill:#3c2015;fill-opacity:1;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal"
+         style="font-size:24px;line-height:1.25;font-family:'Museo Sans Rounded';-inkscape-font-specification:'Museo Sans Rounded Bold';letter-spacing:3.5px;fill:#6a2c1a;fill-opacity:1;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal"
          x="251.22433"
          y="44.712002"
          id="text2925"><tspan
@@ -113,7 +113,7 @@
            id="tspan2923"
            x="251.22433"
            y="44.712002"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:'Museo Sans Rounded';-inkscape-font-specification:'Museo Sans Rounded Bold';fill:#3c2015;fill-opacity:1">COCOA PRESS</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;font-family:'Museo Sans Rounded';-inkscape-font-specification:'Museo Sans Rounded Bold';fill:#6a2c1a;fill-opacity:1">COCOA PRESS</tspan></text>
       <g
          id="g13453"
          transform="matrix(0.04805768,0,0,0.04805768,208.27556,17.711925)">
@@ -154,10 +154,10 @@
     <g
        id="g101032"
        transform="matrix(0.55495193,0,0,0.55495193,0.6092817,249.40159)"
-       style="display:inline">
+       style="display:inline;stroke:#3c2015;stroke-opacity:1">
       <text
          xml:space="preserve"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi Bold Italic'"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi Bold Italic';stroke:#6a2c1a;stroke-opacity:1;fill:#6a2c1a;fill-opacity:1"
          x="57.588673"
          y="-79.21804"
          id="text8263"><tspan
@@ -165,13 +165,14 @@
            id="tspan8261"
            x="57.588673"
            y="-79.21804"
-           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Century Schoolbook';-inkscape-font-specification:'Century Schoolbook Bold Italic'">i</tspan></text>
-      <circle
-         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
+           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Century Schoolbook';-inkscape-font-specification:'Century Schoolbook Bold Italic';stroke:#6a2c1a;stroke-opacity:1;fill:#6a2c1a;fill-opacity:1">i</tspan></text>
+      <ellipse
+         style="fill:none;stroke:#6a2c1a;stroke-width:3;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="path29587"
          cx="66.530518"
          cy="-93.469482"
-         r="20.969481" />
+         rx="20.969383"
+         ry="20.969481" />
     </g>
   </g>
   <g
