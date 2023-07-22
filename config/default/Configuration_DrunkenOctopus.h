@@ -4,6 +4,7 @@
  */
 //#define SOURCE_CODE_URL
 //#define SHORT_BUILD_VERSION
+//#define M16_MACHINE_NAME
 //#define TOOLHEAD_NAME
 //#define TOOLHEAD_TYPE
 //#define WIPE_SEQUENCE_COMMANDS

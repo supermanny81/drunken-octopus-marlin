@@ -103,8 +103,9 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["STRING_CONFIG_H_AUTHOR"]                     = C_STRING("(Cocoa Press Marlin)")
     MARLIN["EEPROM_SETTINGS"]                            = true // EW - Enabled
     MARLIN["PRINTCOUNTER"]                               = true // EW - Enabled
-    MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press MiniChef")
+    MARLIN["CUSTOM_MACHINE_NAME"]                        = C_STRING("Cocoa Press")
     MARLIN["USB_DEVICE_PRODUCT_NAME"]                    = C_STRING("Cocoa Press ")
+    MARLIN["M16_MACHINE_NAME"]                           = C_STRING("Cocoa Press MiniChef")
     MARLIN["MACHINE_UUID"]                               = C_STRING("c51664e3-50b4-40fb-9bd0-63a8cd30df18")
     MARLIN["DEFAULT_NOMINAL_FILAMENT_DIA"]               = 22.66
 

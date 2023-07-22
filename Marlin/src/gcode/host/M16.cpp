@@ -32,7 +32,10 @@
  * M16: Expected Printer Check
  */
 void GcodeSuite::M16() {
-
+  #ifdef M16_MACHINE_NAME
+    #undef MACHINE_NAME
+    #define MACHINE_NAME M16_MACHINE_NAME
+  #endif
   if (strcmp_P(parser.string_arg, PSTR(MACHINE_NAME)))
     kill(GET_TEXT_F(MSG_KILL_EXPECTED_PRINTER));
 

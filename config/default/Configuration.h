@@ -3558,6 +3558,7 @@
  */
 //#define SOURCE_CODE_URL
 //#define SHORT_BUILD_VERSION
+//#define M16_MACHINE_NAME
 //#define TOOLHEAD_NAME
 //#define TOOLHEAD_TYPE
 //#define WIPE_SEQUENCE_COMMANDS
@@ -3603,7 +3604,6 @@
 /**
  * Extra modification for CocoaPress Printers
  */
-//#define HOTENDS
 //#define COCOA_PRESS_EXTRUDER
 //#define TOUCH_UI_COCOA_PRESS
 //#define TOUCH_UI_COCOA_THEME
