@@ -334,7 +334,7 @@ namespace Theme {
     {SILENCE,       REST,     1},
     {TRIANGLE_WAVE, NOTE_A5S, 1},
     {SILENCE,       REST,     1},
-    {TRIANGLE_WAVE, NOTE_A5S, 5},
+    {TRIANGLE_WAVE, NOTE_A5S, 8},
     {SILENCE,       END_SONG, 0}
   };
 
