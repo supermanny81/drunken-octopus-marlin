@@ -173,6 +173,7 @@ function make_config(PRINTER, TOOLHEAD) {
 /**************************** TEMPERATURE SETTINGS ***************************/
 
     MARLIN["PIDTEMP"]                                    = true // EW - skipping this section for now
+    MARLIN["PID_DEBUG"]                                  = true
 
     MARLIN["THERMAL_PROTECTION_HOTENDS"]                 = true
     MARLIN["THERMAL_PROTECTION_BED"]                     = false
@@ -210,9 +211,9 @@ function make_config(PRINTER, TOOLHEAD) {
 
     MARLIN["PREHEAT_1_LABEL"]                            = C_STRING("Cocoa")
     MARLIN["COCOA_PRESS_PREHEAT_SECONDS"]                = 15*60
-    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S331 T0\nM104 S330 T1\nM141 S160")
-    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S338 T0\nM104 S337 T1\nM141 S160")
-    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT"] = C_STRING("M104 S328 T0\nM104 S326 T1\nM141 S200")
+    MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S331 T0\nM104 S330 T1")
+    MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S338 T0\nM104 S337 T1")
+    MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT"] = C_STRING("M104 S328 T0\nM104 S326 T1")
 
     MARLIN["SD_ABORT_NO_COOLDOWN"]                       = true
     MARLIN["EVENT_GCODE_SD_ABORT"]                       = C_STRING( "G0 X0 Y0")
@@ -246,7 +247,7 @@ function make_config(PRINTER, TOOLHEAD) {
 
     if(USE_AUTOLEVELING) {
         MARLIN["FIX_MOUNTED_PROBE"]                      = true
-        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 37.20, -1.25]
+        MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 37.20, 0.5]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = true // EW - enabled
         MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 // EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
         MARLIN["AUTO_BED_LEVELING_UBL"]                  = true

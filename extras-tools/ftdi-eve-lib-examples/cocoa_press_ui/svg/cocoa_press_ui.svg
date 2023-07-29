@@ -24,17 +24,17 @@
      inkscape:snap-nodes="false"
      inkscape:snap-global="true"
      inkscape:window-maximized="0"
-     inkscape:window-y="15"
-     inkscape:window-x="57"
-     inkscape:window-height="1059"
-     inkscape:window-width="1808"
+     inkscape:window-y="18"
+     inkscape:window-x="395"
+     inkscape:window-height="1028"
+     inkscape:window-width="1684"
      units="px"
      showgrid="true"
-     inkscape:current-layer="g101032"
+     inkscape:current-layer="layer4"
      inkscape:document-units="px"
-     inkscape:cy="310.05001"
-     inkscape:cx="247.14891"
-     inkscape:zoom="1.9077568"
+     inkscape:cy="184.58321"
+     inkscape:cx="394.76989"
+     inkscape:zoom="0.83972969"
      inkscape:pageshadow="2"
      inkscape:pageopacity="1"
      borderopacity="1.0"
@@ -66,7 +66,7 @@
          id="stop1775" />
     </linearGradient>
     <linearGradient
-       gradientTransform="matrix(12914490,0,0,47506162,4.9201817e13,4.3770575e12)"
+       gradientTransform="matrix(30435120,0,0,23375190,1.1595217e14,2.1537112e12)"
        id="linearGradient4768"
        inkscape:swatch="solid">
       <stop
@@ -99,7 +99,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Cocoa Press Main PNG"
-     style="display:inline">
+     style="display:none">
     <g
        id="g25033"
        transform="matrix(1.4930946,0,0,1.5639024,62.318884,0.33567665)">
@@ -127,7 +127,7 @@
            id="path13439" />
         <polygon
            class="st3"
-           points="477.2,337.98 370.86,359.41 321.91,398.66 314.13,394.12 298.23,358.79 309.56,276.75 360.13,243.67 409.41,230.68 516.08,235.52 581.26,257.87 648.69,213.75 640.94,334.37 593.62,379.78 565.73,373.95 "
+           points="321.91,398.66 314.13,394.12 298.23,358.79 309.56,276.75 360.13,243.67 409.41,230.68 516.08,235.52 581.26,257.87 648.69,213.75 640.94,334.37 593.62,379.78 565.73,373.95 477.2,337.98 370.86,359.41 "
            id="polygon13441" />
         <path
            class="st0"
@@ -167,7 +167,7 @@
            y="-79.21804"
            style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Century Schoolbook';-inkscape-font-specification:'Century Schoolbook Bold Italic';fill:#6a2c1a;fill-opacity:1;stroke:#6a2c1a;stroke-opacity:1">i</tspan></text>
       <ellipse
-         style="fill:none;stroke:#6a2c1a;stroke-width:2.05248889;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;stroke:#6a2c1a;stroke-width:2.05249;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="path29587"
          cx="66.530518"
          cy="-93.469482"
@@ -206,15 +206,15 @@
        inkscape:connector-curvature="0"
        style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:#ff0000;stroke-width:2.27418;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 33.352844,174.53951 H 341.66977 v 61.09645 H 33.352844 Z"
-       id="extrude_btn"
-       inkscape:label="#extrude_btn" />
-    <path
        id="preheat_chocolate_btn"
+       inkscape:label="#preheat_chocolate_btn" />
+    <path
+       id="extrude_btn"
        d="M 33.352844,244.36403 H 341.66977 v 61.09645 H 33.352844 Z"
        style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:#ff0000;stroke-width:2.27418;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc"
-       inkscape:label="#preheat_chocolate_btn" />
+       inkscape:label="#extrude_btn" />
     <path
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
@@ -293,59 +293,59 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Cocoa Press Z Offset BTN"
-     style="display:none">
+     style="display:inline">
     <path
        id="z_wizard_heading"
-       d="M 250.00798,34.890475 H 549.99201 V 87.258863 H 250.00798 Z"
-       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:3.55235;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 260,30 H 560 V 80 H 260 Z"
+       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:3.47118;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="z_wizard_plus_btn"
-       d="m 683.31825,104.71499 h 83.3289 v 69.82452 h -83.3289 z"
-       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.16188;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 490,110 h 60 v 50 h -60 z"
+       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:1.55235;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="z_wizard_edit_box"
-       d="M 33.352844,279.27629 H 200.01064 V 349.1008 H 33.352844 Z"
-       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:3.05736;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 40,300 h 220 v 70 H 40 Z"
+       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:3.51714;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="z_wizard_inc1_btn"
-       d="M 216.67642,279.27629 H 316.6711 V 349.1008 H 216.67642 Z"
-       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.36821;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 280,300.17549 H 430 V 370 H 280 Z"
+       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.90053;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="z_wizard_inc2_btn"
-       d="m 333.33688,279.27629 h 99.99467 v 69.82451 h -99.99467 z"
-       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.36823;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 450,300.17549 H 600 V 370 H 450 Z"
+       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.90055;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="z_wizard_inc3_btn"
-       d="m 449.99733,279.27629 h 99.99468 v 69.82451 h -99.99468 z"
-       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.36821;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 620,300.17549 H 770 V 370 H 620 Z"
+       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.90053;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="z_wizard_done_btn"
-       d="m 599.98935,384.01306 h 166.6578 v 69.82452 h -166.6578 z"
-       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:3.05736;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 600,390 h 170 v 70 H 600 Z"
+       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:3.09174;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="z_wizard_neg_btn"
-       d="m 683.31825,279.27629 h 83.3289 v 69.82451 h -83.3289 z"
-       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:2.16188;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 490,180 h 60 v 50 h -60 z"
+       style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:1.55235;stroke-miterlimit:4;stroke-dasharray:none"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
        id="z_wizard_diagram"
        style="display:inline;opacity:0.997;fill:url(#linearGradient4768);fill-opacity:1;stroke:none;stroke-width:4.49683;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 338.5189,130.13717 v 34.38779 h 42.06481 l 13.33263,31.12346 h 12.16406 l 13.33263,-31.12346 h 42.06806 V 130.13717 Z M 33.352844,210.03611 v 34.32792 H 766.64715 v -34.32792 z"
+       d="m 341.87175,145.77314 v 34.38779 h 42.06481 l 13.33263,23.12346 h 12.16406 l 13.33263,-23.12346 h 42.06806 V 145.77314 Z M 40.705694,249.67208 V 280 H 770 v -30.32792 z"
        sodipodi:nodetypes="cccccccccccccc" />
   </g>
   <g

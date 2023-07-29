@@ -59,12 +59,6 @@ void ZOffsetWizard::onRedraw(draw_mode_t what) {
      .tag(0)
      .font(font_medium).colors(normal_btn);
 
-  ui.bounds(POLY(z_wizard_neg_btn), x, y, w, h);
-  cmd.tag(4).button(x, y, w, h, F("-"));
-
-  ui.bounds(POLY(z_wizard_plus_btn), x, y, w, h);
-  cmd.tag(5).button(x, y, w, h, F("+"));
-
   char b[32];
   dtostrf(getZOffset_mm(), 5, 2, b);
   strcat_P(b, PSTR(" mm"));
@@ -81,6 +75,14 @@ void ZOffsetWizard::onRedraw(draw_mode_t what) {
   ui.bounds(POLY(z_wizard_inc3_btn), x, y, w, h);
   PREAMBLE(243).button(x, y, w, h, F("1.0"));
 
+  ui.bounds(POLY(z_wizard_neg_btn), x, y, w, h);
+  cmd.tag(4).colors(action_btn).button(x, y, w, h, F(""));
+  drawArrow(x, y, w, h, DOWN);
+
+  ui.bounds(POLY(z_wizard_plus_btn), x, y, w, h);
+  cmd.tag(5).colors(action_btn).button(x, y, w, h, F(""));
+  drawArrow(x, y, w, h, UP);
+  
   ui.bounds(POLY(z_wizard_done_btn), x, y, w, h);
   cmd.tag(1).colors(action_btn).button(x, y, w, h, GET_TEXT_F(MSG_BUTTON_DONE));
 
