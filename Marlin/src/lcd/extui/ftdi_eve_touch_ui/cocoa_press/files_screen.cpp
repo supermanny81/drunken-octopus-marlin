@@ -212,7 +212,7 @@ void FilesScreen::gotoPage(uint8_t page) {
 bool FilesScreen::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case 240: // Back button
-      card.filename[0] = '\0'; // Clear file selection
+      card.filename[0] = card.longFilename[0] = '\0'; // Clear file selection
       GOTO_PREVIOUS();
       return true;
     case 241: // Select highlighted file

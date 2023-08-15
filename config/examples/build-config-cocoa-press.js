@@ -250,15 +250,15 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["NOZZLE_TO_PROBE_OFFSET"]                 = [0, 37.20, 0.5]
         MARLIN["Z_MIN_PROBE_REPEATABILITY_TEST"]         = true // EW - enabled
         MARLIN["MESH_TEST_HOTEND_TEMP"]                  = 32 // EW - changed to 32 (celsius) Default nozzle temperature for the G26 Mesh Validation Tool.
-        MARLIN["AUTO_BED_LEVELING_UBL"]                  = true
+        MARLIN["AUTO_BED_LEVELING_BILINEAR"]             = true
+        MARLIN["ABL_BILINEAR_SUBDIVISION"]               = true
         MARLIN["RESTORE_LEVELING_AFTER_G28"]             = true
         MARLIN["GRID_MAX_POINTS_X"]                      = 5
         MARLIN["GRID_MAX_POINTS_Y"]                      = 5
         MARLIN["PROBING_MARGIN"]                         = 0
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 5
-        MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29 P1\nG29 P3\nG29 S1")
+        MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29\n")
         MARLIN["G26_MESH_VALIDATION"]                    = false
-        MARLIN["UBL_HILBERT_CURVE"]                      = true
     }
 
 
