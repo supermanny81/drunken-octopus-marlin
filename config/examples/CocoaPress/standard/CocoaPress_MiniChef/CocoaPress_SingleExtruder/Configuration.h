@@ -46,12 +46,13 @@
  *
  * Example Configs:     https://github.com/MarlinFirmware/Configurations/branches/all
  *
- * Průša Calculator:    https://blog.prusaprinters.org/calculator_3416/
+ * Průša Calculator:    https://blog.prusa3d.com/calculator_3416/
  *
  * Calibration Guides:  https://reprap.org/wiki/Calibration
  *                      https://reprap.org/wiki/Triffid_Hunter%27s_Calibration_Guide
- *                      https://sites.google.com/site/repraplogphase/calibration-of-your-reprap
+ *                      https://web.archive.org/web/20220907014303/https://sites.google.com/site/repraplogphase/calibration-of-your-reprap
  *                      https://youtu.be/wAL9d7FgInk
+ *                      https://teachingtechyt.github.io/calibration.html
  *
  * Calibration Objects: https://www.thingiverse.com/thing:5573
  *                      https://www.thingiverse.com/thing:1278865
@@ -124,7 +125,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Cocoa Press MiniChef" // <-- changed
+#define CUSTOM_MACHINE_NAME "Cocoa Press" // <-- changed
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -420,11 +421,12 @@
 
   //#define AUTO_POWER_CONTROL      // Enable automatic control of the PS_ON pin
   #if ENABLED(AUTO_POWER_CONTROL)
-    #define AUTO_POWER_FANS         // Turn on PSU if fans need power
-    #define AUTO_POWER_E_FANS
-    #define AUTO_POWER_CONTROLLERFAN
-    #define AUTO_POWER_CHAMBER_FAN
-    #define AUTO_POWER_COOLER_FAN
+    #define AUTO_POWER_FANS           // Turn on PSU for fans
+    #define AUTO_POWER_E_FANS         // Turn on PSU for E Fans
+    #define AUTO_POWER_CONTROLLERFAN  // Turn on PSU for Controller Fan
+    #define AUTO_POWER_CHAMBER_FAN    // Turn on PSU for Chamber Fan
+    #define AUTO_POWER_COOLER_FAN     // Turn on PSU for Cooler Fan
+    #define AUTO_POWER_SPINDLE_LASER  // Turn on PSU for Spindle/Laser
     #define POWER_TIMEOUT              30 // (s) Turn off power if the machine is idle for this duration
     //#define POWER_OFF_DELAY          60 // (s) Delay of poweroff after M81 command. Useful to let fans run for extra time.
   #endif
@@ -548,15 +550,15 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 100 // <-- changed
-#define TEMP_SENSOR_1 0
+#define TEMP_SENSOR_0 101 // <-- changed
+#define TEMP_SENSOR_1 101 // <-- changed
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 1
+#define TEMP_SENSOR_BED 0 // <-- changed
 #define TEMP_SENSOR_PROBE 0
 #define TEMP_SENSOR_CHAMBER 0
 #define TEMP_SENSOR_COOLER 0
@@ -673,7 +675,7 @@
 #define PID_K1     0.95   // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
-  //#define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
+  #define PID_DEBUG             // <-- changed: Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
   //#define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with G-code: M301 E[extruder number, 0-2]
 
@@ -695,13 +697,13 @@
 /**
  * Model Predictive Control for hotend
  *
- * Use a physical model of the hotend to control temperature. When configured correctly
- * this gives better responsiveness and stability than PID and it also removes the need
- * for PID_EXTRUSION_SCALING and PID_FAN_SCALING. Use M306 T to autotune the model.
+ * Use a physical model of the hotend to control temperature. When configured correctly this gives
+ * better responsiveness and stability than PID and removes the need for PID_EXTRUSION_SCALING
+ * and PID_FAN_SCALING. Enable MPC_AUTOTUNE and use M306 T to autotune the model.
  * @section mpctemp
  */
 #if ENABLED(MPCTEMP)
-  //#define MPC_AUTOTUNE                              // Include a method to do MPC auto-tuning (~6.3K bytes of flash)
+  #define MPC_AUTOTUNE                                // Include a method to do MPC auto-tuning (~6.3K bytes of flash)
   //#define MPC_EDIT_MENU                             // Add MPC editing to the "Advanced Settings" menu. (~1.3K bytes of flash)
   //#define MPC_AUTOTUNE_MENU                         // Add MPC auto-tuning to the "Advanced Settings" menu. (~350 bytes of flash)
 
@@ -724,8 +726,12 @@
     //#define MPC_FAN_0_ACTIVE_HOTEND
   #endif
 
+  // Filament Heat Capacity (joules/kelvin/mm)
+  // Set at runtime with M306 H<value>
   #define FILAMENT_HEAT_CAPACITY_PERMM { 5.6e-3f }    // 0.0056 J/K/mm for 1.75mm PLA (0.0149 J/K/mm for 2.85mm PLA).
-  //#define FILAMENT_HEAT_CAPACITY_PERMM { 3.6e-3f }  // 0.0036 J/K/mm for 1.75mm PETG (0.0094 J/K/mm for 2.85mm PETG).
+                                                      // 0.0036 J/K/mm for 1.75mm PETG (0.0094 J/K/mm for 2.85mm PETG).
+                                                      // 0.00515 J/K/mm for 1.75mm ABS (0.0137 J/K/mm for 2.85mm ABS).
+                                                      // 0.00522 J/K/mm for 1.75mm Nylon (0.0138 J/K/mm for 2.85mm Nylon).
 
   // Advanced options
   #define MPC_SMOOTHING_FACTOR 0.5f                   // (0.0...1.0) Noisy temperature sensors may need a lower value for stabilization.
@@ -870,10 +876,10 @@
  * details can be tuned in Configuration_adv.h
  */
 
-//#define THERMAL_PROTECTION_HOTENDS // <-- changed: Enable thermal protection for all extruders
-#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
-#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
-#define THERMAL_PROTECTION_COOLER  // Enable thermal protection for the laser cooling
+#define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
+//#define THERMAL_PROTECTION_BED     // <-- changed: Enable thermal protection for the heated bed
+//#define THERMAL_PROTECTION_CHAMBER // <-- changed: Enable thermal protection for the heated chamber
+//#define THERMAL_PROTECTION_COOLER  // <-- changed: Enable thermal protection for the laser cooling
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -995,8 +1001,8 @@
     // Radius around the center where the arm cannot reach
     #define MIDDLE_DEAD_ZONE_R   0  // (mm)
 
-    #define THETA_HOMING_OFFSET  0  // Calculated from Calibration Guide and M360 / M114. See http://reprap.harleystudio.co.za/?page_id=1073
-    #define PSI_HOMING_OFFSET    0  // Calculated from Calibration Guide and M364 / M114. See http://reprap.harleystudio.co.za/?page_id=1073
+    #define THETA_HOMING_OFFSET  0  // Calculated from Calibration Guide and M360 / M114. See https://www.morgan3dp.com/morgan-calibration-guide/
+    #define PSI_HOMING_OFFSET    0  // Calculated from Calibration Guide and M364 / M114. See https://www.morgan3dp.com/morgan-calibration-guide/
 
   #elif ENABLED(MP_SCARA)
 
@@ -1030,7 +1036,7 @@
   // Radius around the center where the arm cannot reach
   #define MIDDLE_DEAD_ZONE_R   0  // (mm)
 
-  // Calculated from Calibration Guide and M360 / M114. See http://reprap.harleystudio.co.za/?page_id=1073
+  // Calculated from Calibration Guide and M360 / M114. See https://www.morgan3dp.com/morgan-calibration-guide/
   #define THETA_HOMING_OFFSET  0
   #define PSI_HOMING_OFFSET    0
 #endif
@@ -1460,7 +1466,7 @@
   #define MAG_MOUNTED_STOW_5   { PROBE_STOW_FEEDRATE,   {   0,   0,  0 } }  // Extra move if needed
 #endif
 
-// Duet Smart Effector (for delta printers) - https://bit.ly/2ul5U7J
+// Duet Smart Effector (for delta printers) - https://docs.duet3d.com/en/Duet3D_hardware/Accessories/Smart_Effector
 // When the pin is defined you can use M672 to set/reset the probe sensitivity.
 //#define DUET_SMART_EFFECTOR
 #if ENABLED(DUET_SMART_EFFECTOR)
@@ -1476,7 +1482,7 @@
 //#define SENSORLESS_PROBING
 
 /**
- * Allen key retractable z-probe as seen on many Kossel delta printers - https://reprap.org/wiki/Kossel#Automatic_bed_leveling_probe
+ * Allen key retractable z-probe as seen on many Kossel delta printers - https://reprap.org/wiki/Kossel#Autolevel_probe
  * Deploys by touching z-axis belt. Retracts by pushing the probe down.
  */
 //#define Z_PROBE_ALLEN_KEY
@@ -1523,7 +1529,7 @@
  *
  * Tune and Adjust
  * -  Probe Offsets can be tuned at runtime with 'M851', LCD menus, babystepping, etc.
- * -  PROBE_OFFSET_WIZARD (configuration_adv.h) can be used for setting the Z offset.
+ * -  PROBE_OFFSET_WIZARD (Configuration_adv.h) can be used for setting the Z offset.
  *
  * Assuming the typical work area orientation:
  *  - Probe to RIGHT of the Nozzle has a Positive X offset
@@ -1547,7 +1553,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET {0,43.3,-1.25} // <-- changed
+#define NOZZLE_TO_PROBE_OFFSET {0,37.2,0.5} // <-- changed
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1630,7 +1636,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   15 // <-- changed: Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE   5 // <-- changed: Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
@@ -1734,7 +1740,7 @@
 
 // @section homing
 
-//#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
+#define NO_MOTION_BEFORE_HOMING // <-- changed: Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
 //#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
 
 /**
@@ -1760,6 +1766,21 @@
 //#define U_HOME_DIR -1
 //#define V_HOME_DIR -1
 //#define W_HOME_DIR -1
+
+/**
+ * Safety Stops
+ * If an axis has endstops on both ends the one specified above is used for
+ * homing, while the other can be used for things like SD_ABORT_ON_ENDSTOP_HIT.
+ */
+//#define X_SAFETY_STOP
+//#define Y_SAFETY_STOP
+//#define Z_SAFETY_STOP
+//#define I_SAFETY_STOP
+//#define J_SAFETY_STOP
+//#define K_SAFETY_STOP
+//#define U_SAFETY_STOP
+//#define V_SAFETY_STOP
+//#define W_SAFETY_STOP
 
 // @section geometry
 
@@ -1984,8 +2005,8 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
-#define AUTO_BED_LEVELING_UBL // <-- changed
+#define AUTO_BED_LEVELING_BILINEAR // <-- changed
+//#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
 /**
@@ -2086,7 +2107,7 @@
     // Subdivision of the grid by Catmull-Rom method.
     // Synthesizes intermediate points to produce a more detailed mesh.
     //
-    //#define ABL_BILINEAR_SUBDIVISION
+    #define ABL_BILINEAR_SUBDIVISION // <-- changed
     #if ENABLED(ABL_BILINEAR_SUBDIVISION)
       // Number of subdivisions between probe points
       #define BILINEAR_SUBDIVISIONS 3
@@ -2102,7 +2123,7 @@
 
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 0              // <-- changed: Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 5      // <-- changed: Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y 5 // <-- changed
 
@@ -2144,7 +2165,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 0          // <-- changed: Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 10          // Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 5    // <-- changed: Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y 5 // <-- changed
 
@@ -2383,7 +2404,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT {0,0,20} // <-- changed
+  #define NOZZLE_PARK_POINT {0,150,20} // <-- changed
   #define NOZZLE_PARK_MOVE          0   // Park motion: 0 = XY Move, 1 = X Only, 2 = Y Only, 3 = X before Y, 4 = Y before X
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
@@ -2743,7 +2764,7 @@
 
 //
 // Original RADDS LCD Display+Encoder+SDCardReader
-// http://doku.radds.org/dokumentation/lcd-display/
+// https://web.archive.org/web/20200719145306/http://doku.radds.org/dokumentation/lcd-display/
 //
 //#define RADDS_DISPLAY
 
@@ -2773,7 +2794,6 @@
 
 //
 // RigidBot Panel V1.0
-// http://www.inventapart.com/
 //
 //#define RIGIDBOT_PANEL
 
@@ -2817,8 +2837,9 @@
 //
 // Sainsmart (YwRobot) LCD Displays
 //
-// These require F.Malpartida's LiquidCrystal_I2C library
-// https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/Home
+// These require LiquidCrystal_I2C library:
+//   https://github.com/MarlinFirmware/New-LiquidCrystal
+//   https://github.com/fmalpartida/New-LiquidCrystal/wiki
 //
 //#define LCD_SAINSMART_I2C_1602
 //#define LCD_SAINSMART_I2C_2004
@@ -2851,7 +2872,7 @@
 //
 
 //
-// 2-wire Non-latching LCD SR from https://goo.gl/aJJ4sH
+// 2-wire Non-latching LCD SR from https://github.com/fmalpartida/New-LiquidCrystal/wiki/schematics#user-content-ShiftRegister_connection
 // LCD configuration: https://reprap.org/wiki/SAV_3D_LCD
 //
 //#define SAV_3DLCD
@@ -2923,7 +2944,7 @@
 
 //
 // MaKr3d Makr-Panel with graphic controller and SD support.
-// https://reprap.org/wiki/MaKr3d_MaKrPanel
+// https://reprap.org/wiki/MaKrPanel
 //
 //#define MAKRPANEL
 
@@ -2941,7 +2962,7 @@
 
 //
 // Cartesio UI
-// http://mauk.cc/webshop/cartesio-shop/electronics/user-interface
+// https://web.archive.org/web/20180605050442/http://mauk.cc/webshop/cartesio-shop/electronics/user-interface
 //
 //#define CARTESIO_UI
 
@@ -2986,15 +3007,15 @@
 
 //
 // BigTreeTech Mini 12864 V1.0 is an alias for FYSETC_MINI_12864_2_1. Type A/B. NeoPixel RGB Backlight.
+// https://github.com/bigtreetech/MINI-12864/tree/master/mini12864_v1.0
 //
 //#define BTT_MINI_12864_V1
 
 //
-// Factory display for Creality CR-10
+// Factory display for Creality CR-10 / CR-7 / Ender-3
 // https://www.aliexpress.com/item/32833148327.html
 //
-// This is RAMPS-compatible using a single 10-pin connector.
-// (For CR-10 owners who want to replace the Melzi Creality board but retain the display)
+// Connect to EXP1 on RAMPS and compatible boards.
 //
 //#define CR10_STOCKDISPLAY
 
@@ -3124,6 +3145,10 @@
  *  - Download https://github.com/InsanityAutomation/Marlin/raw/CrealityDwin_2.0/TM3D_Combined480272_Landscape_V7.7z
  *  - Copy the downloaded DWIN_SET folder to the SD card.
  *
+ * E3S1PRO (T5L)
+ *  - Download https://github.com/CrealityOfficial/Ender-3S1/archive/3S1_Plus_Screen.zip
+ *  - Copy the downloaded DWIN_SET folder to the SD card.
+ *
  * CREALITY_TOUCH
  *  - CR-6 OEM touch screen. A DWIN display with touch.
  *
@@ -3133,7 +3158,7 @@
  *  - Plug the microSD card into the back of the display.
  *  - Boot the display and wait for the update to complete.
  *
- * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY' ]
+ * :[ 'ORIGIN', 'FYSETC', 'HYPRECY', 'MKS', 'RELOADED', 'IA_CREALITY', 'E3S1PRO', 'CREALITY_TOUCH' ]
  */
 //#define DGUS_LCD_UI ORIGIN
 #if DGUS_UI_IS(MKS)
@@ -3205,6 +3230,7 @@
 //
 // 480x320, 3.5", SPI Display with Rotary Encoder from MKS
 // Usually paired with MKS Robin Nano V2 & V3
+// https://github.com/makerbase-mks/MKS-TFT-Hardware/tree/master/MKS%20TS35
 //
 //#define MKS_TS35_V2_0
 
@@ -3269,12 +3295,14 @@
 //#define ANET_ET5_TFT35
 
 //
-// 1024x600, 7", RGB Stock Display with Rotary Encoder from BIQU-BX
+// 1024x600, 7", RGB Stock Display with Rotary Encoder from BIQU BX
+// https://github.com/bigtreetech/BIQU-BX/tree/master/Hardware
 //
 //#define BIQU_BX_TFT70
 
 //
 // 480x320, 3.5", SPI Stock Display with Rotary Encoder from BIQU B1 SE Series
+// https://github.com/bigtreetech/TFT35-SPI/tree/master/v1
 //
 //#define BTT_TFT35_SPI_V1_0
 
@@ -3321,7 +3349,18 @@
    */
   #define TFT_FONT  NOTOSANS
 
+  /**
+   * TFT Theme for Color_UI. Choose one of the following or add a new one to 'Marlin/src/lcd/tft/themes' directory
+   *
+   * BLUE_MARLIN  - Default theme with 'midnight blue' background
+   * BLACK_MARLIN - Theme with 'black' background
+   * ANET_BLACK   - Theme used for Anet ET4/5
+   */
+  #define TFT_THEME BLACK_MARLIN
+
   //#define TFT_SHARED_IO   // I/O is shared between TFT display and other devices. Disable async data transfer.
+
+  #define COMPACT_MARLIN_BOOT_LOGO  // Use compressed data to save Flash space
 #endif
 
 #if ENABLED(TFT_LVGL_UI)
@@ -3404,7 +3443,7 @@
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-//#define FAN_SOFT_PWM
+#define FAN_SOFT_PWM // <-- changed
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
@@ -3558,11 +3597,12 @@
  */
 //#define SOURCE_CODE_URL
 //#define SHORT_BUILD_VERSION
+#define M16_MACHINE_NAME "Cocoa Press MiniChef" // <-- changed
 //#define TOOLHEAD_NAME
 //#define TOOLHEAD_TYPE
 //#define WIPE_SEQUENCE_COMMANDS
 //#define AXIS_LEVELING_COMMANDS
-#define BED_LEVELING_COMMANDS "G28\nG29 P1\nG29 P3\nG29 S1" // <-- changed
+#define BED_LEVELING_COMMANDS "G28\nG29" // <-- changed
 //#define MANUAL_BED_LEVELING_COMMANDS
 //#define AO_EXP1_DEPRECATED_PINMAP
 #define DISABLE_DUE_SD_MMC // <-- changed
@@ -3603,13 +3643,12 @@
 /**
  * Extra modification for CocoaPress Printers
  */
-//#define HOTENDS
 #define COCOA_PRESS_EXTRUDER // <-- changed
 #define TOUCH_UI_COCOA_PRESS // <-- changed
 #define TOUCH_UI_COCOA_THEME // <-- changed
 #define TOUCH_UI_LCD_TEMP_SCALING 10 // <-- changed
 #define TOUCH_UI_LCD_TEMP_PRECISION 1 // <-- changed
 #define COCOA_PRESS_PREHEAT_SECONDS 900 // <-- changed
-#define COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT "M104 S331 T0\nM104 S330 T1\nM141 S160" // <-- changed
-#define COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT "M104 S338 T0\nM104 S337 T1\nM141 S160" // <-- changed
-#define COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT "M104 S328 T0\nM104 S326 T1\nM141 S200" // <-- changed
+#define COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT "M104 S331 T0\nM104 S330 T1" // <-- changed
+#define COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT "M104 S338 T0\nM104 S337 T1" // <-- changed
+#define COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT "M104 S328 T0\nM104 S326 T1" // <-- changed
