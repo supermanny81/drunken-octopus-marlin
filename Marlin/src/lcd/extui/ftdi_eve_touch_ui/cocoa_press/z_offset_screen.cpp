@@ -22,10 +22,11 @@
 
 #include "../config.h"
 #include "../screens.h"
-
-#include "z_offset_wizard.h"
+#include "../screen_data.h"
 
 #ifdef COCOA_Z_OFFSET_SCREEN
+
+#include "z_offset_wizard.h"
 
 using namespace FTDI;
 using namespace ExtUI;
