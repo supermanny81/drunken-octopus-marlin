@@ -1774,7 +1774,7 @@
  */
 //#define X_SAFETY_STOP
 //#define Y_SAFETY_STOP
-//#define Z_SAFETY_STOP
+#define Z_SAFETY_STOP // <-- changed
 //#define I_SAFETY_STOP
 //#define J_SAFETY_STOP
 //#define K_SAFETY_STOP

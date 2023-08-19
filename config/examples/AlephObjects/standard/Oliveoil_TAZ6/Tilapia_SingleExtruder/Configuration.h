@@ -1772,9 +1772,9 @@
  * If an axis has endstops on both ends the one specified above is used for
  * homing, while the other can be used for things like SD_ABORT_ON_ENDSTOP_HIT.
  */
-//#define X_SAFETY_STOP
-//#define Y_SAFETY_STOP
-//#define Z_SAFETY_STOP
+#define X_SAFETY_STOP // <-- changed
+#define Y_SAFETY_STOP // <-- changed
+#define Z_SAFETY_STOP // <-- changed
 //#define I_SAFETY_STOP
 //#define J_SAFETY_STOP
 //#define K_SAFETY_STOP

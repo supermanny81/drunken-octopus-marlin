@@ -891,23 +891,33 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["X_HOME_DIR"]                             = -1 // Home left
         MARLIN["Y_HOME_DIR"]                             =  1 // Home bed forward
         MARLIN["QUICK_HOME"]                             =  true
+        MARLIN["X_SAFETY_STOP"]                          =  !PRINTER.includes("Hibiscus_Mini2")
+        MARLIN["Y_SAFETY_STOP"]                          =  !PRINTER.includes("Hibiscus_Mini2") && !USE_BTT_002
+        MARLIN["Z_SAFETY_STOP"]                          =  !USE_BTT_002
     }
     else if (PRINTER.includes("Juniper_TAZ5") || PRINTER.includes("Guava_TAZ4")) {
         MARLIN["X_HOME_DIR"]                             = -1 // Home left
         MARLIN["Y_HOME_DIR"]                             = -1 // Home bed rear
         MARLIN["QUICK_HOME"]                             =  true
+        MARLIN["Z_SAFETY_STOP"]                          =  true
     }
 
     else if (PRINTER.includes("Redgum_TAZWorkhorse") ||  PRINTER.includes("SynDaver_Axi")) {
         MARLIN["X_HOME_DIR"]                             = -1 // Home left
         MARLIN["Y_HOME_DIR"]                             = -1 // Home bed rear
         MARLIN["QUICK_HOME"]                             =  true
+        MARLIN["Z_SAFETY_STOP"]                          =  true
     }
 
     else if (IS_TAZ) {
         MARLIN["X_HOME_DIR"]                             = -1 // Home left
         MARLIN["Y_HOME_DIR"]                             =  1 // Home bed forward
         MARLIN["QUICK_HOME"]                             =  true
+        if(!PRINTER.includes("Quiver_TAZPro")) {
+            MARLIN["X_SAFETY_STOP"]                      =  true
+            MARLIN["Y_SAFETY_STOP"]                      =  true
+        }
+        MARLIN["Z_SAFETY_STOP"]                          =  true
     }
 
     if (USE_HOME_BUTTON || ["BLTouch", "Inductive"].includes(PROBE_STYLE) ||
@@ -1325,6 +1335,7 @@ function make_config(PRINTER, TOOLHEAD) {
 
     if (TOOLHEAD_IS_UNIVERSAL && USE_Z_SCREW) {
         MARLIN["USE_XMAX_PLUG"]                          = false
+        MARLIN["X_SAFETY_STOP"]                          = false
         MARLIN["NO_MOTION_BEFORE_HOMING"]                = true
         ADAPTER_X_OFFSET                                 = 0
         ADAPTER_Y_OFFSET                                 = IS_TAZ ? -2.0 : -7.2
@@ -3066,24 +3077,28 @@ function make_config(PRINTER, TOOLHEAD) {
 
     MARLIN["TOOLHEAD_TYPE"]                              = C_STRING(TOOLHEAD_TYPE)
     
-    function checkEndstop(u,assertion) {
-        if(MARLIN.hasOwnProperty(u)) {
-            if(!assertion) {
-                console.log("WARNING:", u, "not supported on this version of Marlin");
-            }
-            delete MARLIN[u];
+    function checkEndstop(axis) {
+        function a(s) {
+            return s.replace("X",axis);
         }
+        if(MARLIN[a("X_HOME_DIR")] ==  -1) {
+            if(!ENABLED(a("USE_XMIN_PLUG"))) console.log("WARNING:", a("USE_XMIN_PLUG"), "needs to be enabled");
+            if( ENABLED(a("USE_XMAX_PLUG")) && !ENABLED(a("X_SAFETY_STOP"))) console.log("WARNING:", a("X_SAFETY_STOP"), "needs to be enabled");
+            if(!ENABLED(a("USE_XMAX_PLUG")) &&  ENABLED(a("X_SAFETY_STOP"))) console.log("WARNING:", a("X_SAFETY_STOP"), "needs to be disabled");
+        } else {
+            if(!ENABLED(a("USE_XMAX_PLUG"))) console.log("WARNING:", a("USE_XMAX_PLUG"), "needs to be enabled");
+            if( ENABLED(a("USE_XMIN_PLUG")) && !ENABLED(a("X_SAFETY_STOP"))) console.log("WARNING:", a("X_SAFETY_STOP"), "needs to be enabled");
+            if(!ENABLED(a("USE_XMIN_PLUG")) &&  ENABLED(a("X_SAFETY_STOP"))) console.log("WARNING:", a("X_SAFETY_STOP"), "needs to be disabled");
+        }
+        delete MARLIN[a("USE_XMIN_PLUG")];
+        delete MARLIN[a("USE_XMAX_PLUG")];
     }
     
     // As of https://github.com/MarlinFirmware/Marlin/pull/25748, USE_*_PLUG is no longer used,
     // but keep it around for now.
-    checkEndstop("USE_XMIN_PLUG", MARLIN["X_HOME_DIR"] == -1);
-    checkEndstop("USE_YMIN_PLUG", MARLIN["Y_HOME_DIR"] == -1);
-    checkEndstop("USE_ZMIN_PLUG", MARLIN["Z_HOME_DIR"] == -1);
-    checkEndstop("USE_XMAX_PLUG", MARLIN["X_HOME_DIR"] ==  1);
-    checkEndstop("USE_YMAX_PLUG", MARLIN["Y_HOME_DIR"] ==  1);
-    checkEndstop("USE_ZMAX_PLUG", MARLIN["Z_HOME_DIR"] ==  1);
-
+    checkEndstop("X");
+    checkEndstop("Y");
+    checkEndstop("Z");
     return MARLIN
 }
 /***************************** END OF CONFIGURATION ****************************/
