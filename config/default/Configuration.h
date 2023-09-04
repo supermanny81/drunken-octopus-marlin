@@ -3621,6 +3621,8 @@
 //#define CURA_LE_RUNOUT_HANDLING_WORKAROUND
 //#define FIL_RUNOUT_PIN
 //#define SERVO0_PIN
+//#define FAN0_PIN
+//#define FAN1_PIN
 //#define ACTION_ON_FILAMENT_RUNOUT
 //#define SWAP_EXTRUDER_FANS
 //#define SWAP_E0_AND_E1

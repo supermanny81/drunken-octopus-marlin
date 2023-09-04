@@ -155,7 +155,7 @@ function make_config(PRINTER, TOOLHEAD) {
 /**************************** NOZZLE PARK FEATURE ****************************/
 
     MARLIN["NOZZLE_PARK_FEATURE"]                        = true
-    MARLIN["NOZZLE_PARK_POINT"]                          = [0, 150, 20]
+    MARLIN["NOZZLE_PARK_POINT"]                          = [70, 5, 20]
 
     // Parking the head does not seem to quite work, so leaving off for now
     //MARLIN["ADVANCED_PAUSE_FEATURE"]                     = true
@@ -210,7 +210,7 @@ function make_config(PRINTER, TOOLHEAD) {
     // Preheat options for chocolate
 
     MARLIN["PREHEAT_1_LABEL"]                            = C_STRING("Cocoa")
-    MARLIN["COCOA_PRESS_PREHEAT_SECONDS"]                = 15*60
+    MARLIN["COCOA_PRESS_PREHEAT_SECONDS"]                = 20*60
     MARLIN["COCOA_PRESS_PREHEAT_DARK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S331 T0\nM104 S330 T1")
     MARLIN["COCOA_PRESS_PREHEAT_MILK_CHOCOLATE_SCRIPT"]  = C_STRING("M104 S338 T0\nM104 S337 T1")
     MARLIN["COCOA_PRESS_PREHEAT_WHITE_CHOCOLATE_SCRIPT"] = C_STRING("M104 S328 T0\nM104 S326 T1")
@@ -231,6 +231,8 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["CONTROLLERFAN_SPEED_MIN"]                    = 0
     MARLIN["CONTROLLER_FAN_IGNORE_Z"]                    = true
     MARLIN["DISABLE_IDLE_Z"]                             = false
+    MARLIN["FAN0_PIN"]                                   = -1
+    MARLIN["FAN1_PIN"]                                   = -1
 
 /****************************** AXIS TRAVEL LIMITS ******************************/
 
@@ -257,7 +259,7 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["GRID_MAX_POINTS_Y"]                      = 5
         MARLIN["PROBING_MARGIN"]                         = 0
         MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]               = 5
-        MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29\n")
+        MARLIN["BED_LEVELING_COMMANDS"]                  = C_STRING("G28\nG29\nG27 P2\n")
         MARLIN["G26_MESH_VALIDATION"]                    = false
     }
 
@@ -342,7 +344,7 @@ function make_config(PRINTER, TOOLHEAD) {
     MARLIN["SD_SPI_SPEED"]                               = 'SPI_SIXTEENTH_SPEED'
 
     MARLIN["LCD_TIMEOUT_TO_STATUS"]                      = 600000 // Ten Minutes
-    MARLIN["TOUCH_UI_VERSION"]                           = C_STRING('Version: BETA (\" __DATE__  \")');
+    MARLIN["TOUCH_UI_VERSION"]                           = C_STRING('Version: 1.0 (\" __DATE__  \")');
     MARLIN["TOUCH_UI_FTDI_EVE"]                          = true
     MARLIN["TOUCH_UI_COCOA_THEME"]                       = true
     MARLIN["TOUCH_UI_COCOA_PRESS"]                       = true

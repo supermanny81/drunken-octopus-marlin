@@ -29,14 +29,27 @@ using namespace FTDI;
 using namespace ExtUI;
 using namespace Theme;
 
-#define GRID_COLS 3
-#define GRID_ROWS 6
-#define BED_MESH_TITLE_POS BTN_POS(1,1), BTN_SIZE(3,1)
-#define WARNING_POS        BTN_POS(1,2), BTN_SIZE(3,2)
-#define PROBE_BED_POS      BTN_POS(1,4), BTN_SIZE(1,1)
-#define SHOW_MESH_POS      BTN_POS(2,4), BTN_SIZE(1,1)
-#define EDIT_MESH_POS      BTN_POS(3,4), BTN_SIZE(1,1)
-#define BACK_POS           BTN_POS(1,6), BTN_SIZE(3,1)
+#if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL)
+    #define GRID_COLS 3
+    #define GRID_ROWS 6
+    #define BED_MESH_TITLE_POS BTN_POS(1,1), BTN_SIZE(3,1)
+    #define WARNING_POS        BTN_POS(1,2), BTN_SIZE(3,2)
+    #define PROBE_BED_POS      BTN_POS(1,4), BTN_SIZE(1,1)
+    #define SHOW_MESH_POS      BTN_POS(2,4), BTN_SIZE(1,1)
+    #define EDIT_MESH_POS      BTN_POS(3,4), BTN_SIZE(1,1)
+    #define BACK_POS           BTN_POS(1,6), BTN_SIZE(3,1)
+#else
+    #define GRID_COLS 2
+    #define GRID_ROWS 6    
+    #define BED_MESH_TITLE_POS BTN_POS(1,1), BTN_SIZE(2,1)
+    #define WARNING_POS        BTN_POS(1,2), BTN_SIZE(2,2)
+    #define PROBE_BED_POS      BTN_POS(1,4), BTN_SIZE(1,1)
+    #define SHOW_MESH_POS      BTN_POS(2,4), BTN_SIZE(1,1)
+    #define BACK_POS           BTN_POS(1,6), BTN_SIZE(2,1)
+
+    // Hide the editor button if motion to grid point not supported
+    #define EDIT_MESH_POS      BTN_POS(4,7), BTN_SIZE(1,1)
+#endif
 
 void LevelingMenu::onRedraw(draw_mode_t what) {
   if (what & BACKGROUND) {
@@ -68,7 +81,7 @@ void LevelingMenu::onRedraw(draw_mode_t what) {
 bool LevelingMenu::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case 1: GOTO_PREVIOUS(); break;
-    case 2: SaveSettingsDialogBox::settingsChanged(); /*BedMeshViewScreen::doProbe();*/ injectCommands(F(BED_LEVELING_COMMANDS)); break;
+    case 2: SaveSettingsDialogBox::settingsChanged(); injectCommands(F(BED_LEVELING_COMMANDS)); break;
     case 3: BedMeshViewScreen::show(); break;
     case 4: SaveSettingsDialogBox::settingsChanged(); BedMeshEditScreen::show(); break;
     default: return false;
