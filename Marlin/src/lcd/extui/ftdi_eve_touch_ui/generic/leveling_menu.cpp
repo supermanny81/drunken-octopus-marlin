@@ -84,7 +84,7 @@ void LevelingMenu::onRedraw(draw_mode_t what) {
        #ifdef AXIS_LEVELING_COMMANDS
        .enabled(true)
        #else
-       .enabled(ANY(Z_STEPPER_AUTO_ALIGN,MECHANICAL_GANTRY_CALIBRATION))
+       .enabled(ANY(Z_STEPPER_AUTO_ALIGN, MECHANICAL_GANTRY_CALIBRATION))
        #endif
        .tag(2).button(LEVEL_AXIS_POS, GET_TEXT_F(MSG_LEVEL_X_AXIS))
        .enabled(ENABLED(HAS_BED_PROBE))
@@ -118,7 +118,7 @@ bool LevelingMenu::onTouchEnd(uint8_t tag) {
         break;
     #elif defined(AXIS_LEVELING_COMMANDS)
       case 2: SpinnerDialogBox::enqueueAndWait(F(AXIS_LEVELING_COMMANDS)); break;
-    #elif ANY(Z_STEPPER_AUTO_ALIGN,MECHANICAL_GANTRY_CALIBRATION)
+    #elif ANY(Z_STEPPER_AUTO_ALIGN, MECHANICAL_GANTRY_CALIBRATION)
       case 2:
         GOTO_SCREEN(StatusScreen);
         ExtUI::injectCommands_P(PSTR("G28 Z\nG34 A2 I20 T0.01"));
