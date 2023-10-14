@@ -1378,7 +1378,7 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["SERVO_DELAY"]                            = [1000, 1000]
         MARLIN["SWITCHING_NOZZLE"]                       = true
         MARLIN["SWITCHING_NOZZLE_E1_SERVO_NR"]           = 1
-        MARLIN["SWITCHING_NOZZLE_SERVO_ANGLES"]          = [55, 120]
+        MARLIN["SWITCHING_NOZZLE_SERVO_ANGLES"]          = [[55, 120],[55, 120]]
         MARLIN["USE_XMAX_PLUG"]                          = false
         MARLIN["TEMP_SENSOR_1"]                          = 5
         MARLIN["DEFAULT_NOMINAL_FILAMENT_DIA"]           = 3.0
