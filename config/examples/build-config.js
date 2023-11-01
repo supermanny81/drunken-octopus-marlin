@@ -1884,9 +1884,10 @@ function make_config(PRINTER, TOOLHEAD) {
             MARLIN["MULTIPLE_PROBING"]                   = 2
             MARLIN["Z_PROBE_FEEDRATE_SLOW"]              = 1*60
             MARLIN["Z_PROBE_FEEDRATE_FAST"]              = USE_Z_BELT ? 20*60 : 8*60
-            MARLIN["Z_PROBE_OFFSET_RANGE_MIN"]           = -2
-            MARLIN["Z_PROBE_OFFSET_RANGE_MAX"]           = 5
+            MARLIN["PROBE_OFFSET_ZMIN"]                  = -2
+            MARLIN["PROBE_OFFSET_ZMAX"]                  = 5
             MARLIN["Z_CLEARANCE_DEPLOY_PROBE"]           = 5
+            MARLIN["Z_PROBE_ERROR_TOLERANCE"]            = 5
             MARLIN["PROBING_MARGIN"]                     = false
             MARLIN["XY_PROBE_FEEDRATE"]                  = 6000
             MARLIN["Z_CLEARANCE_BETWEEN_PROBES"]         = 5
