@@ -1992,7 +1992,7 @@
   #define MARLIN_BRICKOUT // <-- changed
   #define MARLIN_INVADERS // <-- changed
   #define MARLIN_SNAKE // <-- changed
-  #define GAMES_EASTER_EGG          // <-- changed: Add extra blank lines above the "Games" sub-menu
+  //#define GAMES_EASTER_EGG          // Add extra blank lines above the "Games" sub-menu
 
 #endif // HAS_MARLINUI_U8GLIB
 

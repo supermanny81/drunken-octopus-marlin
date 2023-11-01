@@ -364,6 +364,7 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["MACHINE_UUID"]                           = C_STRING("e5502411-d46d-421d-ba3a-a20126d7930f")
         if (!USE_TOUCH_UI) {
             MARLIN["LIGHTWEIGHT_UI"]                     = true
+            USE_LESS_MEMORY                              = 2
         } else {
             USE_REPRAP_LCD_DISPLAY                       = false
             USE_LESS_MEMORY                              = 1
