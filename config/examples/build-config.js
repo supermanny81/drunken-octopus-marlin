@@ -936,6 +936,11 @@ function make_config(PRINTER, TOOLHEAD) {
     else if (MINI_BED && USE_Z_SCREW) {
         MARLIN["HOMING_FEEDRATE_MM_M"]                   = [30*60,30*60,8*60] // mm/m
     }
+    else if (PRINTER.includes("Quiver_TAZPro")) {
+        // According to Brian Kahl, LulzBot is now using newer motors
+        // which cannot handle 30mm/sec feedrate
+        MARLIN["HOMING_FEEDRATE_MM_M"]                   = [50*60,50*60,25*60] // mm/m
+    }
     else if (TAZ_BED && USE_Z_BELT) {
         MARLIN["HOMING_FEEDRATE_MM_M"]                   = [50*60,50*60,30*60] // mm/m
     }
