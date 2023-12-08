@@ -2870,6 +2870,7 @@ function make_config(PRINTER, TOOLHEAD) {
             }
             else if (PROBE_STYLE == "BLTouch" && PRINTER.includes("Guava_TAZ4")) {
                 MARLIN["NOZZLE_TO_PROBE_OFFSET"]         = [-54, 0, -4.0]
+                MARLIN["PROBE_OFFSET_XMIN"]              = -60
             }
             else if (PROBE_STYLE == "BLTouch") {
                 MARLIN["NOZZLE_TO_PROBE_OFFSET"]         = [0, -22, -2.35]
