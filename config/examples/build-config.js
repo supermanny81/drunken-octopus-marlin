@@ -1644,7 +1644,7 @@ function make_config(PRINTER, TOOLHEAD) {
         MARLIN["FAST_PWM_FAN_FREQUENCY"]                 = 122
     }
 
-    MARLIN["FAN_KICKSTART_TIME"]                         = 100
+    MARLIN["EFAN_KICKSTART_TIME"]                        = 100
     MARLIN["FAN_MIN_PWM"]                                = 70
     MARLIN["SOFT_PWM_SCALE"]                             = 4
 
