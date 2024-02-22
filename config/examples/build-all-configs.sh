@@ -77,6 +77,7 @@ build_config custom    Gladiola_MiniEinsyLCD                     CecropiaSilk_Si
 build_config custom    Gladiola_MiniEinsyLCD                     BandedTiger_HardenedSteel
 build_config custom    Gladiola_MiniEinsyTouchUSB                Gladiola_SingleExtruder
 build_config custom    Gladiola_MiniBTT002LCD                    BandedTiger_HardenedSteel
+build_config custom    Gladiola_MiniLCDArchim                    Gladiola_SingleExtruder
 
 build_config accessory Hibiscus_Mini2                            AchemonSphinx_SmallLayer
 build_config standard  Hibiscus_Mini2                            CecropiaSilk_SingleExtruderAeroV2
@@ -114,6 +115,7 @@ build_config custom    Juniper_TAZ5BLTouch                       Angelfish_Aeros
 build_config custom    Juniper_TAZ5BLTouch                       Kanyu_Flexystruder
 build_config custom    Juniper_TAZ5ArchimBLTouch                 Tilapia_SingleExtruder
 build_config custom    Juniper_TAZ5ArchimBLTouch                 Angelfish_Aerostruder
+build_config custom    Juniper_TAZ5ArchimBLTouchHallEffect       CecropiaSilk_SingleExtruderAeroV2
 
 build_config standard  Oliveoil_TAZ6                             Tilapia_SingleExtruder
 build_config accessory Oliveoil_TAZ6                             Angelfish_Aerostruder
@@ -155,6 +157,7 @@ build_config custom    Oliveoil_TAZ6ArchimBLTouch                AchemonSphinx_S
 build_config custom    Oliveoil_TAZ6ArchimBLTouch                M175_Mosquito
 build_config custom    Oliveoil_TAZ6ArchimBLTouch                H175_Hemera
 build_config custom    Oliveoil_TAZ6ArchimBLTouch                Yellowfin_DualExtruderV3
+build_config custom    Oliveoil_TAZ6ArchimHallEffect             Tilapia_SingleExtruder
 
 build_config accessory Quiver_TAZPro                             AchemonSphinx_SmallLayer
 build_config accessory Quiver_TAZPro                             CecropiaSilk_SingleExtruderAeroV2
