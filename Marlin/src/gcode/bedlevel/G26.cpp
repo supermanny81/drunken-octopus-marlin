@@ -543,7 +543,7 @@ void GcodeSuite::G26() {
 
     if (bedtemp) {
       if (!WITHIN(bedtemp, 40, BED_MAX_TARGET)) {
-        SERIAL_ECHOLNPGM("?Specified bed temperature not plausible (40-", BED_MAX_TARGET, "C).");
+        SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Specified bed temperature not plausible (40-", BED_MAX_TARGET, "C)."));
         return;
       }
       g26.bed_temp = bedtemp;
@@ -554,7 +554,7 @@ void GcodeSuite::G26() {
   if (parser.seenval('L')) {
     g26.layer_height = parser.value_linear_units();
     if (!WITHIN(g26.layer_height, 0.0, 2.0)) {
-      SERIAL_ECHOLNPGM("?Specified layer height not plausible.");
+      SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Specified layer height not plausible."));
       return;
     }
   }
@@ -563,12 +563,12 @@ void GcodeSuite::G26() {
     if (parser.has_value()) {
       g26.retraction_multiplier = parser.value_float();
       if (!WITHIN(g26.retraction_multiplier, 0.05, 15.0)) {
-        SERIAL_ECHOLNPGM("?Specified Retraction Multiplier not plausible.");
+        SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Specified Retraction Multiplier not plausible."));
         return;
       }
     }
     else {
-      SERIAL_ECHOLNPGM("?Retraction Multiplier must be specified.");
+      SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Retraction Multiplier must be specified."));
       return;
     }
   }
@@ -576,7 +576,7 @@ void GcodeSuite::G26() {
   if (parser.seenval('S')) {
     g26.nozzle = parser.value_float();
     if (!WITHIN(g26.nozzle, 0.1, 2.0)) {
-      SERIAL_ECHOLNPGM("?Specified nozzle size not plausible.");
+      SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Specified nozzle size not plausible."));
       return;
     }
   }
@@ -586,7 +586,7 @@ void GcodeSuite::G26() {
       #if HAS_MARLINUI_MENU
         g26.prime_flag = -1;
       #else
-        SERIAL_ECHOLNPGM("?Prime length must be specified when not using an LCD.");
+        SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Prime length must be specified when not using an LCD."));
         return;
       #endif
     }
@@ -594,7 +594,7 @@ void GcodeSuite::G26() {
       g26.prime_flag++;
       g26.prime_length = parser.value_linear_units();
       if (!WITHIN(g26.prime_length, 0.0, 25.0)) {
-        SERIAL_ECHOLNPGM("?Specified prime length not plausible.");
+        SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Specified prime length not plausible."));
         return;
       }
     }
@@ -603,7 +603,7 @@ void GcodeSuite::G26() {
   if (parser.seenval('F')) {
     g26.filament_diameter = parser.value_linear_units();
     if (!WITHIN(g26.filament_diameter, 1.0, 4.0)) {
-      SERIAL_ECHOLNPGM("?Specified filament size not plausible.");
+      SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Specified filament size not plausible."));
       return;
     }
   }
@@ -627,7 +627,7 @@ void GcodeSuite::G26() {
   // If any preset or temperature was specified
   if (noztemp) {
     if (!WITHIN(noztemp, 165, thermalManager.hotend_max_target(active_extruder))) {
-      SERIAL_ECHOLNPGM("?Specified nozzle temperature not plausible.");
+      SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Specified nozzle temperature not plausible."));
       return;
     }
     g26.hotend_temp = noztemp;
@@ -648,12 +648,12 @@ void GcodeSuite::G26() {
     if (parser.seen('R'))
       g26_repeats = parser.has_value() ? parser.value_int() : GRID_MAX_POINTS + 1;
     else {
-      SERIAL_ECHOLNPGM("?(R)epeat must be specified when not using an LCD.");
+      SERIAL_ECHOLNPGM(GCODE_ERR_MSG("(R)epeat must be specified when not using an LCD."));
       return;
     }
   #endif
   if (g26_repeats < 1) {
-    SERIAL_ECHOLNPGM("?(R)epeat value not plausible; must be at least 1.");
+    SERIAL_ECHOLNPGM(GCODE_ERR_MSG("(R)epeat value not plausible; must be at least 1."));
     return;
   }
 
@@ -661,7 +661,7 @@ void GcodeSuite::G26() {
   g26.xy_pos.set(parser.seenval('X') ? RAW_X_POSITION(parser.value_linear_units()) : current_position.x,
                  parser.seenval('Y') ? RAW_Y_POSITION(parser.value_linear_units()) : current_position.y);
   if (!position_is_reachable(g26.xy_pos)) {
-    SERIAL_ECHOLNPGM("?Specified X,Y coordinate out of bounds.");
+    SERIAL_ECHOLNPGM(GCODE_ERR_MSG("Specified X,Y coordinate out of bounds."));
     return;
   }
 
