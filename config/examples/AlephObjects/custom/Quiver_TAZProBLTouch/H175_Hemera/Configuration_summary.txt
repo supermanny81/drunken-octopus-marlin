@@ -87,6 +87,8 @@
 #define HOTEND_OFFSET_Y {0,0}
 #define HOTEND_OFFSET_Z {0,0}
 #define HYBRID_THRESHOLD
+#define INPUT_SHAPING_X
+#define INPUT_SHAPING_Y
 #define INVERT_E0_DIR true
 #define INVERT_E1_DIR true
 #define INVERT_X_DIR false

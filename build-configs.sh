@@ -14,4 +14,4 @@
 #
 
 cd config/examples
-./build-all-configs.sh $1
+./build-all-configs.sh $*
