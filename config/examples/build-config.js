@@ -100,7 +100,7 @@ const TOOLHEAD_CHOICES = [
  *  28. WIPER PAD
  *  29. CLEAN NOZZLE
  *  30. PROBE REWIPE
- *  30. BACKLASH COMPENSATION
+ *  30. BACKLASH COMPENSATION / INPUT SHAPING
  *  31. MOTOR CURRENTS
  *  32. ACCELERATION, FEEDRATES AND XYZ MOTOR STEPS
  *  33. LCD OPTIONS
@@ -2701,6 +2701,11 @@ function make_config(PRINTER, TOOLHEAD) {
             MARLIN["BACKLASH_CORRECTION"]                = 0.0
             MARLIN["BACKLASH_DISTANCE_MM"]               = [ 0, 0, 0 ]
         }
+    }
+    
+    if (USE_ARCHIM2) {
+        MARLIN["INPUT_SHAPING_X"]                        = true
+        MARLIN["INPUT_SHAPING_Y"]                        = true
     }
 
 /******************************* MOTOR CURRENTS ******************************/

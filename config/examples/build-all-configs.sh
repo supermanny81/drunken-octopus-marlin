@@ -27,6 +27,12 @@ build_config() {
   group=$1
   printer_name=$2
   toolhead_name=$3
+  if [ -n "$only_printer_name" -a "$printer_name" != "$only_printer_name" ]; then
+     return
+  fi
+  if [ -n "$only_toolhead_name" -a "$toolhead_name" != "$only_toolhead_name" ]; then
+     return
+  fi
   case $printer_name in
     CocoaPress_MiniChef | CocoaPress_MiniChefUSB)
       script="node build-config-cocoa-press.js"
@@ -42,12 +48,22 @@ build_config() {
 
 if [ "$1" = "upgrade" ]; then
   fetch_default_config || (echo Unable to retrieve new configuration files; exit 1)
+  shift
 else
   echo
   echo
   echo Using pre-existing config files. To update, use "./build-configs.sh upgrade"
   echo
   echo
+fi
+
+if [ "$#" -eq 1 ]; then
+  only_printer_name=$1
+fi
+
+if [ "$#" -eq 2 ]; then
+  only_printer_name=$1
+  only_toolhead_name=$2
 fi
 
 vendor=AlephObjects
