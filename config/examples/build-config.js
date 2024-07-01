@@ -2238,7 +2238,7 @@ function make_config(PRINTER, TOOLHEAD) {
         DRIVER_TYPE                                      = 'A4988'
     }
 
-    MARLIN["MINIMUM_STEPPER_PULSE"]                      = 1
+    MARLIN["MINIMUM_STEPPER_PULSE"]                      =  1000
 
     MARLIN["X_DRIVER_TYPE"]                              =  DRIVER_TYPE
     MARLIN["Y_DRIVER_TYPE"]                              =  DRIVER_TYPE
