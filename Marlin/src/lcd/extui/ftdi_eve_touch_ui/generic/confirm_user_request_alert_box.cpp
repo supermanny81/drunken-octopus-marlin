@@ -35,24 +35,23 @@ void ConfirmUserRequestAlertBox::onRedraw(draw_mode_t mode) {
 bool ConfirmUserRequestAlertBox::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case 1:
-      #ifdef SYNDAVER_LEVEL_PRINTING_SCREEN
-        if (ExtUI::isPrintingPaused())
-          // The TuneMenu will call ExtUI::setUserConfirmed()
-          GOTO_PREVIOUS()
-        else
+      #if ENABLED(ADVANCED_PAUSE_FEATURE)
+        if (ExtUI::pauseModeStatus == PAUSE_MESSAGE_PURGE || ExtUI::pauseModeStatus == PAUSE_MESSAGE_OPTION)
+          ExtUI::setPauseMenuResponse(PAUSE_RESPONSE_RESUME_PRINT);
       #endif
+      ExtUI::setUserConfirmed();
       #ifdef FTDI_TUNE_MENU
-        if (ExtUI::isPrintingPaused()) {
+        if (ExtUI::awaitingUserConfirm()) {
           // The TuneMenu will call ExtUI::setUserConfirmed()
-          GOTO_SCREEN(TuneMenu);
+          if (ExtUI::isOngoingPrintJob())
+            GOTO_SCREEN(TuneMenu);
+          else
+            GOTO_SCREEN(StatusScreen);
           current_screen.forget();
+          return true;
         }
-        else
       #endif
-      {
-        ExtUI::setUserConfirmed();
-        GOTO_PREVIOUS();
-      }
+      GOTO_PREVIOUS();
       return true;
     case 2: GOTO_PREVIOUS(); return true;
     default:                 return false;
