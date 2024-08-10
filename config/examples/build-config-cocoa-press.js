@@ -277,9 +277,9 @@ function make_config(PRINTER, TOOLHEAD) {
      *
      * For the Archim, setting this to the default (0) for TRINAMICS causes
      * the E stepper not to advance when LIN_ADVANCE is enabled, so force
-     * the stepper pulse to 1 to match the other drivers.
+     * the stepper pulse to 1000 to match the other drivers.
      */
-    MARLIN["MINIMUM_STEPPER_PULSE"]                      = 1
+    MARLIN["MINIMUM_STEPPER_PULSE_NS"]                   = 1000
 
     MARLIN["X_DRIVER_TYPE"]                              =  DRIVER_TYPE
     MARLIN["Y_DRIVER_TYPE"]                              =  DRIVER_TYPE

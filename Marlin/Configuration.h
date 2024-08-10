@@ -126,11 +126,11 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Mini" // <-- changed
+#define CUSTOM_MACHINE_NAME "TAZ 6" // <-- changed
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
-#define MACHINE_UUID "351487b6-ca9a-4c1a-8765-d668b1da6585" // <-- changed
+#define MACHINE_UUID "845f003c-aebd-4e53-a6b9-7d0984fde609" // <-- changed
 
 // @section stepper drivers
 
@@ -770,7 +770,7 @@
  * When set to any value below 255, enables a form of PWM to the bed that acts like a divider
  * so don't use it unless you are OK with PWM on your bed. (See the comment on enabling PIDTEMPBED)
  */
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 206 // <-- changed: limits duty cycle to bed; 255=full current
 
 /**
  * PID Bed Heating
@@ -792,9 +792,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 294 // <-- changed
-  #define DEFAULT_bedKi 65 // <-- changed
-  #define DEFAULT_bedKd 382 // <-- changed
+  #define DEFAULT_bedKp 162 // <-- changed
+  #define DEFAULT_bedKi 17 // <-- changed
+  #define DEFAULT_bedKd 378 // <-- changed
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1183,12 +1183,12 @@
  * Endstop "Hit" State
  * Set to the state (HIGH or LOW) that applies to each endstop.
  */
-#define X_MIN_ENDSTOP_HIT_STATE LOW // <-- changed
-#define X_MAX_ENDSTOP_HIT_STATE LOW // <-- changed
-#define Y_MIN_ENDSTOP_HIT_STATE LOW // <-- changed
-#define Y_MAX_ENDSTOP_HIT_STATE LOW // <-- changed
+#define X_MIN_ENDSTOP_HIT_STATE HIGH
+#define X_MAX_ENDSTOP_HIT_STATE HIGH
+#define Y_MIN_ENDSTOP_HIT_STATE HIGH
+#define Y_MAX_ENDSTOP_HIT_STATE HIGH
 #define Z_MIN_ENDSTOP_HIT_STATE LOW // <-- changed
-#define Z_MAX_ENDSTOP_HIT_STATE LOW // <-- changed
+#define Z_MAX_ENDSTOP_HIT_STATE HIGH
 #define I_MIN_ENDSTOP_HIT_STATE HIGH
 #define I_MAX_ENDSTOP_HIT_STATE HIGH
 #define J_MIN_ENDSTOP_HIT_STATE HIGH
@@ -1249,7 +1249,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,1600,833} // <-- changed
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,1600,830} // <-- changed
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1261,7 +1261,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          {300,300,8,40} // <-- changed
+#define DEFAULT_MAX_FEEDRATE          {300,300,3,25} // <-- changed
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1274,7 +1274,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      {9000,9000,100,1000} // <-- changed
+#define DEFAULT_MAX_ACCELERATION      {9000,9000,100,9000} // <-- changed
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1291,9 +1291,9 @@
  *   M204 I    Angular Acceleration
  *   M204 J    Angular Travel Acceleration
  */
-#define DEFAULT_ACCELERATION                  2000  // <-- changed: X, Y, Z ... and E acceleration for printing moves
+#define DEFAULT_ACCELERATION                  500  // <-- changed: X, Y, Z ... and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION          3000  // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION           2000  // <-- changed: X, Y, Z ... acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION           500  // <-- changed: X, Y, Z ... acceleration for travel (non printing) moves
 #if ENABLED(AXIS4_ROTATES)
   #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
   #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
@@ -1309,8 +1309,8 @@
  */
 #define CLASSIC_JERK // <-- changed
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 12 // <-- changed
-  #define DEFAULT_YJERK 12 // <-- changed
+  #define DEFAULT_XJERK 8 // <-- changed
+  #define DEFAULT_YJERK 8 // <-- changed
   #define DEFAULT_ZJERK  0.4 // <-- changed
   #define DEFAULT_EJERK  10 // <-- changed
   //#define DEFAULT_IJERK  0.3
@@ -1365,7 +1365,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN // <-- changed
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -1383,7 +1383,7 @@
  *    - Normally-closed (NC) also connect to GND.
  *    - Normally-open (NO) also connect to 5V.
  */
-//#define Z_MIN_PROBE_PIN -1
+#define Z_MIN_PROBE_PIN SERVO0_PIN // <-- changed
 
 /**
  * Probe Type
@@ -1473,7 +1473,7 @@
  * A lightweight, solenoid-driven probe.
  * For information about this sensor https://github.com/bigtreetech/MicroProbe
  *
- * Also requires: PROBE_ENABLE_DISABLE, ENDSTOP_INTERRUPTS_FEATURE if FT_MOTION is enabled.
+ * Also requires: PROBE_ENABLE_DISABLE
  */
 //#define BIQU_MICROPROBE_V1  // Triggers HIGH
 //#define BIQU_MICROPROBE_V2  // Triggers LOW
@@ -1600,7 +1600,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET {0,0,-1.38} // <-- changed
+#define NOZZLE_TO_PROBE_OFFSET {0,0,-1.2} // <-- changed
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1689,7 +1689,7 @@
 #define Z_PROBE_ERROR_TOLERANCE     5 // <-- changed: (mm) Tolerance for early trigger (<= -probe.offset.z + ZPET)
 //#define Z_AFTER_PROBING           5 // (mm) Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -5 // <-- changed: (mm) Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -2 // (mm) Farthest distance below the trigger-point to go before stopping
 
 // For M851 provide ranges for adjusting the X, Y, and Z probe offsets
 //#define PROBE_OFFSET_XMIN -50   // (mm)
@@ -1804,7 +1804,7 @@
  */
 //#define Z_IDLE_HEIGHT Z_HOME_POS
 
-#define Z_CLEARANCE_FOR_HOMING  4   // <-- changed: (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_CLEARANCE_FOR_HOMING  5   // <-- changed: (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
 //#define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed)
@@ -1816,7 +1816,7 @@
 // :[-1,1]
 #define X_HOME_DIR -1
 #define Y_HOME_DIR 1 // <-- changed
-#define Z_HOME_DIR 1 // <-- changed
+#define Z_HOME_DIR -1
 //#define I_HOME_DIR -1
 //#define J_HOME_DIR -1
 //#define K_HOME_DIR -1
@@ -1842,16 +1842,16 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 155.8 // <-- changed
-#define Y_BED_SIZE 155.8 // <-- changed
+#define X_BED_SIZE 281.4 // <-- changed
+#define Y_BED_SIZE 281.4 // <-- changed
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS -8 // <-- changed
-#define Z_MIN_POS -5 // <-- changed
-#define X_MAX_POS 165.8 // <-- changed
-#define Y_MAX_POS 196 // <-- changed
-#define Z_MAX_POS 159 // <-- changed
+#define X_MIN_POS -20.1 // <-- changed
+#define Y_MIN_POS -20.1 // <-- changed
+#define Z_MIN_POS 0
+#define X_MAX_POS 301.5 // <-- changed
+#define Y_MAX_POS 304.5 // <-- changed
+#define Z_MAX_POS 270 // <-- changed
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2151,7 +2151,7 @@
   #define GRID_MAX_POINTS_Y 2 // <-- changed
 
   // Probe along the Y axis, advancing X after each column
-  #define PROBE_Y_FIRST // <-- changed
+  //#define PROBE_Y_FIRST
 
   #if ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
@@ -2300,16 +2300,16 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-//#define Z_SAFE_HOMING
+#define Z_SAFE_HOMING // <-- changed
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT X_CENTER  // (mm) X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT Y_CENTER  // (mm) Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT -19  // <-- changed: (mm) X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT 258  // <-- changed: (mm) Y point for Z homing
   //#define Z_SAFE_HOMING_POINT_ABSOLUTE  // Ignore home offsets (M206) for Z homing position
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M {1800,1800,480} // <-- changed
+#define HOMING_FEEDRATE_MM_M {3000,3000,180} // <-- changed
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2454,7 +2454,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT {10,186,20} // <-- changed
+  #define NOZZLE_PARK_POINT {100,294.5,20} // <-- changed
   #define NOZZLE_PARK_MOVE          0   // Park motion: 0 = XY Move, 1 = X Only, 2 = Y Only, 3 = X before Y, 4 = Y before X
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
@@ -2517,8 +2517,8 @@
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT {{45,175,-0.5}} // <-- changed
-  #define NOZZLE_CLEAN_END_POINT   {{115,175,-0.5}} // <-- changed
+  #define NOZZLE_CLEAN_START_POINT {{-17,95,1}} // <-- changed
+  #define NOZZLE_CLEAN_END_POINT   {{-17,25,1}} // <-- changed
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_CIRCLE)
     #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5                      // (mm) Circular pattern radius
@@ -2540,7 +2540,7 @@
   //#define NOZZLE_CLEAN_HEATUP       // Heat up the nozzle instead of skipping wipe
 
   // Explicit wipe G-code script applies to a G12 with no arguments.
-  #define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nT0\nG1 X115 Y175 Z10 F4000\nM109 R170\nG1 Z-0.5\nM114\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 Z15\nM400\nM106 S255\nG0 X0 Y168.8\nM109 R160\nM107" // <-- changed
+  #define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nT0\nG1 X-17 Y25 Z10 F4000\nM109 R170\nG1 Z1\nM114\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 Z15\nM400\nM106 S255\nG0 X-10 Y-9\nM109 R160\nM107" // <-- changed
 
 #endif
 
@@ -2586,7 +2586,7 @@
  *
  * View the current statistics with M78.
  */
-//#define PRINTCOUNTER
+#define PRINTCOUNTER // <-- changed
 #if ENABLED(PRINTCOUNTER)
   #define PRINTCOUNTER_SAVE_INTERVAL 60 // (minutes) EEPROM save interval during print. A value of 0 will save stats at end of print.
 #endif
@@ -2632,7 +2632,7 @@
  * SD Card support is disabled by default. If your controller has an SD slot,
  * you must uncomment the following option or it won't work.
  */
-//#define SDSUPPORT
+#define SDSUPPORT // <-- changed
 
 /**
  * SD CARD: ENABLE CRC
@@ -3658,18 +3658,18 @@
 //#define M16_MACHINE_NAME
 #define TOOLHEAD_NAME "Single Extruder" // <-- changed
 #define TOOLHEAD_TYPE "SingleExtruder" // <-- changed
-#define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nT0\nG1 X115 Y175 Z10 F4000\nM109 R170\nG1 Z-0.5\nM114\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 X115 Y175\nG1 X45 Y175\nG1 Z15\nM400\nM106 S255\nG0 X0 Y168.8\nM109 R160\nM107" // <-- changed
+#define WIPE_SEQUENCE_COMMANDS "M117 Hot end heating...\nM104 S170\nG28 O1\nM117 Wiping nozzle\nT0\nG1 X-17 Y25 Z10 F4000\nM109 R170\nG1 Z1\nM114\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 X-17 Y25\nG1 X-17 Y95\nG1 Z15\nM400\nM106 S255\nG0 X-10 Y-9\nM109 R160\nM107" // <-- changed
 //#define AXIS_LEVELING_COMMANDS
 //#define BED_LEVELING_COMMANDS
 //#define MANUAL_BED_LEVELING_COMMANDS
 //#define AO_EXP1_DEPRECATED_PINMAP
-//#define DISABLE_DUE_SD_MMC
+#define DISABLE_DUE_SD_MMC // <-- changed
 //#define ARCHIM2_SPI_FLASH_EEPROM_BACKUP_SIZE
-//#define END_G29_ON_BACK_LEFT_CORNER
+#define END_G29_ON_BACK_LEFT_CORNER // <-- changed
 #define G26_IN_START_GCODE_WORKAROUND // <-- changed
 #define USB_DEVICE_VENDOR_ID 0x27b1 // <-- changed
 #define USB_DEVICE_PRODUCT_ID 0x0001 // <-- changed
-//#define USB_DEVICE_PRODUCT_NAME
+#define USB_DEVICE_PRODUCT_NAME "TAZ 6       " // <-- changed
 //#define TOUCH_UI_SYNDAVER_LEVEL
 //#define TOUCH_UI_SYNDAVER_LEVELUP
 //#define TOUCH_UI_NO_BOOTSCREEN
