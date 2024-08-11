@@ -1221,6 +1221,7 @@ class Temperature {
           #if ENABLED(PID_PARAMS_PER_HOTEND)
             temp_hotend[hotend].pid.set(p, i, d);
           #else
+            UNUSED(hotend);
             HOTEND_LOOP() temp_hotend[e].pid.set(p, i, d);
           #endif
           updatePID();
