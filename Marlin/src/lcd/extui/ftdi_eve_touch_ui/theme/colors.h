@@ -26,6 +26,7 @@
 namespace Theme {
   #if ENABLED(TOUCH_UI_COCOA_THEME)
     constexpr int      accent_hue           = 23;
+    constexpr float    accent_sat           = 0.7;
 
     // Browns and Oranges
     constexpr uint32_t accent_color_1       = hsl_to_rgb(12.8,0.597,0.263); // Darkest
@@ -113,7 +114,6 @@ namespace Theme {
     constexpr uint32_t theme_darkest        = gray_color_1;
     constexpr uint32_t theme_dark           = gray_color_2;
 
-    constexpr uint32_t bg_dark_color        = gray_color_0;
     constexpr uint32_t bg_color             = gray_color_1;
     constexpr uint32_t axis_label           = gray_color_2;
     constexpr uint32_t bg_light_color       = gray_color_3;
@@ -166,6 +166,7 @@ namespace Theme {
   #if ENABLED(TOUCH_UI_ROYAL_THEME)
     constexpr uint32_t fan_speed            = hsl_to_rgb(240, 0.5, 0.13);
     constexpr uint32_t temp                 = hsl_to_rgb(343, 1.0, 0.23);
+    constexpr uint32_t temp_button          = hsl_to_rgb(accent_hue, accent_sat, 0.39);
   #else
     constexpr uint32_t fan_speed            = hsl_to_rgb(30, 0.85, 0.50);
     constexpr uint32_t fan_speed_button     = hsl_to_rgb(30, 0.85, 0.50);
@@ -186,7 +187,9 @@ namespace Theme {
 
   constexpr btn_colors disabled_btn         = {.bg = bg_color,      .grad = fg_disabled, .fg = fg_disabled,     .rgb = fg_disabled };
   constexpr btn_colors normal_btn           = {.bg = fg_action,     .grad = 0xFFFFFF,    .fg = fg_normal,       .rgb = 0xFFFFFF };
+#ifdef FTDI_CUSTOM_USER_MENUS
   constexpr btn_colors accent_btn           = {.bg = fg_action,     .grad = 0xFFFFFF,    .fg = lulzbot_accent,  .rgb = 0xFFFFFF };
+#endif
   constexpr btn_colors action_btn           = {.bg = bg_color,      .grad = 0xFFFFFF,    .fg = fg_action,       .rgb = 0xFFFFFF };
   constexpr btn_colors red_btn              = {.bg = 0xFF5555,      .grad = 0xFFFFFF,    .fg = 0xFF0000,        .rgb = 0xFFFFFF };
   constexpr btn_colors ui_slider            = {.bg = theme_darkest, .grad = 0xFFFFFF,    .fg = theme_dark,      .rgb = accent_color_3 };
@@ -201,7 +204,6 @@ namespace Theme {
   constexpr btn_colors cold_pull_btn        = {.bg = fg_action,     .grad = fg_normal,   .fg = cold_pull,       .rgb = 0xFFFFFF };
   constexpr btn_colors cancel_btn           = {.bg = fg_action,     .grad = fg_normal,   .fg = cancel,          .rgb = 0xFFFFFF };
   constexpr btn_colors temp_btn             = {.bg = bg_color,      .grad = fg_disabled, .fg = fg_disabled,     .rgb = 0xFFFFFF };
-  constexpr btn_colors temp_disabled_btn    = {.bg = bg_color,      .grad = bg_dark_color, .fg = bg_dark_color, .rgb = bg_light_color };
 
   // Temperature color scale
 
