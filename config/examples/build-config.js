@@ -2692,6 +2692,8 @@ function make_config(PRINTER, TOOLHEAD) {
 
         if (IS_MINI) {
             MARLIN["MEASURE_BACKLASH_WHEN_PROBING"]      = true
+        } else {
+            MARLIN["MEASURE_BACKLASH_WHEN_PROBING"]      = false
         }
 
         if (PRINTER.includes("Quiver_TAZPro")) {
