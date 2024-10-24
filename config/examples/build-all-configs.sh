@@ -160,6 +160,7 @@ build_config custom    Oliveoil_TAZ6Archim                       Angelfish_Aeros
 build_config custom    Oliveoil_TAZ6Archim                       H175_Hemera
 build_config custom    Oliveoil_TAZ6Archim                       M175_Mosquito
 build_config custom    Oliveoil_TAZ6BLTouch                      CecropiaSilk_SingleExtruderAeroV2
+build_config custom    Oliveoil_TAZ6BLTouch                      Opah_Moarstruder
 build_config custom    Oliveoil_TAZ6BLTouch                      Angelfish_Aerostruder
 build_config custom    Oliveoil_TAZ6BLTouch                      Tilapia_SingleExtruder
 build_config custom    Oliveoil_TAZ6BLTouch                      H175_Hemera
