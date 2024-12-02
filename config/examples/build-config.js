@@ -3065,6 +3065,10 @@ function make_config(PRINTER, TOOLHEAD) {
     if (USE_LESS_MEMORY >= 2) {
         MARLIN["G26_MESH_VALIDATION"]                    = false
         MARLIN["PID_EDIT_MENU"]                          = false
+        /* 12/2/2024 Disable UBL due to failure to flash */
+        MARLIN["UBL_HILBERT_CURVE"]                      = false
+        MARLIN["AUTO_BED_LEVELING_UBL"]                  = false
+        MARLIN["AUTO_BED_LEVELING_BILINEAR"]             = true
     }
     if (USE_LESS_MEMORY >= 3) {
         MARLIN["INDIVIDUAL_AXIS_HOMING_MENU"]            = false
